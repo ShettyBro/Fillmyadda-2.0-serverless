@@ -61,11 +61,16 @@ exports.handler = async (event) => {
       headers,
       body: JSON.stringify({ message: 'User registered successfully' })
     };
-  } catch (err) {
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({ message: 'Error registering user', error: err.message })
-    };
   }
-};
+    catch (err) {
+      onsole.error("Database connection error:", err); // Log to Netlify
+  return {
+    statusCode: 500,
+    headers,
+    body: JSON.stringify({ message: 'Database error', error: err.message })
+      };
+    }
+  }
+;
+
+
