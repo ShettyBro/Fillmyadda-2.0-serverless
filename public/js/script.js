@@ -189,14 +189,16 @@ async function fetchMovieDetails() {
         console.error('Failed to load movie:', error);
         showModal('Failed to load movie. Please try again.');
     }
-}
-
 // Call fetchMovieDetails only on the player.html page
 document.addEventListener('DOMContentLoaded', function () {
     if (window.location.pathname.endsWith('player.html')) {
         fetchMovieDetails(); 
     }
 });
+
+}
+
+
 
 
 
