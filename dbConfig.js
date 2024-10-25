@@ -5,6 +5,7 @@ const dbConfig = {
   database: process.env.DB_NAME,
   options: {
     encrypt: true,           // Important for Azure SQL
-    enableArithAbort: true    // Helps prevent connection issues with some SQL setups
+    enableArithAbort: true,    // Helps prevent connection issues with some SQL setups
+    connectionTimeout: 30000   // Set to 30 seconds
   }
 };
