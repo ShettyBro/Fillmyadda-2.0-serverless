@@ -111,6 +111,11 @@ if (loginForm) {
     loginForm.addEventListener('submit', async (event) => {
         event.preventDefault(); // Prevent form from submitting the traditional way
 
+         // Get the button element and disable it
+        const loginButton = document.getElementById('loginButton');
+        loginButton.disabled = true; // Disable the login button to prevent multiple submissions
+        loginButton.textContent = 'Logging in...'; // Change button text for feedback
+
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
@@ -134,6 +139,9 @@ if (loginForm) {
     } catch (error) {
         console.error('Login Error:', error);
         showModal('An error occurred. Please try again later.');
+    } finally {
+        loginButton.disabled = false; // Re-enable the login button
+        loginButton.textContent = 'Login'; // Reset button text
     }
 });
 }
@@ -143,6 +151,12 @@ const registerForm = document.getElementById('registerForm');
 if (registerForm) {
     registerForm.addEventListener('submit', async (event) => {
         event.preventDefault(); // Prevent form from submitting the traditional way
+       
+        // Get the button element and disable it
+        const registerButton = document.getElementById('registerButton');
+        registerButton.disabled = true; // Disable the button
+        registerButton.textContent = 'Registering...'; // Change button text for feedback
+       
         const fullname = document.getElementById('fullname').value; // Ensure you have this input in your HTML
         const email = document.getElementById('email').value; // Ensure you have this input in your HTML
         const username = document.getElementById('username').value; // Ensure you have this input in your HTML
@@ -164,6 +178,10 @@ if (registerForm) {
     } catch (error) {
         console.error('Registration Error:', error);
         showModal('Server error. Please try again later.');
+    }finally {
+        // Re-enable the button after the request is complete
+        registerButton.disabled = false; // Re-enable the button
+        registerButton.textContent = 'Register'; // Reset button text
     }
 });
 }
