@@ -3,10 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dbConfig = require('../dbConfig');
 const crypto = require('crypto');
-const bodyParser = require('body-parser');
-const express = require('express'); 
 require('dotenv').config();
-
 
 // Generate a secure secret key
 const generateSecretKey = () => {
@@ -17,12 +14,28 @@ const generateSecretKey = () => {
 const JWT_SECRET = generateSecretKey();
 
 exports.handler = async (event) => {
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+
+  // Handle preflight OPTIONS request
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      headers,
+      body: "",
+    };
+  }
+
   const body = JSON.parse(event.body);
   const { username, password } = body;
 
   if (!username || !password) {
     return {
       statusCode: 400,
+      headers,
       body: JSON.stringify({ message: 'Username and password are required' })
     };
   }
@@ -36,6 +49,7 @@ exports.handler = async (event) => {
     if (result.recordset.length === 0) {
       return {
         statusCode: 401,
+        headers,
         body: JSON.stringify({ message: 'Invalid username or password' })
       };
     }
@@ -54,17 +68,20 @@ exports.handler = async (event) => {
       // Return token to client
       return {
         statusCode: 200,
+        headers,
         body: JSON.stringify({ message: 'Login successful', token })
       };
     } else {
       return {
         statusCode: 401,
+        headers,
         body: JSON.stringify({ message: 'Invalid username or password' })
       };
     }
   } catch (err) {
     return {
       statusCode: 500,
+      headers,
       body: JSON.stringify({ message: 'Error during login', error: err.message })
     };
   }
