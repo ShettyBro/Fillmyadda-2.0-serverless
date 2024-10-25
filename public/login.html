@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmyadda - Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script defer src="js/script.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div class="header">
+        <nav class="nav">
+            <img class="logo" src="css/assets/bg.png" alt="">
+            <div class="navbt" >
+                <button onclick="location.href='about-index.html'" target="_blank">About</button>
+            </div>
+        </nav>
+        <div class="box">
+            <form id="loginForm" method="POST">
+                <img src="css/assets/Login (480 x 270 px).png" alt="">
+                <div class="inputbox">
+                    <input type="text" name="username" id="username" required>
+                    <label class="label" for="username">Username:</label>
+                </div>
+                <div class="inputbox">
+                    <input type="password" name="password" id="password" required>
+                    <label class="label" for="password">Password:</label>
+                </div>
+                <div class="forgot">
+                    <!-- <label>
+                        <input type="checkbox"> Remember Me [removed incomplete fuctualnility future development]
+                    </label>
+                    <label>
+                        <a href="forgot-password.html">Forgot Password?</a>
+                    </label> -->
+                </div>
+                <button type="submit">LOGIN</button>
+                <div class="register">
+                    <p>Don't Have An Account? <a href="register.html">Register Now</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for notifications -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modal-message" class="modal-message"></p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Filmyadda. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmyadda - Home</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
+</head>
+
+<body>
+
+    <div class="header">
+        <nav class="nav">
+            <img class="logo" src="css/assets/bg.png" alt="">
+            <div class="navbt">
+                <button id="logoutButton">Logout</button>
+                <button onclick="location.href='about.html'" target="_blank">About</button>
+            </div>
+        </nav>
+        <div>
+
+            <div class="image-grid">
+                <div class="image-item" onclick="selectMovie(1)">
+                    <img src="css/assets/uri_the_surgical_strike_ poster.jpg" alt="URI: The Surgical Strike poster">
+                    <p>URI: The Surgical Strike</p>
+                </div>
+                <div class="image-item" onclick="selectMovie(2)">
+                    <img src="css/assets/drive.jpg" alt="Image 2">
+                    <p>Drive (2019) Hindi</p>
+                </div>
+                <div class="image-item" onclick="selectMovie(8)">
+                    <img src="css/assets/Jailer.png" alt="Image 3">
+                    <p>Jailer 2023</p>
+                </div>
+                <div class="image-item" onclick="selectMovie(3)">
+                    <img src="css/assets/sooryavanshi.jpg" alt="Image 4">
+                    <p>Sooryavanshi 2022</p>
+                </div>
+                <div class="image-item" onclick="selectMovie(7)">
+                    <img src="css/assets/LEO-2023.jpg" alt="Image 5">
+                    <p>LEO (2023) Hindi</p>
+                </div>
+                <div class="image-item" onclick="selectMovie(6)">
+                    <img src="css/assets/simmba.jpg" alt="Image 6">
+                    <p>Simmba 2018</p>
+                </div>
+                <div class="image-item" onclick="selectMovie(4)">
+                    <img src="css/assets/singham-returns.jpg" alt="Image 7">
+                    <p>Singham Returns (2014)</p>
+                </div>
+                <div class="image-item" onclick="selectMovie(5)">
+                    <img src="css/assets/singham.jpg" alt="Image 8">
+                    <p>Singham 2011</p>
+                </div>
+                <div class="image-item" onclick="selectMovie(10)">
+                    <img src="css/assets/avenger-endgame.jpg" alt="Image 9">
+                    <p>Avenger Endgame</p>
+                </div>
+                <div class="image-item" onclick="selectMovie(9)">
+                    <img src="css/assets/avengers-infinitywar.jpg" alt="Image 10">
+                    <p>Avengers Infinity War</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div>
+        <footer class="footer">
+            <p> &copy; 2024 Filmyadda. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Modal for notifications -->
+    <div id="modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modal-message"></p>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const token = localStorage.getItem('token');
+            
+            if (!token) {
+                // Redirect to login page if no token is found
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>

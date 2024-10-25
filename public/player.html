@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Player</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <nav class="nav">
+            <img class="logo" src="css/assets/bg.png" alt="Logo">
+            <div class="navbt">
+                <button onclick="location.href='home.html'">Home</button>
+                <button id="logoutButton">Logout</button>
+                <button onclick="location.href='about.html'" target="_blank">About</button>
+            </div>
+        </nav>
+        <div class="cont">
+            <h1 id="movieTitle">Loading...</h1>
+        </div>
+        <div class="container">
+            <video id="videoPlayer">
+                <source id="videoSource" src="" type="video/mp4"> <!-- Video source will be set dynamically -->
+                Your browser does not support the video tag.
+            </video>
+            <div class="controls">
+                <button id="playPauseButton">
+                    <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="white" d="M8 5v14l11-7z" />
+                    </svg>
+                    <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        style="display: none;">
+                        <path fill="white" d="M6 19h4V5H6zm8 0h4V5h-4z" />
+                    </svg>
+                </button>
+
+                <input type="range" id="seekBar" value="0" min="0" step="0.1">
+                <button id="fullScreenBtn">
+                    <img src="css/assets/full-screen.png" alt="Fullscreen" id="fullScreenIcon" width="24" height="24">
+                </button>
+                <input type="range" id="volumeControl" value="100" min="0" max="100">
+            </div>
+        </div>
+    </div>
+    <div>
+        <footer class="footer">
+            <p> &copy; 2024 Filmyadda. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Modal for notifications -->
+    <div id="modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modal-message"></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const token = localStorage.getItem('token');
+            
+            if (!token) {
+                // Redirect to login page if no token is found
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+    
+
+
+</body>
+
+</html>

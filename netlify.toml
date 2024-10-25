@@ -1,0 +1,10 @@
+[build]
+  functions = "functions/" # Path to serverless functions
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[build]
+  publish = "public"
