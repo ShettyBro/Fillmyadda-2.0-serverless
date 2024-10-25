@@ -3,8 +3,22 @@ const dbConfig = require('../dbConfig');
 const { verifyToken } = require('./verifyToken');
 require('dotenv').config();
 
-
 exports.handler = async (event) => {
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  };
+
+  // Handle preflight OPTIONS request
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      headers,
+      body: "",
+    };
+  }
+
   try {
     // Verify token before proceeding
     const user = verifyToken(event);
@@ -15,6 +29,7 @@ exports.handler = async (event) => {
     if (!id) {
       return {
         statusCode: 400,
+        headers,
         body: JSON.stringify({ error: 'Movie ID is required' })
       };
     }
@@ -27,17 +42,20 @@ exports.handler = async (event) => {
     if (result.recordset.length > 0) {
       return {
         statusCode: 200,
+        headers,
         body: JSON.stringify(result.recordset[0])
       };
     } else {
       return {
         statusCode: 404,
+        headers,
         body: JSON.stringify({ error: 'Movie not found' })
       };
     }
   } catch (err) {
     return {
       statusCode: 500,
+      headers,
       body: JSON.stringify({ error: err.message || 'Error fetching video details' })
     };
   }
