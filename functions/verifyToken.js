@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+require('dotenv').config();
+
 
 // Generate a secure secret key
 const generateSecretKey = () => {

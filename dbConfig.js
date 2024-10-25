@@ -1,11 +1,10 @@
-module.exports = {
-    user: 'Filmyadda-admin',
-    password: 'Sudeepjs#&123',
-    server: 'filmyadda.database.windows.net',
-    database: 'Filmyadda',
-    options: {
-      encrypt: true,
-      enableArithAbort: true
-    }
-  };
-  
+const dbConfig = {
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  server: process.env.DB_SERVER,
+  database: process.env.DB_NAME,
+  options: {
+    encrypt: true,
+    enableArithAbort: true
+  }
+};

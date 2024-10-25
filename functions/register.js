@@ -1,6 +1,8 @@
 const sql = require('mssql');
 const bcrypt = require('bcryptjs');
 const dbConfig = require('../dbConfig');
+require('dotenv').config();
+
 
 exports.handler = async (event) => {
   const body = JSON.parse(event.body);

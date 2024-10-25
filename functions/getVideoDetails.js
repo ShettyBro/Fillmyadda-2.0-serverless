@@ -1,6 +1,8 @@
 const sql = require('mssql');
 const dbConfig = require('../dbConfig');
 const { verifyToken } = require('./verifyToken');
+require('dotenv').config();
+
 
 exports.handler = async (event) => {
   try {

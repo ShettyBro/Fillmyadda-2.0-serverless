@@ -5,6 +5,8 @@ const dbConfig = require('../dbConfig');
 const crypto = require('crypto');
 const bodyParser = require('body-parser');
 const express = require('express'); 
+require('dotenv').config();
+
 
 // Generate a secure secret key
 const generateSecretKey = () => {
