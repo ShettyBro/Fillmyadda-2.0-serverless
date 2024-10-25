@@ -2,7 +2,7 @@ const sql = require('mssql');
 const dbConfig = require('../dbConfig');
 
 // Export the handler function for Netlify
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
     // Enable CORS
     const headers = {
         'Access-Control-Allow-Origin': '*',
@@ -42,7 +42,7 @@ exports.handler = async function(event, context) {
 
         // Connect to the database
         const pool = await sql.connect(dbConfig);
-        
+
         // Query to fetch movie details
         const query = 'SELECT title, source FROM Movies WHERE id = @id';
         const result = await pool.request()
