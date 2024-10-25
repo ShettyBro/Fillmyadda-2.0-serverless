@@ -3,14 +3,29 @@ const bcrypt = require('bcryptjs');
 const dbConfig = require('../dbConfig');
 require('dotenv').config();
 
-
 exports.handler = async (event) => {
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+
+  // Handle preflight OPTIONS request
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      headers,
+      body: "",
+    };
+  }
+
   const body = JSON.parse(event.body);
   const { fullname, email, username, password } = body;
 
   if (!fullname || !email || !username || !password) {
     return {
       statusCode: 400,
+      headers,
       body: JSON.stringify({ message: 'All fields are required' })
     };
   }
@@ -27,6 +42,7 @@ exports.handler = async (event) => {
     if (existingUser.recordset.length > 0) {
       return {
         statusCode: 409,
+        headers,
         body: JSON.stringify({ message: 'Username, fullname, or email already exists.' })
       };
     }
@@ -42,11 +58,13 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 201,
+      headers,
       body: JSON.stringify({ message: 'User registered successfully' })
     };
   } catch (err) {
     return {
       statusCode: 500,
+      headers,
       body: JSON.stringify({ message: 'Error registering user', error: err.message })
     };
   }
