@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Movie Player</title>
@@ -42,11 +42,15 @@
         <div class="cont">
             <h1 id="movieTitle">Loading...</h1>
         </div>
+
+
         <div class="container">
-            <video id="videoPlayer" class="video-player" controls>
+            <video id="videoPlayer" class="video-player" >
                 <source id="videoSource" src="" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
+
+
             <div class="controls">
                 <button id="playPauseButton">
                     <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

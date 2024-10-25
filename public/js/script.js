@@ -57,46 +57,38 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// authentication check
+// Handle Logout
 document.addEventListener('DOMContentLoaded', function () {
-    const protectedPaths = ['/home.html', '/player.html', '/about.html'];
-    const currentPage = window.location.pathname.split('/').pop();
-
-    // Only check for token on protected pages
-    if (protectedPaths.includes('/' + currentPage)) {
-        const token = localStorage.getItem('authToken');
-        const expirationTime = localStorage.getItem('tokenExpiration');
-
-        // Check if the token exists and has not expired
-        if (!token || (expirationTime && Date.now() > expirationTime)) {
-            console.log('Token is missing or expired, redirecting to login.');
-            // Clear all auth data
+    const logoutButton = document.getElementById('logoutButton');
+    
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            // Clear all auth-related data
             localStorage.removeItem('authToken');
             localStorage.removeItem('tokenExpiration');
-            localStorage.removeItem('selectedMovieId');
-            
-            // Replace current history state
-            window.history.replaceState(null, '', 'index.html');
-            
-            // Redirect without adding to history
-            window.location.replace('login.html');
-        }
+            localStorage.removeItem('selectedMovieId'); // Clear any selected movie
+
+            // Set page to prevent cache on logout
+            window.location.replace('index.html'); // Redirect to login page
+
+            // Show logout confirmation modal
+            showModal('Successfully logged out. Thank you!');
+        });
     }
 });
 
-//handle popstate (back/forward button) events
+// Prevent back navigation to protected pages after logout
 window.addEventListener('popstate', function(event) {
     const protectedPaths = ['/home.html', '/player.html', '/about.html'];
     const currentPath = window.location.pathname;
-    
-    // Check if trying to access protected page
+
+    // Check if trying to access protected page without valid token
+    const token = localStorage.getItem('authToken');
+    const expirationTime = localStorage.getItem('tokenExpiration');
+
     if (protectedPaths.some(path => currentPath.includes(path))) {
-        const token = localStorage.getItem('authToken');
-        const expirationTime = localStorage.getItem('tokenExpiration');
-        
-        // If no valid token, redirect to login
         if (!token || (expirationTime && Date.now() > expirationTime)) {
-            window.location.replace('login.html');
+            window.location.replace('login.html'); // Redirect to login
         }
     }
 });
