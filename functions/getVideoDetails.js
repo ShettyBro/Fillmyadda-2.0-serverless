@@ -1,62 +1,48 @@
-const sql = require('mssql');
-const dbConfig = require('../dbConfig');
-const { verifyToken } = require('./verifyToken');
-require('dotenv').config();
 
-exports.handler = async (event) => {
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
-  };
+// Route to get video details by movie ID
+app.post('/getVideoDetails', async (req, res) => {
+  const { id } = req.body;
 
-  // Handle preflight OPTIONS request
-  if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 200,
-      headers,
-      body: "",
-    };
+  if (!id) {
+      return res.status(400).json({ error: 'Movie ID is required' });
   }
 
   try {
-    // Verify token before proceeding
-    const user = verifyToken(event);
+      const pool = await sql.connect(dbConfig);
+      const query = 'SELECT title, source FROM movies WHERE id = @id';
+      const result = await pool.request()
+          .input('id', sql.Int, id)
+          .query(query);
 
-    const body = JSON.parse(event.body);
-    const { id } = body;
-
-    if (!id) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ error: 'Movie ID is required' })
-      };
-    }
-
-    const pool = await sql.connect(dbConfig);
-    const result = await pool.request()
-      .input('id', sql.Int, id)
-      .query('SELECT title, source FROM movies WHERE id = @id');
-
-    if (result.recordset.length > 0) {
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify(result.recordset[0])
-      };
-    } else {
-      return {
-        statusCode: 404,
-        headers,
-        body: JSON.stringify({ error: 'Movie not found' })
-      };
-    }
+      if (result.recordset.length > 0) {
+          return res.json(result.recordset[0]); // Return the first result
+      } else {
+          return res.status(404).json({ error: 'Movie not found' });
+      }
   } catch (err) {
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({ error: err.message || 'Error fetching video details' })
-    };
+      console.error('Error fetching video details:', err);
+      return res.status(500).json({ error: 'Database query error' });
   }
-};
+});
+
+// Fetch movie details by ID
+app.get('/movies/:id', async (req, res) => {
+  const movieId = req.params.id;
+
+  try {
+      const pool = await sql.connect(dbConfig);
+      const result = await pool.request()
+          .input('id', sql.Int, movieId) // Specify the input type
+          .query('SELECT title, source FROM movies WHERE id = @id');
+
+      if (result.recordset.length > 0) {
+          const movie = result.recordset[0];
+          res.status(200).json(movie); // Respond with movie details
+      } else {
+          res.status(404).json({ message: 'Movie not found' }); // Movie not found
+      }
+  } catch (err) {
+      console.error('Error fetching movie details:', err);
+      res.status(500).json({ message: 'Internal server error' });
+  }
+});

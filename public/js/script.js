@@ -160,37 +160,32 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// Function to fetch movie details for player page
+//Function to fetch the movie details from the backend
 async function fetchMovieDetails() {
-    const movieId = localStorage.getItem('selectedMovieId');
+    const movieId = localStorage.getItem('selectedMovieId'); // Get the movie ID from localStorage
+
     if (!movieId) {
-        showModal('No movie selected.');
+        showModal('No movie selected.'); // Show an error if no movie is selected
         return;
     }
 
     try {
-        const response = await fetch(`/.netlify/functions/getVideoDetails`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-            },
-            body: JSON.stringify({ id: movieId })
-        });
+        const response = await fetch(`https://filmyadda-2-0-serverless.netlify.app/.netlify/functions/getVideoDetails/${movieId}`); // Use the movieId in the URL
         const data = await response.json();
 
         if (response.ok) {
+            // Update the title and video source in the player
             document.getElementById('movieTitle').textContent = data.title;
-            document.getElementById('videoSource').src = data.source;
+            document.getElementById('videoSource').src = data.source; // Change 'videoSource' to 'source'
             document.getElementById('videoPlayer').load();
         } else {
             showModal(data.message || "Error loading movie");
         }
     } catch (error) {
-        console.error('Fetch Movie Error:', error);
         showModal('Failed to load movie. Please try again.');
     }
 }
+
 
 // Function to select a movie and navigate to player page
 function selectMovie(movieId) {

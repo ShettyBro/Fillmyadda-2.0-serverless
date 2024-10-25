@@ -7,7 +7,7 @@ require('dotenv').config();
 
 // Generate a secure secret key
 const generateSecretKey = () => {
-    return crypto.randomBytes(64).toString('hex');
+  return crypto.randomBytes(64).toString('hex');
 };
 
 // Replace with a secure secret key
