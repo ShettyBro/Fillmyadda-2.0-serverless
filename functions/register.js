@@ -3,6 +3,13 @@ const bcrypt = require('bcryptjs');
 const dbConfig = require('../dbConfig');
 require('dotenv').config();
 
+console.log('Database Configuration:', {
+  user: process.env.DB_USER,
+  server: process.env.DB_SERVER,
+  database: process.env.DB_NAME,
+});
+
+
 exports.handler = async (event) => {
   const headers = {
     "Access-Control-Allow-Origin": "*",
