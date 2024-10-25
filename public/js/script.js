@@ -111,12 +111,16 @@ const registerForm = document.getElementById('registerForm');
 if (registerForm) {
     registerForm.addEventListener('submit', async (event) => {
         event.preventDefault(); // Prevent form from submitting the traditional way
+        const fullname = document.getElementById('fullname').value; // Ensure you have this input in your HTML
+        const email = document.getElementById('email').value; // Ensure you have this input in your HTML
+        const username = document.getElementById('username').value; // Ensure you have this input in your HTML
+        const password = document.getElementById('password').value; // Ensure you have this input in your HTML
 
     try {
         const response = await fetch('/.netlify/functions/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ fullname, email, username, password })
+            body: JSON.stringify({ username, password, fullname, email })
         });
 
         if (response.ok) {
