@@ -157,19 +157,20 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Function to fetch the movie details from the backend
+// Function to fetch the movie details from the backend
 async function fetchMovieDetails() {
     const movieId = localStorage.getItem('selectedMovieId'); // Get the movie ID from localStorage
 
     if (!movieId) {
-        showModal('No movie selected.'); // Show an error if no movie is selected
-        return;
+        console.log('No movie selected, skipping fetch.');
+        return; // Exit if no movie ID is set
     }
 
     try {
         const response = await fetch('https://filmyadda-2-0-serverless.netlify.app/.netlify/functions/getVideoDetails', {
-            method: 'POST', // Change to POST request
+            method: 'POST', 
             headers: {
-                'Content-Type': 'application/json', // Set the content type
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({ id: movieId }) // Send the movieId as a JSON object
         });
@@ -179,22 +180,25 @@ async function fetchMovieDetails() {
         if (response.ok) {
             // Update the title and video source in the player
             document.getElementById('movieTitle').textContent = data.title;
-            document.getElementById('videoSource').src = data.source; // Ensure 'videoSource' matches your HTML
+            document.getElementById('videoSource').src = data.source; 
             document.getElementById('videoPlayer').load();
         } else {
             showModal(data.error || "Error loading movie");
         }
     } catch (error) {
+        console.error('Failed to load movie:', error);
         showModal('Failed to load movie. Please try again.');
     }
 }
 
-// Function to handle movie selection and navigate to the player page
-function selectMovie(movieId) {
-    localStorage.setItem('selectedMovieId', movieId); // Store the movie ID in localStorage
-    window.location.href = 'player.html'; // Navigate to player page
-    fetchMovieDetails(); // Call the function to fetch movie details
-}
+// Call fetchMovieDetails only on the player.html page
+document.addEventListener('DOMContentLoaded', function () {
+    if (window.location.pathname.endsWith('player.html')) {
+        fetchMovieDetails(); 
+    }
+});
+
+
 
 // Call fetchMovieDetails when the page loads
 document.addEventListener('DOMContentLoaded', fetchMovieDetails);
