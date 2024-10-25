@@ -182,7 +182,7 @@ async function fetchMovieDetails() {
             document.getElementById('videoSource').src = data.source; // Ensure 'videoSource' matches your HTML
             document.getElementById('videoPlayer').load();
         } else {
-            showModal(data.message || "Error loading movie");
+            showModal(data.error || "Error loading movie");
         }
     } catch (error) {
         showModal('Failed to load movie. Please try again.');
@@ -196,14 +196,8 @@ function selectMovie(movieId) {
     fetchMovieDetails(); // Call the function to fetch movie details
 }
 
-
-
-
-
-// // Automatically load movie details on player page
-// if (window.location.pathname.includes('player.html')) {
-//     window.onload = fetchMovieDetails;
-// }
+// Call fetchMovieDetails when the page loads
+document.addEventListener('DOMContentLoaded', fetchMovieDetails);
 
 // Title bar auto heading
 document.addEventListener('DOMContentLoaded', function () {
