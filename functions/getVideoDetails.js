@@ -2,7 +2,7 @@ const sql = require('mssql');
 const dbConfig = require('../dbConfig'); // Ensure dbConfig is defined
 
 module.exports.handler = async function (context, req) {
-    const { id } = req.body; // Destructure the ID from the request body
+    const { id } = JSON.parse(req.body); // Destructure the ID from the request body
 
     if (!id) {
         return {
