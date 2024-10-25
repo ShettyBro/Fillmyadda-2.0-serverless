@@ -1,18 +1,28 @@
-const dbConfig = {
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  server: process.env.DB_SERVER,
-  database: process.env.DB_NAME,
-  options: {
-    encrypt: true,           // Important for Azure SQL
-    enableArithAbort: true,    // Helps prevent connection issues with some SQL setups
-    connectionTimeout: 30000   // Set to 30 seconds
-  }
+const sql = require('mssql'); // Import the mssql package
+
+// Database configuration
+const config = {
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    server: process.env.DB_SERVER,
+    database: process.env.DB_NAME,
+    options: {
+        encrypt: true, // Use this if you're on Windows Azure
+        trustServerCertificate: true // Change to false if using production
+    }
 };
-const poolPromise = new sql.ConnectionPool(config)
-    .connect()
-    .then(pool => {
+
+// Function to connect to the database
+async function connectToDatabase() {
+    try {
+        const pool = await sql.connect(config);
         console.log('Connected to SQL Server');
         return pool;
-    })
-    .catch(err => console.log('Database connection failed: ', err));
+    } catch (err) {
+        console.error('Database connection failed: ', err);
+        throw err; // Re-throw the error for handling in the calling function
+    }
+}
+
+// Export the sql object and the connect function
+module.exports = { sql, connectToDatabase };
