@@ -1,10 +1,8 @@
 [build]
-  functions = "functions/" # Path to serverless functions
+  functions = "functions"  # Path to serverless functions
+  publish = "public"       # Directory to publish (your site’s main folder)
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-[build]
-  publish = "public"
