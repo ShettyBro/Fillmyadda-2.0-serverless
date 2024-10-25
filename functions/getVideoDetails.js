@@ -1,57 +1,32 @@
 const sql = require('mssql');
 const dbConfig = require('../dbConfig'); // Ensure dbConfig is defined and correct
 
-module.exports.handler = async function (context, req) {
-    let movieId;
-    
-    // Safely parse req.body and log for debugging
-    try {
-        const parsedBody = JSON.parse(req.body);
-        movieId = parsedBody.id;
-        console.log('Received movie ID:', movieId);
-    } catch (error) {
-        console.error('Error parsing request body:', error);
-        return {
-            statusCode: 400,
-            body: JSON.stringify({ error: 'Invalid request format' })
-        };
-    }
-
-    // Check if movie ID exists
+async function getMovieDetails(movieId) {
+    // Check if movieId is provided
     if (!movieId) {
-        return {
-            statusCode: 400,
-            body: JSON.stringify({ error: 'Movie ID is required' })
-        };
+        throw new Error('Movie ID is required');
     }
 
     try {
         // Connect to the database
         const pool = await sql.connect(dbConfig);
-        const query = 'SELECT title, source FROM Movies WHERE id = @id'; // Check your table name
+        
+        // Query to fetch movie details
+        const query = 'SELECT title, source FROM Movies WHERE id = @id';
         const result = await pool.request()
             .input('id', sql.Int, movieId)
             .query(query);
 
-        // Return movie details if found
+        // Check if any results were returned
         if (result.recordset.length > 0) {
-            console.log('Movie details found:', result.recordset[0]);
-            return {
-                statusCode: 200,
-                body: JSON.stringify(result.recordset[0])
-            };
+            return result.recordset[0]; // Return the first result
         } else {
-            console.log('Movie not found for ID:', movieId);
-            return {
-                statusCode: 404,
-                body: JSON.stringify({ error: 'Movie not found' })
-            };
+            throw new Error('Movie not found');
         }
     } catch (err) {
-        console.error('Error fetching video details:', err);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Database query error' })
-        };
+        console.error('Error fetching movie details:', err);
+        throw new Error('Database query error');
     }
-};
+}
+
+module.exports = getMovieDetails;

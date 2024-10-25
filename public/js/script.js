@@ -83,7 +83,7 @@ if (loginForm) {
         const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('/.netlify/functions/login', {
+        const response = await fetch('https://filmyadda-srverless.netlify.app/.netlify/functions/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
@@ -117,7 +117,7 @@ if (registerForm) {
         const password = document.getElementById('password').value; // Ensure you have this input in your HTML
 
     try {
-        const response = await fetch('/.netlify/functions/register', {
+        const response = await fetch('https://filmyadda-srverless.netlify.app/.netlify/functions/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password, fullname, email })
@@ -167,7 +167,7 @@ async function fetchMovieDetails() {
     }
 
     try {
-        const response = await fetch('https://filmyadda-2-0-serverless.netlify.app/.netlify/functions/getVideoDetails', {
+        const response = await fetch('https://filmyadda-srverless.netlify.app/.netlify/functions/getVideoDetails', {
             method: 'POST', 
             headers: {
                 'Content-Type': 'application/json',
