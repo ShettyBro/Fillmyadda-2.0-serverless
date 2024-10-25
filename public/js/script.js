@@ -45,13 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-const poolPromise = new sql.ConnectionPool(config)
-    .connect()
-    .then(pool => {
-        console.log('Connected to SQL Server');
-        return pool;
-    })
-    .catch(err => console.log('Database connection failed: ', err));
+
 
 
 // Verify token on page load for protected pages
