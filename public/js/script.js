@@ -34,42 +34,82 @@ window.onclick = function (event) {
     }
 }
 
+// Update your logout functionality in script.js
 document.addEventListener('DOMContentLoaded', function () {
     const logoutButton = document.getElementById('logoutButton');
     
     if (logoutButton) {
         logoutButton.addEventListener('click', () => {
-            localStorage.removeItem('authToken'); // Clear the token from localStorage
-            showModal('Successfully logged out. Thank you!', 'index.html');
+            // Clear all auth-related data
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('tokenExpiration');
+            localStorage.removeItem('selectedMovieId'); // Clear any selected movie
+
+            // Replace the current history state
+            window.history.replaceState(null, '', 'index.html');
+            
+            // Clear browser history and redirect
+            window.location.replace('index.html');
+            
+            showModal('Successfully logged out. Thank you!');
         });
     }
 });
 
 
-
-// Verify token on page load for protected pages
+// authentication check
 document.addEventListener('DOMContentLoaded', function () {
     const protectedPaths = ['/home.html', '/player.html', '/about.html'];
     const currentPage = window.location.pathname.split('/').pop();
 
     // Only check for token on protected pages
-    if (protectedPaths.includes(currentPage)) {
+    if (protectedPaths.includes('/' + currentPage)) {
         const token = localStorage.getItem('authToken');
         const expirationTime = localStorage.getItem('tokenExpiration');
 
         // Check if the token exists and has not expired
         if (!token || (expirationTime && Date.now() > expirationTime)) {
             console.log('Token is missing or expired, redirecting to login.');
-            localStorage.removeItem('authToken'); // Clear expired token
-            localStorage.removeItem('tokenExpiration'); // Clear expiration time
-            window.location.href = 'login.html';
-        } else {
-            console.log('Token is valid, proceeding to load protected content.');
-            loadProtectedContent(); // Load the protected content
+            // Clear all auth data
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('tokenExpiration');
+            localStorage.removeItem('selectedMovieId');
+            
+            // Replace current history state
+            window.history.replaceState(null, '', 'index.html');
+            
+            // Redirect without adding to history
+            window.location.replace('login.html');
         }
     }
 });
 
+//handle popstate (back/forward button) events
+window.addEventListener('popstate', function(event) {
+    const protectedPaths = ['/home.html', '/player.html', '/about.html'];
+    const currentPath = window.location.pathname;
+    
+    // Check if trying to access protected page
+    if (protectedPaths.some(path => currentPath.includes(path))) {
+        const token = localStorage.getItem('authToken');
+        const expirationTime = localStorage.getItem('tokenExpiration');
+        
+        // If no valid token, redirect to login
+        if (!token || (expirationTime && Date.now() > expirationTime)) {
+            window.location.replace('login.html');
+        }
+    }
+});
+
+//this meta tag to your HTML files to prevent caching of protected pages
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.location.pathname.match(/(home|player|about)\.html/)) {
+        const meta = document.createElement('meta');
+        meta.setAttribute('http-equiv', 'Cache-Control');
+        meta.setAttribute('content', 'no-cache, no-store, must-revalidate');
+        document.head.appendChild(meta);
+    }
+});
 
 
 
