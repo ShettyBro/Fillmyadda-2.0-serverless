@@ -13,4 +13,4 @@ const config = {
 };
 
 // Export the sql module and the config object
-module.exports = { sql, config };
+module.exports =  config;
