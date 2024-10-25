@@ -70,10 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// Function to load protected content
-function loadProtectedContent() {
-    document.getElementById('protectedContent').style.display = 'block';
-}
 
 
 
