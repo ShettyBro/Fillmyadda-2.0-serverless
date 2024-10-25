@@ -1,28 +1,16 @@
-const sql = require('mssql'); // Import the mssql package
+const sql = require('mssql');
 
-// Database configuration
+// Configuration object for the database
 const config = {
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    server: process.env.DB_SERVER,
-    database: process.env.DB_NAME,
+    user: process.env.DB_USER, // Ensure this is set in Netlify
+    password: process.env.DB_PASSWORD, // Ensure this is set in Netlify
+    server: process.env.DB_SERVER, // Ensure this is set in Netlify
+    database: process.env.DB_NAME, // Ensure this is set in Netlify
     options: {
         encrypt: true, // Use this if you're on Windows Azure
         trustServerCertificate: true // Change to false if using production
     }
 };
 
-// Function to connect to the database
-async function connectToDatabase() {
-    try {
-        const pool = await sql.connect(config);
-        console.log('Connected to SQL Server');
-        return pool;
-    } catch (err) {
-        console.error('Database connection failed: ', err);
-        throw err; // Re-throw the error for handling in the calling function
-    }
-}
-
-// Export the sql object and the connect function
-module.exports = { sql, connectToDatabase };
+// Export the sql module and the config object
+module.exports = { sql, config };
