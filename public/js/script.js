@@ -170,7 +170,14 @@ async function fetchMovieDetails() {
     }
 
     try {
-        const response = await fetch(`https://filmyadda-2-0-serverless.netlify.app/.netlify/functions/getVideoDetails/${movieId}`); // Ensure correct URL structure
+        const response = await fetch('https://filmyadda-2-0-serverless.netlify.app/.netlify/functions/getVideoDetails', {
+            method: 'POST', // Change to POST request
+            headers: {
+                'Content-Type': 'application/json', // Set the content type
+            },
+            body: JSON.stringify({ id: movieId }) // Send the movieId as a JSON object
+        });
+
         const data = await response.json();
 
         if (response.ok) {
@@ -186,17 +193,21 @@ async function fetchMovieDetails() {
     }
 }
 
-
-// Function to select a movie and navigate to player page
+// Function to handle movie selection and navigate to the player page
 function selectMovie(movieId) {
-    localStorage.setItem('selectedMovieId', movieId);
-    window.location.href = 'player.html';
+    localStorage.setItem('selectedMovieId', movieId); // Store the movie ID in localStorage
+    window.location.href = 'player.html'; // Navigate to player page
+    fetchMovieDetails(); // Call the function to fetch movie details
 }
 
-// Automatically load movie details on player page
-if (window.location.pathname.includes('player.html')) {
-    window.onload = fetchMovieDetails;
-}
+
+
+
+
+// // Automatically load movie details on player page
+// if (window.location.pathname.includes('player.html')) {
+//     window.onload = fetchMovieDetails;
+// }
 
 // Title bar auto heading
 document.addEventListener('DOMContentLoaded', function () {
