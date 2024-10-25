@@ -88,7 +88,7 @@ window.addEventListener('popstate', function(event) {
 
     if (protectedPaths.some(path => currentPath.includes(path))) {
         if (!token || (expirationTime && Date.now() > expirationTime)) {
-            window.location.replace('login.html'); // Redirect to login
+            window.location.replace('home.html'); // Redirect to login
         }
     }
 });
