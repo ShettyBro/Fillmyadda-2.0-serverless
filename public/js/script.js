@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-//Function to fetch the movie details from the backend
+// Function to fetch the movie details from the backend
 async function fetchMovieDetails() {
     const movieId = localStorage.getItem('selectedMovieId'); // Get the movie ID from localStorage
 
@@ -170,13 +170,13 @@ async function fetchMovieDetails() {
     }
 
     try {
-        const response = await fetch(`https://filmyadda-2-0-serverless.netlify.app/.netlify/functions/getVideoDetails/${movieId}`); // Use the movieId in the URL
+        const response = await fetch(`https://filmyadda-2-0-serverless.netlify.app/.netlify/functions/getVideoDetails/${movieId}`); // Ensure correct URL structure
         const data = await response.json();
 
         if (response.ok) {
             // Update the title and video source in the player
             document.getElementById('movieTitle').textContent = data.title;
-            document.getElementById('videoSource').src = data.source; // Change 'videoSource' to 'source'
+            document.getElementById('videoSource').src = data.source; // Ensure 'videoSource' matches your HTML
             document.getElementById('videoPlayer').load();
         } else {
             showModal(data.message || "Error loading movie");

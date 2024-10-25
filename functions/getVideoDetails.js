@@ -1,7 +1,6 @@
-
 // Route to get video details by movie ID
 app.post('/getVideoDetails', async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.body; // Get ID from request body
 
   if (!id) {
       return res.status(400).json({ error: 'Movie ID is required' });
@@ -22,27 +21,5 @@ app.post('/getVideoDetails', async (req, res) => {
   } catch (err) {
       console.error('Error fetching video details:', err);
       return res.status(500).json({ error: 'Database query error' });
-  }
-});
-
-// Fetch movie details by ID
-app.get('/movies/:id', async (req, res) => {
-  const movieId = req.params.id;
-
-  try {
-      const pool = await sql.connect(dbConfig);
-      const result = await pool.request()
-          .input('id', sql.Int, movieId) // Specify the input type
-          .query('SELECT title, source FROM movies WHERE id = @id');
-
-      if (result.recordset.length > 0) {
-          const movie = result.recordset[0];
-          res.status(200).json(movie); // Respond with movie details
-      } else {
-          res.status(404).json({ message: 'Movie not found' }); // Movie not found
-      }
-  } catch (err) {
-      console.error('Error fetching movie details:', err);
-      res.status(500).json({ message: 'Internal server error' });
   }
 });
