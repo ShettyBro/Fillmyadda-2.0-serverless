@@ -63,7 +63,7 @@ exports.handler = async (event) => {
     };
   }
     catch (err) {
-      onsole.error("Database connection error:", err); // Log to Netlify
+      console.error("Database connection error:", err); // Log to Netlify
   return {
     statusCode: 500,
     headers,
