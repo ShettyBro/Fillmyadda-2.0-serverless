@@ -83,7 +83,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('authToken');
+
             
             if (!token) {
                 // Redirect to login page if no token is found

@@ -47,35 +47,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
 // Verify token on page load for protected pages
-document.addEventListener('DOMContentLoaded', async function () {
-    const protectedPaths = ['/home.html', '/player.html', '/about.html']; // Add your protected pages here
-    const currentPath = window.location.pathname;
+document.addEventListener('DOMContentLoaded', function () {
+    const protectedPaths = ['/home.html', '/player.html', '/about.html'];
+    const currentPage = window.location.pathname.split('/').pop();
 
-    if (!publicPages.includes(currentPage)) {
+    // Only check for token on protected pages
+    if (protectedPaths.includes(currentPage)) {
         const token = localStorage.getItem('authToken');
+        const expirationTime = localStorage.getItem('tokenExpiration');
 
-        if (!token) {
+        // Check if the token exists and has not expired
+        if (!token || (expirationTime && Date.now() > expirationTime)) {
+            console.log('Token is missing or expired, redirecting to login.');
+            localStorage.removeItem('authToken'); // Clear expired token
+            localStorage.removeItem('tokenExpiration'); // Clear expiration time
             window.location.href = 'login.html';
         } else {
-            try {
-                const response = await fetch('/.netlify/functions/verifyToken', {
-                    method: 'POST',
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Token verification failed');
-                }
-            } catch (error) {
-                console.error('Token Verification Error:', error);
-                localStorage.removeItem('authToken');
-                showModal('Session expired. Redirecting to login...', 'login.html');
-            }
+            console.log('Token is valid, proceeding to load protected content.');
+            loadProtectedContent(); // Load the protected content
         }
     }
 });
+
+// Function to load protected content
+function loadProtectedContent() {
+    document.getElementById('protectedContent').style.display = 'block';
+}
+
+
 
 // Login function
 const loginForm = document.getElementById('loginForm');
@@ -95,7 +95,10 @@ if (loginForm) {
 
         if (response.ok) {
             const data = await response.json();
-            localStorage.setItem('authToken', data.token); // Store token in storage
+            localStorage.setItem('authToken', data.token); // Store the token
+             // Set expiration time for the token (5 hours in milliseconds)
+             const expirationTime = Date.now() + (5 * 60 * 60 * 1000);
+             localStorage.setItem('tokenExpiration', expirationTime);
             showModal('Login successful! Redirecting to home...', 'home.html');
         } else {
             showModal('Invalid username or password.');
