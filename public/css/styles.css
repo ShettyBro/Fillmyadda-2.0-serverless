@@ -527,7 +527,7 @@ input:-webkit-autofill::first-line {
 /* Button Styles */
 .box2 button {
     margin-top: 10%;
-    margin-bottom: 10%;
+    margin-bottom: 0%;
     width: auto;
     font: inherit;
     background-color: rgb(168, 0, 0);
@@ -558,6 +558,7 @@ form {
     font-size: 18px;
     text-align: center;
     margin-top: 20px;
+    
 }
 
 /* Autofill Styles */
@@ -1021,5 +1022,213 @@ ul {
   .example-2 .icon-content a[data-social="youtube"] ~ .tooltip {
     background-color: #ff0000;
   }
-  
 
+
+  /* Extra modifications  */
+  #passwordError {
+    color:rgb(243, 240, 240);
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: block;
+    background-color: transparent;
+    
+    padding: 5px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* mobile conversion */
+
+/* Updated responsive styles */
+
+/* Base responsive setup */
+@media screen and (max-width: 1024px) {
+    .image-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .image-item img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .image-item p {
+        font-size: 16px;
+    }
+
+    /* Adjust button sizes */
+    .box button, .box2 button {
+        font-size: 1rem;
+        padding: 0.25em 0.75em;
+        margin-left: 25%;
+    }
+
+    /* Footer positioning */
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer {
+        margin-top: auto;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+}
+
+/* Landscape mode specific adjustments */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    body {
+        zoom: 0.9;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    .box, .box2 {
+        height: auto;
+        min-height: 80vh;
+        margin: 10px auto;
+        transform: scale(0.9);
+    }
+
+    .image-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .maincontent {
+        margin: 20px 0;
+    }
+
+    .modal-content {
+        margin: 5% auto;
+    }
+
+    /* Ensure content doesn't overflow */
+    .container {
+        max-width: 95vw;
+        margin: 0 auto;
+    }
+
+    /* Adjust video player for landscape */
+    #videoPlayer {
+        max-height: 70vh;
+    }
+
+    /* Footer adjustment for landscape */
+    .footer {
+        position: relative;
+        padding: 5px 0;
+    }
+}
+
+/* Portrait mode specific adjustments */
+@media screen and (max-width: 480px) and (orientation: portrait) {
+    .image-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 10px;
+        padding: 10px;
+    }
+
+    /* Adjust login/register boxes */
+    .box, .box2 {
+        width: 90%;
+        padding: 15px;
+        margin: 20px auto;
+        height: auto;
+        min-height: 400px;
+    }
+
+    .box button, .box2 button {
+        font-size: 1rem;
+        padding: 0.25em 0.75em;
+        margin: 10px auto;
+        transform: scale(0.9);
+        width: auto;
+    }
+
+    .nav {
+        flex-direction: row; /* Keep items in a row for mobile */
+        justify-content: space-between; /* Space out items */
+        padding: 10px; /* Add padding for better spacing */
+    
+    }
+
+    .logo {
+        width: 150px; /* Reduce logo width */
+        height: auto; /* Maintain aspect ratio */
+        margin-right: 10px; /* Add margin to separate from buttons */
+    }
+
+    .nav button {
+        width: auto; /* Allow buttons to size based on content */
+        font-size: 14px; /* Adjust font size for better visibility */
+        padding: 8px 12px; /* Increase padding for easier tapping */
+        margin-left: 5px; /* Add margin between buttons */
+        
+    }
+
+    /* Ensure footer stays at the bottom */
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* Ensure body takes full height */
+    }
+
+    .footer {
+        margin-top: auto; /* Push footer to the bottom */
+        position: relative; /* Ensure it is positioned correctly */
+    }
+
+    /* Make form inputs more touch-friendly */
+    .inputbox input, .inputbox2 input {
+        padding: 8px 0;
+        margin-top: 20px;
+    }
+
+    .inputbox label, .inputbox2 label {
+        font-size: 16px;
+    }
+
+    /* Footer positioning for portrait */
+    .footer {
+        margin-top: auto;
+        padding: 5px 0;
+    }
+
+    /* Adjust main content spacing */
+    .maincontent {
+        margin: 30px 0;
+    }
+
+    .maincontent button {
+        font-size: 20px;
+        padding: 10px 20px;
+        border: 1px solid #fff;
+        background: transparent;
+        color: gold;
+        border-radius: 4px;
+        transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    }
+}

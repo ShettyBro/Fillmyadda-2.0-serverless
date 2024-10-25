@@ -33,7 +33,7 @@
 <body>
     <div class="header">
         <nav class="nav">
-            <img class="logo" src="css/assets/bg.png" alt="Logo" onclick="href='home.html'">
+            <img class="logo" src="css/assets/bg.png" alt="" onclick="location.href='home.html'">
             <div class="navbt">
                 <button onclick="location.href='home.html'">Home</button>
                 <button id="logoutButton">Logout</button>
@@ -46,7 +46,7 @@
 
 
         <div class="container">
-            <video id="videoPlayer" class="video-player" >
+            <video id="videoPlayer" class="video-player" oncontextmenu="return false;" >
                 <source id="videoSource" src="" type="video/mp4">
                 Your browser does not support the video tag.
             </video>

@@ -14,6 +14,11 @@ function showModal(message, redirectUrl = null) {
     }
 }
 
+function toggleMenu() {
+    const navLinks = document.getElementById('navLinks');
+    navLinks.classList.toggle('active'); // Toggle the active class
+}
+
 // Function to close modal
 function closeModal() {
     const modal = document.getElementById('modal');
@@ -79,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Prevent back navigation to protected pages after logout
 window.addEventListener('popstate', function(event) {
-    const protectedPaths = ['/home.html', '/player.html', '/about.html'];
+    const protectedPaths = ['/home.html', '/player.html', '/about.html',];
     const currentPath = window.location.pathname;
 
     // Check if trying to access protected page without valid token
@@ -137,8 +142,8 @@ if (loginForm) {
             showModal('Invalid username or password.');
         }
     } catch (error) {
-        console.error('Login Error:', error);
-        showModal('An error occurred. Please try again later.');
+        console.log('Login Error:', error);
+        showModal('Server Down Contact Develpoer or Try Again Later');
     } finally {
         loginButton.disabled = false; // Re-enable the login button
         loginButton.textContent = 'Login'; // Reset button text
@@ -162,6 +167,20 @@ if (registerForm) {
         const username = document.getElementById('username').value; // Ensure you have this input in your HTML
         const password = document.getElementById('password').value; // Ensure you have this input in your HTML
 
+          // Password validation rule: Minimum 8 characters and at least 1 special symbol
+          const passwordRegex = /^(?=.*[!@#$%^&*])(?=.{8,})/;
+
+        if (!passwordRegex.test(password)) {
+            passwordError.innerHTML = "<span style='color: red;'>Invalid Password <br>  * Mim 8 characters <br> * One special symbol (!@#$%^&*).</span>";
+            hasError = true;`1`
+            registerButton.disabled = false; // Re-enable the button if validation fails
+            registerButton.textContent = 'Register'; // Reset button text
+            return;
+        }else {
+            passwordError.innerHTML = ""; // Clear password error if valid
+        }
+        
+
     try {
         const response = await fetch('https://filmyadda-srverless.netlify.app/.netlify/functions/register', {
             method: 'POST',
@@ -177,7 +196,7 @@ if (registerForm) {
         }
     } catch (error) {
         console.error('Registration Error:', error);
-        showModal('Server error. Please try again later.');
+        showModal('Server Down Contact Develpoer or Try Again Later');
     }finally {
         // Re-enable the button after the request is complete
         registerButton.disabled = false; // Re-enable the button
@@ -221,7 +240,7 @@ async function fetchMovieDetails() {
     const movieId = localStorage.getItem('selectedMovieId');
     
     if (!movieId) {
-        showModal('No movie selected');
+        showModal('Server Down Contact Develpoer or Try Again Later');
         return;
     }
 
@@ -260,8 +279,8 @@ async function fetchMovieDetails() {
         }
 
     } catch (error) {
-        console.error('Error fetching movie details:', error);
-        showModal(`Failed to load movie: ${error.message}`);
+        console.log('Error fetching movie details:', error);
+        showModal(`Server Down Contact Develpoer or Try Again Later`);
     }
 }
 // Call fetchMovie Details only on the player.html page
@@ -356,6 +375,30 @@ document.addEventListener('DOMContentLoaded', function () {
         const seekTime = (seekBar.value / 100) * video.duration;
         video.currentTime = seekTime;
     });
+
+     // Spacebar for play/pause and arrow keys for seek
+     document.addEventListener('keydown', (event) => {
+        if (event.code === 'Space') {
+            event.preventDefault(); // Prevent scrolling the page
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
+        }
+
+        // Rewind the video by 10 seconds with the left arrow key
+        if (event.code === 'ArrowLeft') {
+            video.currentTime = Math.max(0, video.currentTime - 10);
+        }
+
+            // Forward the video by 10 seconds with the right arrow key
+            if (event.code === 'ArrowRight') {
+                video.currentTime = Math.min(video.duration, video.currentTime + 10);
+            }
+        });
+
+
 
     // Handle volume control
     volumeControl.addEventListener('input', () => {

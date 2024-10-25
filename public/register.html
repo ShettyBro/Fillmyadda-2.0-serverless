@@ -13,7 +13,7 @@
 <body>
     <div class="header">
         <nav class="nav">
-            <img class="logo" src="css/assets/bg.png" alt="" onclick="href='index.html'">
+            <img class="logo" src="css/assets/bg.png" alt="" onclick="location.href='index.html'">
             <div class="navbt">
                 <button onclick="location.href='about-index.html'" target="_blank">About</button>
             </div>
@@ -37,10 +37,11 @@
                     <input type="password" name="password" id="password" required>
                     <label class="label" for="password">Password:</label>
                 </div>
+                <span id="passwordError" ></span>
                 <button id="registerButton" type="submit">REGISTER</button>
-                <div class="register">
+                <span class="register">
                     <p>Already a Member? <a href="login.html">Login Now</a></p>
-                </div>
+                </span>
             </form>
         </div>
     </div>
