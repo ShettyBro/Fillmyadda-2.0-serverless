@@ -256,6 +256,7 @@ async function fetchMovieDetails() {
         if (videoSource && videoPlayer && data.source) {
             videoSource.src = data.source;
             videoPlayer.load(); // Reload the video player with new source
+            videoPlayer.play();
         }
 
     } catch (error) {
