@@ -157,40 +157,62 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Function to fetch the movie details from the backend
+// Add this function to your existing script.js
+function selectMovie(movieId) {
+    // Store the selected movie ID in localStorage
+    localStorage.setItem('selectedMovieId', movieId);
+    
+    // Redirect to the player page
+    window.location.href = 'player.html';
+}
+
 // Function to fetch the movie details from the backend
 async function fetchMovieDetails() {
-    const movieId = localStorage.getItem('selectedMovieId'); // Get the movie ID from localStorage
-
+    const movieId = localStorage.getItem('selectedMovieId');
+    
     if (!movieId) {
-        console.log('No movie selected, skipping fetch.');
-        return; // Exit if no movie ID is set
+        showModal('No movie selected');
+        return;
     }
 
     try {
         const response = await fetch('https://filmyadda-srverless.netlify.app/.netlify/functions/getVideoDetails', {
-            method: 'POST', 
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id: movieId }) // Send the movieId as a JSON object
+            body: JSON.stringify({ id: parseInt(movieId) }) // Ensure movieId is sent as a number
         });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
         const data = await response.json();
 
-        if (response.ok) {
-            // Update the title and video source in the player
-            document.getElementById('movieTitle').textContent = data.title;
-            document.getElementById('videoSource').src = data.source; 
-            document.getElementById('videoPlayer').load();
-        } else {
-            showModal(data.error || "Error loading movie");
+        if (data.error) {
+            throw new Error(data.error);
         }
+
+        // Update the video player
+        const movieTitle = document.getElementById('movieTitle');
+        const videoSource = document.getElementById('videoSource');
+        const videoPlayer = document.getElementById('videoPlayer');
+
+        if (movieTitle && data.title) {
+            movieTitle.textContent = data.title;
+        }
+
+        if (videoSource && videoPlayer && data.source) {
+            videoSource.src = data.source;
+            videoPlayer.load(); // Reload the video player with new source
+        }
+
     } catch (error) {
-        console.error('Failed to load movie:', error);
-        showModal('Failed to load movie. Please try again.');
+        console.error('Error fetching movie details:', error);
+        showModal(`Failed to load movie: ${error.message}`);
     }
 }
-
 // Call fetchMovie Details only on the player.html page
 document.addEventListener('DOMContentLoaded', function () {
     if (window.location.pathname.endsWith('player.html')) {
@@ -199,11 +221,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
-
-
-// Call fetchMovieDetails when the page loads
-document.addEventListener('DOMContentLoaded', fetchMovieDetails);
 
 // Title bar auto heading
 document.addEventListener('DOMContentLoaded', function () {
