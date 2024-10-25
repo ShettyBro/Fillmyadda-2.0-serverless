@@ -7,7 +7,22 @@
     <title>Filmyadda - About</title>
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/script.js"></script>
-    <script src="js/auth.js" defer></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          // Retrieve the token and its expiration time from local storage
+          const token = localStorage.getItem('token');
+          const expirationTime = localStorage.getItem('tokenExpiration');
+          
+          // Check if the token is missing or expired
+          if (!token || (expirationTime && Date.now() > expirationTime)) {
+              // Clear the token and expiration time from local storage
+              localStorage.removeItem('token');
+              localStorage.removeItem('tokenExpiration');
+              // Redirect to the login page
+              window.location.href = 'index.html'; // Change this to 'index.html' as you requested
+          }
+      });
+  </script>
 </head>
 
 <body>
