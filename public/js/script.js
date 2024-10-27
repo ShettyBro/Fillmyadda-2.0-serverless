@@ -413,36 +413,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // Search bro
+// script.js
+async function searchMovies(query) {
+    if (!query) return; // Prevent empty queries
+    try {
+        const response = await fetch(`https://filmyadda.sudeepbro.me/.netlify/functions/searchMovies?query=${encodeURIComponent(query)}`);
 
-// Function to search for movies based on user input
-function searchMovies(query) {
-    const searchResults = document.getElementById('search-results');
-    
-    // Hide results if the input is empty
-    if (query.trim() === '') {
-      searchResults.style.display = 'none';
-      return;
-    }
-    
-    // Fetch movie data from the server
-    fetch(`https://filmyadda.sudeepbro.me/.netlify/functions/searchMovies?search=${encodeURIComponent(query)}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.length === 0) {
-          searchResults.style.display = 'none';
-        } else {
-          searchResults.style.display = 'block';
-          // Display search results in the dropdown
-          searchResults.innerHTML = data.map(movie => 
-            `<p onclick="selectMovie(${movie.id})">${movie.title}</p>`
-          ).join('');
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
-      })
-      .catch(error => {
+
+        const result = await response.json();
+
+        // Check if 'movies' is an array before processing
+        if (Array.isArray(result.movies)) {
+            // Process your movie titles here
+            const searchResultsContainer = document.getElementById('search-results');
+            searchResultsContainer.innerHTML = ''; // Clear previous results
+
+            result.movies.forEach(title => {
+                const listItem = document.createElement('li');
+                listItem.textContent = title; // or any other property of the movie
+                searchResultsContainer.appendChild(listItem);
+            });
+        } else {
+            console.error('Response is not an array:', result);
+        }
+
+    } catch (error) {
         console.error('Error fetching search results:', error);
-        searchResults.style.display = 'none';
-      });
-  }
+    }
+}
+
+
   
   // Function to handle movie selection from search results
   function selectMovie(movieId) {

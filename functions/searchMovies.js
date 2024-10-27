@@ -29,19 +29,17 @@ exports.handler = async (event) => {
         
         // Query the Movies table for titles that contain the search query
         const result = await sql.query`
-            SELECT id, title FROM movies WHERE title LIKE ${'%' + query + '%'}
-        `;
+            SELECT id, title FROM movies WHERE title LIKE ${'%' + query + '%'} `;
 
         // Map the results to include both id and title
-        const movies = result.recordset.map(row => ({
-            id: row.id,
-            title: row.title
-        }));
+        const movieTitles = result.recordset.map(row => row.title);
+
 
         return {
             statusCode: 200,
-            body: JSON.stringify(movies), // Return the entire movies array
+            body: JSON.stringify({ movies: movieTitles }),
         };
+        
     } catch (error) {
         console.error("Database query error:", error);
         return {
