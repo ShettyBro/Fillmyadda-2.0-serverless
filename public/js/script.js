@@ -317,15 +317,28 @@ document.addEventListener('DOMContentLoaded', function () {
     const volumeControl = document.getElementById('volumeControl');
     let controlsTimeout;
 
+    // Function to show/hide controls
     function showControls() {
-        controls.style.visibility = 'visible';
+        controls.classList.add('visible'); // Show controls
         if (controlsTimeout) {
             clearTimeout(controlsTimeout);
         }
         controlsTimeout = setTimeout(() => {
-            controls.style.visibility = 'hidden';
+            controls.classList.remove('visible'); // Hide after timeout
         }, 4000);
     }
+
+    // Function to toggle play/pause
+    function togglePlayPause() {
+        if (video.paused) {
+            video.play();
+        } else {
+            video.pause();
+        }
+    }
+
+    // Hide default controls
+    video.controls = false; // Disable default controls
 
     video.addEventListener('play', () => {
         playIcon.style.display = 'none';
@@ -337,21 +350,9 @@ document.addEventListener('DOMContentLoaded', function () {
         pauseIcon.style.display = 'none';
     });
 
-    video.addEventListener('click', () => {
-        if (video.paused) {
-            video.play();
-        } else {
-            video.pause();
-        }
-    });
+    video.addEventListener('click', togglePlayPause);
 
-    playPauseButton.addEventListener('click', () => {
-        if (video.paused) {
-            video.play();
-        } else {
-            video.pause();
-        }
-    });
+    playPauseButton.addEventListener('click', togglePlayPause);
 
     video.addEventListener('mousemove', showControls);
     controls.addEventListener('mousemove', showControls);
@@ -359,8 +360,10 @@ document.addEventListener('DOMContentLoaded', function () {
     fullScreenBtn.addEventListener('click', () => {
         if (!document.fullscreenElement) {
             video.requestFullscreen();
+            controls.classList.add('visible'); // Ensure controls are visible in full-screen
         } else {
             document.exitFullscreen();
+            controls.classList.remove('visible'); // Hide controls when exiting full-screen
         }
     });
 
@@ -376,29 +379,29 @@ document.addEventListener('DOMContentLoaded', function () {
         video.currentTime = seekTime;
     });
 
-     // Spacebar for play/pause and arrow keys for seek
-     document.addEventListener('keydown', (event) => {
+    // Spacebar for play/pause and arrow keys for seek
+    document.addEventListener('keydown', (event) => {
         if (event.code === 'Space') {
             event.preventDefault(); // Prevent scrolling the page
-            if (video.paused) {
-                video.play();
-            } else {
-                video.pause();
-            }
+            togglePlayPause();
         }
-
-        // Rewind the video by 10 seconds with the left arrow key
         if (event.code === 'ArrowLeft') {
             video.currentTime = Math.max(0, video.currentTime - 10);
         }
-
-            // Forward the video by 10 seconds with the right arrow key
-            if (event.code === 'ArrowRight') {
-                video.currentTime = Math.min(video.duration, video.currentTime + 10);
+        if (event.code === 'ArrowRight') {
+            video.currentTime = Math.min(video.duration, video.currentTime + 10);
+        }
+        // Toggle full screen with "F" key
+        if (event.code === 'KeyF') {
+            if (!document.fullscreenElement) {
+                video.requestFullscreen();
+                controls.classList.add('visible'); // Ensure controls are visible in full-screen
+            } else {
+                document.exitFullscreen();
+                controls.classList.remove('visible'); // Hide controls when exiting full-screen
             }
-        });
-
-
+        }
+    });
 
     // Handle volume control
     volumeControl.addEventListener('input', () => {
@@ -406,9 +409,37 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     showControls(); // Show controls when the page loads
-
-    // Automatically fetch and play the movie when player.html loads
-    if (window.location.pathname.includes('player.html')) {
-        fetchMovieDetails();
-    }
 });
+
+
+
+// Search bar 
+async function searchMovies(query) {
+    const searchResults = document.getElementById("search-results");
+
+    if (query) {
+        try {
+            const response = await fetch(`/.netlify/functions/searchMovies?query=${encodeURIComponent(query)}`);
+            const data = await response.json();
+
+            if (data.movies && data.movies.length > 0) {
+                searchResults.innerHTML = data.movies.map(movie => 
+                    `<div onclick="selectMovie('${movie}')">${movie}</div>`
+                ).join("");
+                searchResults.style.display = "block";
+            } else {
+                searchResults.style.display = "none";
+            }
+        } catch (error) {
+            console.error("Error fetching movies:", error);
+            searchResults.style.display = "none";
+        }
+    } else {
+        searchResults.style.display = "none";
+    }
+}
+
+function selectMovie(movie) {
+    alert(`Redirecting to movie: ${movie}`);
+    document.getElementById("search-results").style.display = "none";
+}
