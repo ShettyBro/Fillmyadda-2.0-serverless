@@ -412,6 +412,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// Search bro
+
 // Function to search for movies based on user input
 function searchMovies(query) {
     const searchResults = document.getElementById('search-results');
@@ -423,7 +425,7 @@ function searchMovies(query) {
     }
     
     // Fetch movie data from the server
-    fetch(`/api/movies?search=${encodeURIComponent(query)}`)
+    fetch(`https://filmyadda.sudeepbro.me/.netlify/functions/searchMovies?search=${encodeURIComponent(query)}`)
       .then(response => response.json())
       .then(data => {
         if (data.length === 0) {

@@ -24,7 +24,7 @@ exports.handler = async (event) => {
         
         // Query the Movies table for titles that contain the search query
         const result = await sql.query`
-            SELECT id, title FROM Movies WHERE title LIKE ${'%' + query + '%'}
+            SELECT id, title FROM movies WHERE title LIKE ${'%' + query + '%'}
         `;
 
         // Map the results to include both id and title
