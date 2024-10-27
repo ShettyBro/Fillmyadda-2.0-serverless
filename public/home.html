@@ -50,7 +50,8 @@
                 <div class="border"></div>
               
                 <div id="main">
-                    <input type="text" id="search-bar" placeholder="Search for a movie..." oninput="searchMovies(this.value)">                  <div id="input-mask"></div>
+                  <input placeholder="Search..." type="text" name="text" class="input" oninput="searchMovies(this.value)"/>
+                  <div id="input-mask"></div>
                   <div id="pink-mask"></div>
                   <div class="filterBorder"></div>
                   <div id="filter-icon">
@@ -104,7 +105,7 @@
                     </svg>
                   </div>
                 </div>
-                <div id="search-results" style="display: none; position: absolute; background-color: white; width: 100%; border: 1px solid #ccc;"></div>
+                <div id="search-results" class="dropdown-overlay"></div>
             </div>
             <div class="image-grid">
                 <div class="image-item" onclick="selectMovie(1)">

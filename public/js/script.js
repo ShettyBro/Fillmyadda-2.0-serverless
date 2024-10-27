@@ -412,34 +412,51 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
-// Search bar 
-async function searchMovies(query) {
-    const searchResults = document.getElementById("search-results");
-
-    if (query) {
-        try {
-            const response = await fetch(`/.netlify/functions/searchMovies?query=${encodeURIComponent(query)}`);
-            const data = await response.json();
-
-            if (data.movies && data.movies.length > 0) {
-                searchResults.innerHTML = data.movies.map(movie => 
-                    `<div onclick="selectMovie('${movie}')">${movie}</div>`
-                ).join("");
-                searchResults.style.display = "block";
-            } else {
-                searchResults.style.display = "none";
-            }
-        } catch (error) {
-            console.error("Error fetching movies:", error);
-            searchResults.style.display = "none";
-        }
-    } else {
-        searchResults.style.display = "none";
+// Function to search for movies based on user input
+function searchMovies(query) {
+    const searchResults = document.getElementById('search-results');
+    
+    // Hide results if the input is empty
+    if (query.trim() === '') {
+      searchResults.style.display = 'none';
+      return;
     }
-}
-
-function selectMovie(movie) {
-    alert(`Redirecting to movie: ${movie}`);
-    document.getElementById("search-results").style.display = "none";
-}
+    
+    // Fetch movie data from the server
+    fetch(`/api/movies?search=${encodeURIComponent(query)}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.length === 0) {
+          searchResults.style.display = 'none';
+        } else {
+          searchResults.style.display = 'block';
+          // Display search results in the dropdown
+          searchResults.innerHTML = data.map(movie => 
+            `<p onclick="selectMovie(${movie.id})">${movie.title}</p>`
+          ).join('');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching search results:', error);
+        searchResults.style.display = 'none';
+      });
+  }
+  
+  // Function to handle movie selection from search results
+  function selectMovie(movieId) {
+    console.log("Selected movie with ID:", movieId);
+    // Optionally redirect to a movie page or play video here
+    // e.g., window.location.href = `/movie/${movieId}`;
+    
+    // Hide the search results once a movie is selected
+    document.getElementById('search-results').style.display = 'none';
+  }
+  
+  // Optional: Add event listener to the search input for real-time searching
+  const searchInput = document.getElementById('search-input'); // Change this ID based on your input field
+  if (searchInput) {
+    searchInput.addEventListener('input', (event) => {
+      searchMovies(event.target.value);
+    });
+  }
+  

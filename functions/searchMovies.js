@@ -1,5 +1,5 @@
 // Netlify function: searchMovies.js
-const sql = require("mssql");  // Install mssql using npm
+const sql = require("mssql"); // Install mssql using npm
 const dbConfig = require('../dbConfig');
 require('dotenv').config();
 
@@ -8,7 +8,6 @@ console.log('Database Configuration:', {
   server: process.env.DB_SERVER,
   database: process.env.DB_NAME,
 });
-
 
 exports.handler = async (event) => {
     const query = event.queryStringParameters.query;
@@ -20,19 +19,23 @@ exports.handler = async (event) => {
     }
 
     try {
-        // Connect to the SQL database
-        await sql.connect(config);
+        // Connect to the SQL database using the dbConfig
+        await sql.connect(dbConfig); // Use dbConfig instead of config
         
         // Query the Movies table for titles that contain the search query
         const result = await sql.query`
-            SELECT title FROM movies WHERE title LIKE ${'%' + query + '%'}
+            SELECT id, title FROM Movies WHERE title LIKE ${'%' + query + '%'}
         `;
 
-        const movieTitles = result.recordset.map(row => row.title);
+        // Map the results to include both id and title
+        const movies = result.recordset.map(row => ({
+            id: row.id,
+            title: row.title
+        }));
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ movies: movieTitles }),
+            body: JSON.stringify(movies), // Return the entire movies array
         };
     } catch (error) {
         console.error("Database query error:", error);

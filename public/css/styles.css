@@ -1257,7 +1257,7 @@ ul {
     background-color: #010201;
     border: none;
     /* padding:7px; */
-    width: 401px;
+    width: 301px;
     height: 56px;
     border-radius: 10px;
     color: white;
@@ -1584,4 +1584,27 @@ ul {
     background-color: #3d3a4f;
   }
   
-  
+  /* drop down  */
+  #search-results {
+    display: none; /* Initially hidden, shows when results are available */
+    position: absolute;
+    top: 100%; /* Positions the dropdown right below the input */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1000; /* Ensures it’s above other content */
+    max-height: 200px; /* Adds scroll if results are too long */
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+}
+
+#search-results div {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+#search-results div:hover {
+    background-color: #f1f1f1; /* Adds a hover effect to results */
+}
