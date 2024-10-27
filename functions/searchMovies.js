@@ -14,6 +14,11 @@ exports.handler = async (event) => {
     if (!query) {
         return {
             statusCode: 400,
+            headers: {
+                'Access-Control-Allow-Origin': '*', // Allow all origins
+                'Access-Control-Allow-Methods': 'GET, OPTIONS', // Allow methods
+                'Content-Type': 'application/json', // Specify content type
+            },
             body: JSON.stringify({ error: "Query parameter is required" }),
         };
     }
