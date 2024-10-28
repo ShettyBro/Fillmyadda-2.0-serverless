@@ -334,8 +334,10 @@ input[type="range"]::-moz-range-thumb {
     margin-top: 10%;
 }
 
-.video-player {
+.video-js {
     border: 2px;
+    margin:auto;
+    
 }
 
 /* Login Box Styles */
