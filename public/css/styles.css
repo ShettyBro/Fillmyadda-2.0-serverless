@@ -1243,7 +1243,7 @@ ul {
   .darkBorderBg,
   .glow {
     max-height: 70px;
-    max-width: 314px;
+    max-width: 400;
     height: 100%;
     width: 100%;
     position: absolute;
@@ -1257,7 +1257,7 @@ ul {
     background-color: #010201;
     border: none;
     /* padding:7px; */
-    width: 301px;
+    width: 401px;
     height: 56px;
     border-radius: 10px;
     color: white;
@@ -1527,7 +1527,7 @@ ul {
   }
   
   .filterBorder::before {
-    content: "";
+    /* content: ""; */
   
     text-align: center;
     top: 50%;
