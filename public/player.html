@@ -10,7 +10,6 @@
     <title>Movie Player</title>
     <link rel="icon" href="css/assets/final-logo.ico" type="image/x-icon" >
     <link rel="stylesheet" href="css/styles.css">
-    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     <script src="js/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -46,9 +45,8 @@
         </div>
 
 
-
         <div class="container">
-            <video id="videoPlayer" class="video-js" controls preload="auto" autoplay oncontextmenu="return false;" >
+            <video id="videoPlayer" class="video-player" autoplay oncontextmenu="return false;" >
                 <source id="videoSource" src="" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -89,7 +87,7 @@
 
   
     
-    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+
 
 </body>
 
