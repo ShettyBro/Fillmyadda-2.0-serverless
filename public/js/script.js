@@ -192,7 +192,8 @@ if (registerForm) {
             showModal('Registration successful! Redirecting to login...', 'login.html');
         } else {
             const error = await response.text();
-            showModal(`Registration failed: ${error}`);
+            showModal(`Registration failed:
+                Username, fullname, or email already exists`);
         }
     } catch (error) {
         console.error('Registration Error:', error);
