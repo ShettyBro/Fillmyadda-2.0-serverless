@@ -188,6 +188,7 @@ body {
     visibility: visible;
 }
 
+
 button {
     background-color: transparent;
     border: none;
@@ -237,9 +238,23 @@ input[type="range"]::-moz-range-thumb {
     cursor: pointer;
 }
 
+
 #volumeControl {
     width: 100px;
 }
+
+::-webkit-media-controls {
+    display:none !important;
+  }
+
+  video::-webkit-media-controls {
+    display:none !important;
+  }
+
+  video::-webkit-media-controls-enclosure {
+    display:none !important;
+  }
+
 
 /* Main Content Styles */
 .maincontent {

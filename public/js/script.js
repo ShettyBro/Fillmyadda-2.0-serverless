@@ -360,13 +360,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     fullScreenBtn.addEventListener('click', () => {
         if (!document.fullscreenElement) {
-            video.requestFullscreen();
+            video.requestFullscreen(); 
+            showControls();
             controls.classList.add('visible'); // Ensure controls are visible in full-screen
         } else {
             document.exitFullscreen();
             controls.classList.remove('visible'); // Hide controls when exiting full-screen
         }
     });
+
+   
+
 
     // Update the seek bar as the video plays
     video.addEventListener('timeupdate', () => {
