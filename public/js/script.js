@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Function to fetch the movie details from the backend
-// Add this function to your existing script.js
+
 function selectMovie(movieId) {
     // Store the selected movie ID in localStorage
     localStorage.setItem('selectedMovieId', movieId);
@@ -417,4 +417,99 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// Search bro
+let movieList = [];
+
+// Load movies from movies.json
+async function loadMovies() {
+    try {
+        const response = await fetch('movies.json'); // Ensure the path is correct
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        movieList = await response.json();
+        console.log('Movies loaded:', movieList); // Log loaded movies for debugging
+    } catch (error) {
+        console.error('Error loading movie list:', error);
+    }
+}
+
+// Filter movies based on user input
+function filterMovies() {
+    const searchInput = document.getElementById('search-Input').value.toLowerCase();
+    const searchResults = document.getElementById('search-results');
+    searchResults.innerHTML = ''; // Clear previous results
+
+    // Filter the movie list
+    const filteredMovies = movieList.filter(movie => 
+        movie.title.toLowerCase().includes(searchInput)
+    );
+
+    console.log('Filtered Movies:', JSON.stringify(filteredMovies, null, 2)); // Pretty print the movies
+   
+    if (filteredMovies.length > 0) {
+   // Display filtered results
+        filteredMovies.forEach(movie => {
+            const resultItem = document.createElement('div');
+            resultItem.textContent = movie.title; // Display movie title
+            resultItem.classList.add('suggestion-item');
+
+            // Add click event for movie selection
+            resultItem.addEventListener('click', () => {
+                localStorage.setItem('selectedMovieId', movie.id); // Store movie ID in local storage
+                selectMovie(movie.id); // Call selectMovie function to navigate to player page
+            });
+            searchResults.appendChild(resultItem);
+        });
+    } else {
+        // If no results found, display a message
+        const noResultsItem = document.createElement('div');
+        noResultsItem.textContent = 'No results found'; // Message for no results
+        noResultsItem.classList.add('no-results'); // Add the no-results class for styling
+        searchResults.appendChild(noResultsItem);
+    }
+
+    // Show or hide results based on matches
+    searchResults.style.display = 'block' ;
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadMovies(); // Load movies when the DOM is ready
+
+    // Add event listener for search input
+    const searchInput = document.getElementById('search-Input');
+    if (searchInput) {
+        searchInput.addEventListener('input', filterMovies); // Call filterMovies on input
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadMovies(); // Load movies when the DOM is ready
+
+    // Add event listener for search input
+    const searchInput = document.getElementById('search-Input');
+    const searchResults = document.getElementById('search-results');
+    let debounceTimer;
+
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(filterMovies, 300); // Delay of 300ms
+        });
+
+        // Hide dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!searchResults.contains(event.target) && event.target !== searchInput) {
+                searchResults.style.display = 'none'; // Hide the dropdown if clicked outside
+            }
+        });
+    }
+});
+
+
+// Function to select the movie and redirect
+function selectMovie(movieId) {
+    localStorage.setItem('selectedMovieId', movieId); // Store selected movie ID
+    window.location.href = 'player.html'; // Redirect to the player page
+}
+

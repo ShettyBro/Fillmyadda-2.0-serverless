@@ -1277,7 +1277,7 @@ ul {
     height: 56px;
     border-radius: 10px;
     color: white;
-    padding-inline: 59px;
+    padding-inline: 30px;
     font-size: 18px;
   }
   #poda {
@@ -1286,16 +1286,16 @@ ul {
     justify-content: center;
   }
   .input::placeholder {
-    color: #c0b9c0;
+    color: #ffffff;
   }
   
   .input:focus {
     outline: none;
   }
   
-  #main:focus-within > #input-mask {
+  /* #main:focus-within > #input-mask {
     display: none;
-  }
+  } */
   
   #input-mask {
     pointer-events: none;
@@ -1317,10 +1317,10 @@ ul {
     filter: blur(20px);
     opacity: 0.8;
     animation:leftright 4s ease-in infinite;
-    transition: all 2s;
+    transition: all 
   }
   #main:hover > #pink-mask {
-    opacity: 0;
+    opacity: 1;
   }
   
   .white {
@@ -1512,65 +1512,14 @@ ul {
     }
   }
   
-  #filter-icon {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    max-height: 40px;
-    max-width: 38px;
-    height: 100%;
-    width: 100%;
-  
-    isolation: isolate;
-    overflow: hidden;
-    /* Border Radius */
-    border-radius: 10px;
-    background: linear-gradient(180deg, #161329, black, #1d1b4b);
-    border: 1px solid transparent;
-  }
-  .filterBorder {
-    height: 42px;
-    width: 40px;
-    position: absolute;
-    overflow: hidden;
-    top: 7px;
-    right: 7px;
-    border-radius: 10px;
-  }
-  
-  .filterBorder::before {
-    /* content: ""; */
-  
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(90deg);
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    filter: brightness(1.35);
-    background-image: conic-gradient(
-      rgba(0, 0, 0, 0),
-      #3d3a4f,
-      rgba(0, 0, 0, 0) 50%,
-      rgba(0, 0, 0, 0) 50%,
-      #3d3a4f,
-      rgba(0, 0, 0, 0) 100%
-    );
-    animation: rotate 4s linear infinite;
-  }
+ /* Dropdown  */
+
   #main {
     position: relative;
   }
   #search-icon {
     position: absolute;
-    left: 20px;
+    left: 90%;
     top: 15px;
   }
   
@@ -1592,8 +1541,9 @@ ul {
   
   #search-results div {
     padding: 8px;
-    color: #fff;
+    color: #ffffff;
     cursor: pointer;
+   
   }
   
   #search-results div:hover {
@@ -1607,7 +1557,7 @@ ul {
     top: 100%; /* Positions the dropdown right below the input */
     left: 0;
     width: 100%;
-    background-color: white;
+    background-color: rgb(42, 5, 5);
     border: 1px solid #ccc;
     z-index: 1000; /* Ensures it’s above other content */
     max-height: 200px; /* Adds scroll if results are too long */
@@ -1622,8 +1572,33 @@ ul {
 }
 
 #search-results div:hover {
-    background-color: #f1f1f1; /* Adds a hover effect to results */
+    background-color: #1a0101; /* Adds a hover effect to results */
 }
 
 
-/* new custome player */
+.dropdown-overlay {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    width: 100%;
+    display: none; /* Initially hidden */
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    
+
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
+.no-results {
+    padding: 10px;
+    color: red; /* Change color for visibility */
+    text-align: center; /* Center the text */
+}
