@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function togglePlayPause() {
         if (video.paused) {
             video.play();
-        } else {
+        } else if (!video.paused) {
             video.pause();
         }
     }
