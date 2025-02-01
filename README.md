@@ -1,12 +1,12 @@
 <p>______________________________________________________________________________________________________________________________________________________________</p>
 
-<p><img align="Center" src="images/1.png" width="2048" border="1" /></p>
+<p><img align="Center" src="images/0.png" width="2048" border="1" /></p>
 ______________________________________________________________________________________________________________________________________________________________
 <h1  align="center">🎞️ FilmyAdda 📽️</h1>
 
 
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/6a7f3143-3c76-478d-ba1f-af2802a9c08b/deploy-status)](https://app.netlify.com/sites/filmyadda-939/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bc7f6b4e-cb01-4d70-a9db-e700adccb86e/deploy-status)](https://app.netlify.com/sites/filmyadda-srverless/deploys)
 
 FilmyAdda is an online OTT platform built to provide a Netflix-like experience for streaming movies. The platform allows users to browse movies, register an account, and enjoy a customized viewing experience.
 
@@ -85,7 +85,7 @@ filmyadda/
 
 ## Live Demo
 
-Check out the live version of the site [here](https://filmyadda.shettybro.tech/index.html).
+Check out the live version of the site [here](https://filmyadda.sudeepbro.me/index.html).
 
 
 ## Contributions
