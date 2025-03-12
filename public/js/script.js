@@ -560,8 +560,8 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 
 
 const restform = document.getElementById('resetForm');
-if (restform){
-    registerForm.addEventListener('submit', async (event) {
+if (restform) {
+    restform.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const button = document.getElementById('resetbutton');
