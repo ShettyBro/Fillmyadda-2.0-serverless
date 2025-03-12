@@ -552,11 +552,10 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
     }
 });
 
-
 // Reset password function
 document.getElementById('resetForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-    const button = document.getElementById('loginButton');
+    const button = document.getElementById('resetbutton');
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     const email = document.getElementById('Email').value.trim();
@@ -564,7 +563,7 @@ document.getElementById('resetForm').addEventListener('submit', async function (
     const confirmPassword = document.getElementById('ConfirmPassword').value;
 
     if (!token) {
-        showModal('Invalid or missing token.');
+        showModal('Invalid or missing token.', 'login.html');
         return;
     }
 
@@ -583,7 +582,7 @@ document.getElementById('resetForm').addEventListener('submit', async function (
     button.innerText = 'Resetting Password...';
 
     try {
-        const response = await fetch('/.netlify/functions/sendResetEmail?action=resetPassword', {
+        const response = await fetch('/.netlify/functions/resetPass', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ token, email, newPassword })
@@ -598,7 +597,7 @@ document.getElementById('resetForm').addEventListener('submit', async function (
         }
         
     } catch (error) {
-        showModal('Failed to reset password. Please try again.');
+        showModal('Failed to reset password. Please try again.', 'login.html');
     } finally {
         // Re-enable button
         button.disabled = false;

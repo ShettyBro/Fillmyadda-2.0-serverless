@@ -51,37 +51,7 @@ exports.forgotPassword = async (event) => {
   return { statusCode: 200, headers, body: JSON.stringify({ message: 'Reset link sent!' }) };
 };
 
-// Reset Password Function
-exports.resetPassword = async (event) => {
-  if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 200, headers };
-  }
 
-  const { token, newPassword } = JSON.parse(event.body);
-  if (!token || !newPassword) {
-    return { statusCode: 400, headers, body: JSON.stringify({ message: 'Token and new password are required' }) };
-  }
-
-  try {
-    const decoded = jwt.verify(token, SECRET_KEY);
-    const email = decoded.email;
-
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    const pool = await sql.connect(dbConfig);
-    const result = await pool.request()
-      .input('email', sql.VarChar, email)
-      .input('password', sql.VarChar, hashedPassword)
-      .query('UPDATE Users SET password = @password WHERE email = @email');
-
-    if (result.rowsAffected[0] === 0) {
-      return { statusCode: 404, headers, body: JSON.stringify({ message: 'User not found' }) };
-    }
-
-    return { statusCode: 200, headers, body: JSON.stringify({ message: 'Password updated successfully!' }) };
-  } catch (error) {
-    return { statusCode: 400, headers, body: JSON.stringify({ message: 'Invalid or expired token' }) };
-  }
-};
 
 // Netlify Handler Export
 exports.handler = async (event) => {
