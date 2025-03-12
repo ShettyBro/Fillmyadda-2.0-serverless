@@ -583,7 +583,6 @@ document.getElementById('resetForm').addEventListener('submit', async function (
 
     try {
         const response = await fetch('/.netlify/functions/sendResetEmail?action=resetPassword', {
-
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ token, email, newPassword })
@@ -592,13 +591,14 @@ document.getElementById('resetForm').addEventListener('submit', async function (
         const data = await response.json();
         
         if (response.ok) {
-            showModal(data.message || 'Password reset successful! Redirecting to login...', 'login.html');
+            showModal(data.message || 'Password reset successful!');
+            setTimeout(() => window.location.href = 'login.html', 3000);
         } else {
-            showModal(data.message || 'Session expired. Request a new link.', 'login.html');
+            showModal(data.message || 'Session expired. Request a new link.');
         }
         
     } catch (error) {
-        showModal('Failed to reset password. Please try again.', 'login.html');
+        showModal('Failed to reset password. Please try again.');
     } finally {
         // Re-enable button
         button.disabled = false;
