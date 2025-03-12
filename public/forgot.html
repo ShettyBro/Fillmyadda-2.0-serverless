@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filmyadda - Login</title>
+    <title>Filmyadda - forgot-password</title>
     <link rel="icon" href="css/assets/final-logo.ico" type="image/x-icon" >
     <link rel="stylesheet" href="css/styles.css">
     <script defer src="js/script.js"></script>
-   
+    <style>
+    </style>
 </head>
 <body>
     <div class="header">
@@ -19,24 +20,13 @@
         </nav>
         <div class="box">
             <form id="loginForm" method="POST">
-                <img src="css/assets/Login (480 x 270 px).png" alt="">
+                <img src="css/assets/forgot password.png" alt="">
                 <div class="inputbox">
-                    <input type="text" name="username" id="username" required>
-                    <label class="label" for="username">Username:</label>
+                    <input type="text" name="Email" id="Email" required>
+                    <label class="label" for="Email">Email:</label>
                 </div>
-                <div class="inputbox">
-                    <input type="password" name="password" id="password" required>
-                    <label class="label" for="password">Password:</label>
-                </div>
-                <div class="forgot">
-                    <label>
-                        <a href="forgot.html">Forgot Password ?</a>
-                    </label>
-                </div>
-                <button id="loginButton" type="submit">LOGIN</button>
-                <div class="register">
-                    <p>Don't Have An Account? <a href="register.html">Register Now</a></p>
-                </div>
+                <button id="SendLink" type="SendLink">SendLink</button>
+                
             </form>
         </div>
     </div>

@@ -209,7 +209,7 @@ if (registerForm) {
 document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('modal');
     const modalMessage = document.getElementById('modal-message');
-    const closeSpan = document.getElementsByClassName('close')[0];
+    const closeSpan = document.getElementsByClassName('close')[3];
 
     // Close the modal when the close button is clicked
     if (closeSpan) {
@@ -513,3 +513,94 @@ function selectMovie(movieId) {
     window.location.href = 'player.html'; // Redirect to the player page
 }
 
+// Forgot password function
+document.getElementById('SendLink').addEventListener('click', async function (e) {
+    e.preventDefault();
+    const button = e.target;
+    const email = document.getElementById('Email').value.trim();
+
+    if (!email) {
+        showModal('Please enter a valid email.');
+        return;
+    }
+
+    // Disable button and show loading text
+    button.disabled = true;
+    button.innerText = 'Sending Link...';
+
+    try {
+        const response = await fetch('/.netlify/functions/forgotPassword', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Show success message and redirect to login.html after 3 seconds
+            showModal('Email sent successfully! Please check your inbox.', 'login.html');
+        } else {
+            showModal(data.message || 'An error occurred. Try again.');
+        }
+    } catch (error) {
+        showModal('Failed to send reset link. Please try again.');
+    } finally {
+        // Re-enable button
+        button.disabled = false;
+        button.innerText = 'Send Link';
+    }
+});
+
+
+// Reset password function
+document.getElementById('loginForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const button = document.getElementById('loginButton');
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const email = document.getElementById('Email').value.trim();
+    const newPassword = document.getElementById('NewPassword').value;
+    const confirmPassword = document.getElementById('ConfirmPassword').value;
+
+    if (!token) {
+        showModal('Invalid or missing token.');
+        return;
+    }
+
+    if (!email || !newPassword || !confirmPassword) {
+        showModal('All fields are required.');
+        return;
+    }
+
+    if (newPassword !== confirmPassword) {
+        showModal('Passwords do not match.');
+        return;
+    }
+
+    // Disable button and show loading text
+    button.disabled = true;
+    button.innerText = 'Resetting Password...';
+
+    try {
+        const response = await fetch('/.netlify/functions/resetPassword', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token, email, newPassword })
+        });
+
+        const data = await response.json();
+        
+        if (response.ok) {
+            showModal(data.message || 'Password reset successful! Redirecting to login...', 'login.html');
+        } else {
+            showModal(data.message || 'An error occurred. Try again.');
+        }
+    } catch (error) {
+        showModal('Failed to reset password. Please try again.');
+    } finally {
+        // Re-enable button
+        button.disabled = false;
+        button.innerText = 'Submit';
+    }
+});
