@@ -553,6 +553,7 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 });
 
 // Reset password function
+// Reset password function
 document.getElementById('resetForm').addEventListener('submit', async function (e) {
     e.preventDefault();
     const button = document.getElementById('resetbutton');
@@ -598,10 +599,13 @@ document.getElementById('resetForm').addEventListener('submit', async function (
         }
         
     } catch (error) {
+        console.error('Error:', error);
         showModal('Failed to reset password. Please try again.');
     } finally {
-        // Re-enable button
-        button.disabled = false;
-        button.innerText = 'Submit';
+        // Re-enable button after 3 seconds in case of failure
+        setTimeout(() => {
+            button.disabled = false;
+            button.innerText = 'Submit';
+        }, 3000);
     }
 });
