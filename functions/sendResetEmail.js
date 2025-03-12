@@ -11,12 +11,11 @@ const generateSecretKey = () => {
   return crypto.randomBytes(64).toString('hex');
 };
 
-const SECRET_KEY = generateSecretKey();
-const RESEND_API_KEY = process.env.RESEND_API_KEY;
-
-if (!RESEND_API_KEY) {
-  throw new Error('Missing required environment variable: RESEND_API_KEY');
+const SECRET_KEY = process.env.SECRET_KEY;
+if (!SECRET_KEY) {
+  throw new Error('Missing required environment variable: SECRET_KEY');
 }
+
 
 const headers = {
   'Access-Control-Allow-Origin': '*',

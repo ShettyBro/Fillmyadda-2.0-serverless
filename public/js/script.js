@@ -554,7 +554,7 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 
 
 // Reset password function
-document.getElementById('loginForm').addEventListener('submit', async function (e) {
+document.getElementById('resetForm').addEventListener('submit', async function (e) {
     e.preventDefault();
     const button = document.getElementById('loginButton');
     const urlParams = new URLSearchParams(window.location.search);
@@ -594,8 +594,9 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         if (response.ok) {
             showModal(data.message || 'Password reset successful! Redirecting to login...', 'login.html');
         } else {
-            showModal(data.message || 'An error occurred. Try again.');
+            showModal(data.message || 'Session expired. Request a new link.', 'login.html');
         }
+        
     } catch (error) {
         showModal('Failed to reset password. Please try again.');
     } finally {
