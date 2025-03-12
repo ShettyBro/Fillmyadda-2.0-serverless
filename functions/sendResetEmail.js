@@ -36,7 +36,8 @@ exports.forgotPassword = async (event) => {
   }
 
   const token = jwt.sign({ email }, SECRET_KEY, { expiresIn: '30m' });
-  const resetLink = `https://filmyadda.shettybro.tech/reset.html?token=${token}`;
+  const resetLink = `https://filmyadda.sudeepbro.me/reset.html?token=${token}`;
+  
 
   await fetch('https://api.resend.com/emails', {
     method: 'POST',
