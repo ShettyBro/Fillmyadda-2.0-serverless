@@ -83,3 +83,17 @@ exports.resetPassword = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ message: 'Invalid or expired token' }) };
   }
 };
+
+// Netlify Handler Export
+exports.handler = async (event) => {
+  if (event.path.endsWith('forgotPassword')) {
+    return exports.forgotPassword(event);
+  } else if (event.path.endsWith('resetPassword')) {
+    return exports.resetPassword(event);
+  } else {
+    return {
+      statusCode: 404,
+      body: JSON.stringify({ message: 'Not Found' })
+    };
+  }
+};
