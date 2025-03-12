@@ -1,7 +1,7 @@
 const sql = require('mssql');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const fetch = (await import('node-fetch')).default;
+import fetch from 'node-fetch';
 const crypto = require('crypto');
 const dbConfig = require('../dbConfig');
 require('dotenv').config();
