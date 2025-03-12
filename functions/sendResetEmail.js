@@ -6,18 +6,15 @@ const crypto = require('crypto');
 const dbConfig = require('../dbConfig');
 require('dotenv').config();
 
-// Generate a secure secret key
-const generateSecretKey = () => {
-  return crypto.randomBytes(64).toString('hex');
-};
-
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-
 const SECRET_KEY = process.env.SECRET_KEY;
+
 if (!SECRET_KEY) {
   throw new Error('Missing required environment variable: SECRET_KEY');
 }
-
+if (!RESEND_API_KEY) {
+  throw new Error('Missing required environment variable: RESEND_API_KEY');
+}
 
 const headers = {
   'Access-Control-Allow-Origin': '*',
@@ -38,7 +35,6 @@ exports.forgotPassword = async (event) => {
 
   const token = jwt.sign({ email }, SECRET_KEY, { expiresIn: '30m' });
   const resetLink = `https://filmyadda.sudeepbro.me/reset.html?token=${token}`;
-  
 
   await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -69,19 +65,39 @@ exports.resetPassword = async (event) => {
     const decoded = jwt.verify(token, SECRET_KEY);
     const email = decoded.email;
 
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    const pool = await sql.connect(dbConfig);
-    const result = await pool.request()
-      .input('email', sql.VarChar, email)
-      .input('password', sql.VarChar, hashedPassword)
-      .query('UPDATE Users SET password = @password WHERE email = @email');
+    // Quick response to prevent Netlify timeout
+    const immediateResponse = {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify({ message: 'Password update in progress. Please wait.' })
+    };
 
-    if (result.rowsAffected[0] === 0) {
-      return { statusCode: 404, headers, body: JSON.stringify({ message: 'User not found' }) };
-    }
+    setTimeout(async () => {
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      const pool = await sql.connect({
+        ...dbConfig,
+        options: {
+          encrypt: true,
+          enableArithAbort: true,
+          requestTimeout: 9000 // 9 seconds timeout
+        }
+      });
 
-    return { statusCode: 200, headers, body: JSON.stringify({ message: 'Password updated successfully!' }) };
+      const result = await pool.request()
+        .input('email', sql.VarChar, email)
+        .input('password', sql.VarChar, hashedPassword)
+        .query('UPDATE Users SET password = @password WHERE email = @email');
+
+      if (result.rowsAffected[0] === 0) {
+        console.error('User not found:', email);
+      } else {
+        console.log('Password updated successfully for:', email);
+      }
+    }, 0);
+
+    return immediateResponse;
   } catch (error) {
+    console.error('Reset Password Error:', error);
     return { statusCode: 400, headers, body: JSON.stringify({ message: 'Invalid or expired token' }) };
   }
 };
@@ -89,7 +105,7 @@ exports.resetPassword = async (event) => {
 // Netlify Handler Export
 exports.handler = async (event) => {
   const { action } = event.queryStringParameters || {};
-  
+
   if (action === 'forgotPassword') {
     return exports.forgotPassword(event);
   } else if (action === 'resetPassword') {
@@ -101,4 +117,3 @@ exports.handler = async (event) => {
     };
   }
 };
-
