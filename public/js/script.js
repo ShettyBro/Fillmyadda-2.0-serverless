@@ -554,14 +554,24 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 
 // Reset password function
 // Reset password function
-document.getElementById('resetForm').addEventListener('submit', async function (e) {
-    e.preventDefault();
+
+
+
+
+
+const restform = document.getElementById('resetForm');
+if (restform){
+    registerForm.addEventListener('submit', async (event) {
+    event.preventDefault();
+
     const button = document.getElementById('resetbutton');
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     const email = document.getElementById('Email').value.trim();
     const newPassword = document.getElementById('NewPassword').value;
     const confirmPassword = document.getElementById('ConfirmPassword').value;
+
+    
 
     if (!token) {
         showModal('Invalid or missing token.', 'login.html');
@@ -609,3 +619,4 @@ document.getElementById('resetForm').addEventListener('submit', async function (
         }, 3000);
     }
 });
+}
