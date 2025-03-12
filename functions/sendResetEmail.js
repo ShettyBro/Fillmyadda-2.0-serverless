@@ -42,7 +42,7 @@ exports.forgotPassword = async (event) => {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from: 'no-reply@filmyadda.com',
+      from: 'no-reply@sudeepbro.me',
       to: email,
       subject: 'Reset Your Password',
       html: `<p>Click <a href='${resetLink}'>here</a> to reset your password. This link is valid for 30 minutes.</p>`
