@@ -582,7 +582,8 @@ document.getElementById('resetForm').addEventListener('submit', async function (
     button.innerText = 'Resetting Password...';
 
     try {
-        const response = await fetch('/.netlify/functions/resetPass', {
+        const response = await fetch('/.netlify/functions/sendResetEmail?action=resetPassword', {
+
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ token, email, newPassword })
