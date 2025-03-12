@@ -20,7 +20,7 @@
     "jsonwebtoken": "^9.0.2",
     "mssql": "^11.0.1",
     "mysql": "^2.18.1",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^2.7.0"
   },
   "devDependencies": {
     "video.js": "^8.19.1"
