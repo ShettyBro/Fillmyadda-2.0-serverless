@@ -86,9 +86,11 @@ exports.resetPassword = async (event) => {
 
 // Netlify Handler Export
 exports.handler = async (event) => {
-  if (event.path.endsWith('forgotPassword')) {
+  const { action } = event.queryStringParameters || {};
+  
+  if (action === 'forgotPassword') {
     return exports.forgotPassword(event);
-  } else if (event.path.endsWith('resetPassword')) {
+  } else if (action === 'resetPassword') {
     return exports.resetPassword(event);
   } else {
     return {
@@ -97,3 +99,4 @@ exports.handler = async (event) => {
     };
   }
 };
+

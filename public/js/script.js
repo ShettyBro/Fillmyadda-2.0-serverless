@@ -529,7 +529,7 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
     button.innerText = 'Sending Link...';
 
     try {
-        const response = await fetch('/.netlify/functions/forgotPassword', {
+        const response = await fetch('/.netlify/functions/sendResetEmail?action=forgotPassword',{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
@@ -583,7 +583,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     button.innerText = 'Resetting Password...';
 
     try {
-        const response = await fetch('/.netlify/functions/resetPassword', {
+        const response = await fetch('/.netlify/functions/sendResetEmail?action=resetPassword', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ token, email, newPassword })
