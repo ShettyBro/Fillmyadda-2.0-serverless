@@ -560,7 +560,7 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 //Reset password js
 const resetform= document.getElementById('resetForm');
 if (resetform) {
-    resetform.addEventListener('submit', async (event) => {
+    resetform.addEventListener('click', async (event) => {
     event.preventDefault();
 
     const resetbutton = document.getElementById('resetbutton');
