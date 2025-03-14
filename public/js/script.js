@@ -557,38 +557,37 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 
 
 
-// Reset password function
+//Reset password js
 document.getElementById('resetForm').addEventListener('submit', async function (e) {
-    e.preventDefault(); // Prevent default form submission
-
-    // Get form values
+    e.preventDefault();
+    const button = document.getElementById('resetbutton');
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
     const email = document.getElementById('Email').value.trim();
     const newPassword = document.getElementById('NewPassword').value;
     const confirmPassword = document.getElementById('ConfirmPassword').value;
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token'); // Extract token from URL
 
-    // Validation checks
     if (!token) {
         showModal('Invalid or missing token.', 'login.html');
         return;
     }
+
     if (!email || !newPassword || !confirmPassword) {
         showModal('All fields are required.');
         return;
     }
+
     if (newPassword !== confirmPassword) {
         showModal('Passwords do not match.');
         return;
     }
 
-    // Disable button to prevent multiple clicks
-    const button = document.getElementById('resetbutton');
+    // Disable button and show loading text
     button.disabled = true;
     button.innerText = 'Resetting Password...';
 
     try {
-        const response = await fetch('https://filmyadda.sudeepbro.me/.netlify/functions/sendResetEmail?action=resetPassword', {
+        const response = await fetch('/.netlify/functions/sendResetEmail?action=resetPassword', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ token, email, newPassword })
@@ -597,15 +596,16 @@ document.getElementById('resetForm').addEventListener('submit', async function (
         const data = await response.json();
         
         if (response.ok) {
-            showModal('Password reset successful! Redirecting to login...');
-            setTimeout(() => window.location.href = 'login.html', 3000); // Redirect after 3 seconds
+            showModal(data.message || 'Password reset successful!');
+            setTimeout(() => window.location.href = 'login.html', 3000);
         } else {
             showModal(data.message || 'Session expired. Request a new link.');
         }
+        
     } catch (error) {
-        console.error('Fetch error:', error);
         showModal('Failed to reset password. Please try again.');
     } finally {
+        // Re-enable button
         button.disabled = false;
         button.innerText = 'Submit';
     }
