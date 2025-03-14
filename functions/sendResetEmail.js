@@ -46,6 +46,7 @@ exports.forgotPassword = async (event) => {
   return { statusCode: 200, headers, body: JSON.stringify({ message: 'Reset link sent!' }) };
 };
 
+
 // Reset Password Function
 exports.resetPassword = async (event) => {
   if (event.httpMethod === 'OPTIONS') {
@@ -75,8 +76,14 @@ exports.resetPassword = async (event) => {
     }
 
     return { statusCode: 200, headers, body: JSON.stringify({ message: 'Password updated successfully!' }) };
+
   } catch (error) {
     console.error('Reset Password Error:', error);
+
+    if (error.name === 'TokenExpiredError') {
+      return { statusCode: 400, headers, body: JSON.stringify({ message: 'Reset link has expired. Request a new one.' }) };
+    }
+
     return { statusCode: 400, headers, body: JSON.stringify({ message: 'Invalid or expired token' }) };
   }
 };
@@ -96,3 +103,4 @@ exports.handler = async (event) => {
     };
   }
 };
+
