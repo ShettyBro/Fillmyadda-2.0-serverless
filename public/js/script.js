@@ -585,7 +585,7 @@ if (resetform) {
         return;
     }
 
-    if (newPassword !== confirmPassword) {
+    if (password !== confirmPassword) {
         showModal('Passwords do not match.');
         return;
     }
@@ -598,7 +598,7 @@ if (resetform) {
         const response = await fetch('/.netlify/functions/sendResetEmail?action=resetPassword', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token, email, newPassword })
+            body: JSON.stringify({ token, email, confirmPassword })
         });
 
         const data = await response.json();
