@@ -560,7 +560,7 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 //Reset password js
 const resetform= document.getElementById('resetForm');
 if (resetform) {
-    resetform.addEventListener('click', async (event) => {
+    resetform.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const resetbutton = document.getElementById('resetbutton');
@@ -568,10 +568,9 @@ if (resetform) {
     resetbutton.innerText = 'Resetting Password...';
 
     const token = localStorage.getItem('resetToken');
-    console.log(token);
-    const newPassword = document.getElementById('password').value.trim();
-    const confirmPassword = document.getElementById('confirmPassword').value.trim();
-    const email = document.getElementById('email').value.trim();
+    const newPassword = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const email = document.getElementById('email').value;
 
   
 
@@ -601,9 +600,9 @@ if (resetform) {
             body: JSON.stringify({ token, email, newPassword })
         });
 
-        const data = await response.json();
         
         if (response.ok) {
+            const data = await response.json();
             showModal(data.message || 'Password reset successful!');
             setTimeout(() => window.location.href = 'login.html', 3000);
         } else {
