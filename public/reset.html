@@ -7,8 +7,13 @@
     <link rel="icon" href="css/assets/final-logo.ico" type="image/x-icon" >
     <link rel="stylesheet" href="css/styles.css">
     <script defer src="js/script.js"></script>
-    <style>
-    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve the token from the URL
+         const token = new URLSearchParams(window.location.search).get('token');
+        localStorage.setItem('resetToken', token);
+        });
+    </script>
 </head>
 <body>
     <div class="header">
@@ -19,7 +24,7 @@
             </div>
         </nav>
         <div class="box">
-            <form id="resetForm">
+            <form id="resetForm" method="post">
                 <img src="css/assets/reset password.png" alt="">
                 <div class="inputbox">
                     <input type="text" name="Email" id="Email" required>

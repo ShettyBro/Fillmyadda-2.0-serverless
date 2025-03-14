@@ -558,14 +558,22 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 
 
 //Reset password js
-document.getElementById('resetForm').addEventListener('submit', async function (e) {
-    e.preventDefault();
-    const button = document.getElementById('resetbutton');
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
-    const email = document.getElementById('Email').value.trim();
-    const newPassword = document.getElementById('NewPassword').value;
-    const confirmPassword = document.getElementById('ConfirmPassword').value;
+const resetform= document.getElementById('resetForm');
+if (resetform) {
+    resetform.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const resetbutton = document.getElementById('resetbutton');
+    resetbutton.disabled = true;
+    resetbutton.innerText = 'Resetting Password...';
+
+    const token = localStorage.getItem('resetToken');
+    console.log(token);
+    const password = document.getElementById('password').value.trim();
+    const confirmPassword = document.getElementById('confirmPassword').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+  
 
     if (!token) {
         showModal('Invalid or missing token.', 'login.html');
@@ -610,3 +618,4 @@ document.getElementById('resetForm').addEventListener('submit', async function (
         button.innerText = 'Submit';
     }
 });
+}
