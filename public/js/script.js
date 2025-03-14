@@ -569,7 +569,7 @@ if (resetform) {
 
     const token = localStorage.getItem('resetToken');
     console.log(token);
-    const password = document.getElementById('password').value.trim();
+    const newPassword = document.getElementById('password').value.trim();
     const confirmPassword = document.getElementById('confirmPassword').value.trim();
     const email = document.getElementById('email').value.trim();
 
@@ -585,7 +585,7 @@ if (resetform) {
         return;
     }
 
-    if (password !== confirmPassword) {
+    if (newPassword !== confirmPassword) {
         showModal('Passwords do not match.');
         return;
     }
@@ -598,7 +598,7 @@ if (resetform) {
         const response = await fetch('/.netlify/functions/sendResetEmail?action=resetPassword', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token, email, confirmPassword })
+            body: JSON.stringify({ token, email, newPassword })
         });
 
         const data = await response.json();
