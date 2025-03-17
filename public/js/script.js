@@ -555,9 +555,14 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
     }
 });
 
+
+
+
+
 //otp veriifcation function
-document.addEventListener("DOMContentLoaded", function () {
-    const otpForm = document.getElementById("otpForm");
+document.getElementById('validate').addEventListener('click', async function (e) {
+    e.preventDefault();
+    
     const emailInput = document.getElementById("emailInput");
     const otpInput = document.getElementById("otpInput");
 
