@@ -557,21 +557,24 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 
 //otp veriifcation function
 document.addEventListener("DOMContentLoaded", function () {
-    const otpInputs = document.querySelectorAll(".inputs input");
-    const verifyButton = document.querySelector(".validate");
+    const otpForm = document.getElementById("otpForm");
+    const emailInput = document.getElementById("emailInput");
+    const otpInput = document.getElementById("otpInput");
 
-    verifyButton.addEventListener("click", async function (event) {
+    // Pre-fill email if stored in local storage
+    const storedEmail = localStorage.getItem("userEmail");
+    if (storedEmail) {
+        emailInput.value = storedEmail;
+    }
+
+    otpForm.addEventListener("submit", async function (event) {
         event.preventDefault();
 
-        const email = localStorage.getItem("userEmail"); // Email stored when OTP was requested
-        if (!email) {
-            showModal("Error: No email found. Request OTP again.");
-            return;
-        }
+        const email = emailInput.value.trim();
+        const otp = otpInput.value.trim();
 
-        const otp = Array.from(otpInputs).map(input => input.value).join("");
-        if (otp.length !== 6) {
-            showModal("Please enter the complete 6-digit OTP.");
+        if (!email || otp.length !== 6) {
+            showModal("❌ Please enter a valid email and 6-digit OTP.");
             return;
         }
 
@@ -586,6 +589,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (response.ok) {
                 localStorage.setItem("resetToken", data.token); // Store JWT token
                 showModal("✅ OTP verified successfully! Redirecting...");
+
                 setTimeout(() => {
                     window.location.href = "reset.html"; // Redirect to reset password page
                 }, 2000);
@@ -594,10 +598,11 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         } catch (error) {
             console.error("OTP verification error:", error);
-            showModal("Something went wrong. Please try again.");
+            showModal("❌ Something went wrong. Please try again.");
         }
     });
 });
+
 
 //reset password function
 document.getElementById("resetForm").addEventListener("submit", async function (e) {

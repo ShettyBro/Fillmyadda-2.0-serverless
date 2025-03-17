@@ -4,38 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filmyadda - OTP</title>
-    <link rel="icon" href="css/assets/final-logo.ico" type="image/x-icon" >
+    <link rel="icon" href="css/assets/final-logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/styles.css">
     <script defer src="js/script.js"></script>
-   
 </head>
 <body>
     <div class="header">
         <nav class="nav">
             <img class="logo" src="css/assets/bg.png" alt="" onclick="location.href='index.html'">
-            <div class="navbt" >
+            <div class="navbt">
                 <button onclick="location.href='about-index.html'" target="_blank">About</button>
             </div>
         </nav>
     </div>
-<!-- From Uiverse.io by Yaya12085 --> 
- <div class="otpbox">
-<form class="form">
-    <div class="info">
-    <span class="title">OTP Verification</span>
-  <p class="description">Please enter the code we have sent you. </p>
-     </div>
-      <div class="otpInputs">
-      <input placeholder="" type="tel" maxlength="1">
-      <input placeholder="" type="tel" maxlength="1">
-      <input placeholder="" type="tel" maxlength="1">
-      <input placeholder="" type="tel" maxlength="1">
-      <input placeholder="" type="tel" maxlength="1">
-      <input placeholder="" type="tel" maxlength="1">
-    </div>
-          <button class="validate" href="#" type="submit">Verify</button>
-  <p class="resend">You don't receive the code ?<a class="resend-action">RESEND</a></p>
-  </form>
+
+    <div class="otpbox">
+        <form class="form" id="otpForm">
+            <div class="info">
+                <span class="title">OTP Verification</span>
+                <p class="description">Please enter the code we have sent you.</p>
+            </div>
+
+            <div class="inputbox">
+                <input id="otpInput" type="tel" maxlength="6" placeholder="Enter 6-digit OTP" required>
+            </div>
+
+            <button class="validate" type="submit">Verify</button>
+
+            <p class="resend">Didn't receive the code? <a class="resend-action">RESEND</a></p>
+        </form>
     </div>
 
     <!-- Modal for notifications -->
