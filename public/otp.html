@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmyadda - OTP</title>
+    <link rel="icon" href="css/assets/final-logo.ico" type="image/x-icon" >
+    <link rel="stylesheet" href="css/styles.css">
+    <script defer src="js/script.js"></script>
+   
+</head>
+<body>
+    <div class="header">
+        <nav class="nav">
+            <img class="logo" src="css/assets/bg.png" alt="" onclick="location.href='index.html'">
+            <div class="navbt" >
+                <button onclick="location.href='about-index.html'" target="_blank">About</button>
+            </div>
+        </nav>
+    </div>
+<!-- From Uiverse.io by Yaya12085 --> 
+ <div class="otpbox">
+<form class="form">
+    <div class="info">
+    <span class="title">OTP Verification</span>
+  <p class="description">Please enter the code we have sent you. </p>
+     </div>
+      <div class="inputs">
+      <input placeholder="" type="tel" maxlength="1">
+      <input placeholder="" type="tel" maxlength="1">
+      <input placeholder="" type="tel" maxlength="1">
+      <input placeholder="" type="tel" maxlength="1">
+      <input placeholder="" type="tel" maxlength="1">
+      <input placeholder="" type="tel" maxlength="1">
+    </div>
+          <button class="validate" href="#" type="submit">Verify</button>
+  <p class="resend">You don't receive the code ?<a class="resend-action">RESEND</a></p>
+  </form>
+    </div>
+
+    <!-- Modal for notifications -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modal-message" class="modal-message"></p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Filmyadda. All rights reserved.</p>
+    </footer>
+</body>
+</html>
