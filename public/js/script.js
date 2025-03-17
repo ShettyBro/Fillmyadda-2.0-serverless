@@ -532,7 +532,7 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
     button.innerText = 'Sending OTP...';
 
     try {
-        const response = await fetch('/.netlify/functions/sendResetEmail?action=forgotPassword',{
+        const response = await fetch('https://filmyadda.sudeepbro.me/.netlify/functions/sendResetEmail',{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
