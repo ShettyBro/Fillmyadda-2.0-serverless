@@ -576,7 +576,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            const response = await fetch("https://your-api-url/verifyOTP", {
+            const response = await fetch("https://filmyadda.sudeepbro.me/.netlify/functions/otpver?action=verifyOTP", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, otp })
@@ -623,7 +623,7 @@ document.getElementById("resetForm").addEventListener("submit", async function (
     }
 
     try {
-        const response = await fetch("https://your-api-url/resetPassword", {
+        const response = await fetch("https://filmyadda.sudeepbro.me/.netlify/functions/otpver?action=resetPassword", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ token, email, newPassword })
