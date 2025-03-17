@@ -555,66 +555,92 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
     }
 });
 
+//otp veriifcation function
+document.addEventListener("DOMContentLoaded", function () {
+    const otpInputs = document.querySelectorAll(".inputs input");
+    const verifyButton = document.querySelector(".validate");
 
+    verifyButton.addEventListener("click", async function (event) {
+        event.preventDefault();
 
-//Reset password js
-const resetform= document.getElementById('resetForm');
-if (resetform) {
-    resetform.addEventListener('submit', async (event) => {
-    event.preventDefault();
+        const email = localStorage.getItem("userEmail"); // Email stored when OTP was requested
+        if (!email) {
+            showModal("Error: No email found. Request OTP again.");
+            return;
+        }
 
-    const resetbutton = document.getElementById('resetbutton');
-    resetbutton.disabled = true;
-    resetbutton.innerText = 'Resetting Password...';
+        const otp = Array.from(otpInputs).map(input => input.value).join("");
+        if (otp.length !== 6) {
+            showModal("Please enter the complete 6-digit OTP.");
+            return;
+        }
 
-    const token = localStorage.getItem('resetToken');
-    const newPassword = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    const email = document.getElementById('email').value;
+        try {
+            const response = await fetch("https://your-api-url/verifyOTP", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, otp })
+            });
 
-  
+            const data = await response.json();
+            if (response.ok) {
+                localStorage.setItem("resetToken", data.token); // Store JWT token
+                showModal("✅ OTP verified successfully! Redirecting...");
+                setTimeout(() => {
+                    window.location.href = "reset.html"; // Redirect to reset password page
+                }, 2000);
+            } else {
+                showModal(`❌ ${data.message}`);
+            }
+        } catch (error) {
+            console.error("OTP verification error:", error);
+            showModal("Something went wrong. Please try again.");
+        }
+    });
+});
 
-    if (!token) {
-        showModal('Invalid or missing token.', 'login.html');
-        return;
-    }
+//reset password function
+document.getElementById("resetForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const resetButton = document.getElementById("resetbutton");
+    resetButton.disabled = true;
+    resetButton.innerText = "Resetting Password...";
+
+    const token = localStorage.getItem("resetToken"); // Get JWT token
+    const email = document.getElementById("Email").value;
+    const newPassword = document.getElementById("NewPassword").value;
+    const confirmPassword = document.getElementById("ConfirmPassword").value;
 
     if (!email || !newPassword || !confirmPassword) {
-        showModal('All fields are required.');
+        showModal("All fields are required.");
         return;
     }
 
     if (newPassword !== confirmPassword) {
-        showModal('Passwords do not match.');
+        showModal("Passwords do not match.");
         return;
     }
 
-    // Disable button and show loading text
-    button.disabled = true;
-    button.innerText = 'Resetting Password...';
-
     try {
-        const response = await fetch('/.netlify/functions/sendResetEmail?action=resetPassword', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+        const response = await fetch("https://your-api-url/resetPassword", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ token, email, newPassword })
         });
 
-        
+        const data = await response.json();
         if (response.ok) {
-            const data = await response.json();
-            showModal(data.message || 'Password reset successful!');
-            setTimeout(() => window.location.href = 'login.html', 3000);
+            showModal("✅ Password reset successful! Redirecting to login...");
+            setTimeout(() => window.location.href = "login.html", 3000);
         } else {
-            showModal(data.message || 'Session expired. Request a new link.');
+            showModal(`❌ ${data.message}`);
         }
-        
     } catch (error) {
-        showModal('Failed to reset password. Please try again.');
+        console.error("Reset Password Error:", error);
+        showModal("Something went wrong. Please try again.");
     } finally {
-        // Re-enable button
-        button.disabled = false;
-        button.innerText = 'Submit';
+        resetButton.disabled = false;
+        resetButton.innerText = "SUBMIT";
     }
 });
-}
