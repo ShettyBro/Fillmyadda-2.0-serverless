@@ -516,7 +516,7 @@ function selectMovie(movieId) {
 
 
 
-// Forgot password function
+// send OTP
 document.getElementById('SendLink').addEventListener('click', async function (e) {
     e.preventDefault();
     const button = e.target;
@@ -529,7 +529,7 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 
     // Disable button and show loading text
     button.disabled = true;
-    button.innerText = 'Sending Link...';
+    button.innerText = 'Sending OTP...';
 
     try {
         const response = await fetch('/.netlify/functions/sendResetEmail?action=forgotPassword',{
@@ -542,7 +542,7 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 
         if (response.ok) {
             // Show success message and redirect to login.html after 3 seconds
-            showModal('Email sent successfully! Please check your inbox.', 'login.html');
+            showModal('Email sent successfully! Please check your inbox.', 'otp.html');
         } else {
             showModal(data.message || 'An error occurred. Try again.');
         }

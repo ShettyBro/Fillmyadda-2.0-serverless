@@ -11,7 +11,7 @@ const headers = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS'
 };
 
-// Forgot Password Function
+// send otp
 exports.forgotPassword = async (event) => {
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers };
