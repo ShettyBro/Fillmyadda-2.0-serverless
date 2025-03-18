@@ -560,7 +560,7 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 
 
 //otp veriifcation function
-document.getElementById('validate').addEventListener('click', async function (e) {
+document.getElementById('validate').addEventListener('submit', async function (e) {
     e.preventDefault();
     const button = e.target;
     const otp = document.getElementById('otpInput').value.trim();
