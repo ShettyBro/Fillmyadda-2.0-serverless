@@ -541,6 +541,7 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
         const data = await response.json();
 
         if (response.ok) {
+            localStorage.setItem ("userEmail", email); // Store email in local storage
             // Show success message and redirect to login.html after 3 seconds
             showModal('Email sent successfully! Please check your inbox.', 'otp.html');
         } else {
@@ -557,57 +558,55 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 
 
 
-
-
 //otp veriifcation function
 document.getElementById('validate').addEventListener('click', async function (e) {
     e.preventDefault();
-    
-    const emailInput = document.getElementById("emailInput");
-    const otpInput = document.getElementById("otpInput");
+    const button = e.target;
+    const otp = document.getElementById('otpInput').value.trim();
 
-    // Pre-fill email if stored in local storage
     const storedEmail = localStorage.getItem("userEmail");
     if (storedEmail) {
         emailInput.value = storedEmail;
     }
 
-    otpForm.addEventListener("submit", async function (event) {
-        event.preventDefault();
 
-        const email = emailInput.value.trim();
-        const otp = otpInput.value.trim();
+    // Disable button and show loading text
+    button.disabled = true;
+    button.innerText = 'Verifying OTP...';
 
-        if (!email || otp.length !== 6) {
-            showModal("❌ Please enter a valid email and 6-digit OTP.");
-            return;
+    if (otp.length !== 6) {
+        showModal("❌ Please enter a 6-digit OTP.");
+        return;
+    }
+
+    try {
+        const response = await fetch("https://filmyadda.sudeepbro.me/.netlify/functions/otpver?action=verifyOTP", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ storedEmail, otp })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            localStorage.setItem("resetToken", data.token); // Store JWT token
+            showModal("✅ OTP verified successfully! Redirecting...");
+
+            setTimeout(() => {
+                window.location.href = "reset.html"; // Redirect to reset password page
+            }, 2000);
+        } else {
+            showModal(`❌ ${data.message}`);
         }
-
-        try {
-            const response = await fetch("https://filmyadda.sudeepbro.me/.netlify/functions/otpver?action=verifyOTP", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, otp })
-            });
-
-            const data = await response.json();
-            if (response.ok) {
-                localStorage.setItem("resetToken", data.token); // Store JWT token
-                showModal("✅ OTP verified successfully! Redirecting...");
-
-                setTimeout(() => {
-                    window.location.href = "reset.html"; // Redirect to reset password page
-                }, 2000);
-            } else {
-                showModal(`❌ ${data.message}`);
-            }
-        } catch (error) {
-            console.error("OTP verification error:", error);
+    } catch (error) {
+        console.error("OTP verification error:", error);
             showModal("❌ Something went wrong. Please try again.");
-        }
-    });
+    } finally {
+        // Re-enable button
+        button.disabled = false;
+        button.innerText = 'Send Link';
+    }
 });
-
 
 //reset password function
 document.getElementById("resetForm").addEventListener("submit", async function (e) {
