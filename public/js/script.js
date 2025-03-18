@@ -574,10 +574,7 @@ document.getElementById('validate').addEventListener('click', async function (e)
     button.disabled = true;
     button.innerText = 'Verifying OTP...';
 
-    if (otp.length !== 6) {
-        showModal("❌ Please enter a 6-digit OTP.");
-        return;
-    }
+    
 
     try {
         const response = await fetch("https://filmyadda.sudeepbro.me/.netlify/functions/otpver?action=verifyOTP", {
@@ -607,6 +604,7 @@ document.getElementById('validate').addEventListener('click', async function (e)
         button.innerText = 'Send Link';
     }
 });
+
 
 //reset password function
 document.getElementById("resetForm").addEventListener("submit", async function (e) {
