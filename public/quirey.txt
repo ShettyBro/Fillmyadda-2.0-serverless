@@ -1,0 +1,14 @@
+//insert movies 
+INSERT INTO movies (title, source)  
+VALUES ('The Diplomat', 'https://ottprojectstorage.blob.core.windows.net/movies/Diplomat.2025.1080p.HEVC.Hindi.PRE-HD.2.0.HC-ESub.x265-HDHub4u.Ms.mkv?sp=r&st=2025-03-20T10:06:16Z&se=2040-03-20T18:06:16Z&spr=https&sv=2024-11-04&sr=b&sig=tXwbU59cUoIQ7aWyWvdqbC2BJF7wucQr82IpXAxcc2Q%3D');
+
+select * from movies;
+
+drop table movies;
+
+//CREATE Table 
+
+CREATE TABLE movies (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    title VARCHAR(255) NOT NULL,
+    source VARCHAR(MAX) NOT NULL );
