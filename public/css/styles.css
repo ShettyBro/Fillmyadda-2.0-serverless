@@ -20,6 +20,7 @@ body {
 
 /* Navigation Bar Styles */
 .nav {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -27,6 +28,8 @@ body {
 }
 
 .nav button {
+    display: flex;
+    justify-content: flex-end;
     border: 0;
     outline: 0;
     background: transparent;
@@ -47,13 +50,25 @@ body {
 }
 
 .navbt {
-    width: 10%;
+    width: 15%;
     height: 0%;
     margin-top: 1%;
     display: flex;
     flex-direction: row;
-}
+    margin-right: 20px;
 
+}
+.logoutButton{
+  position: absolute;
+right: 1%;
+top: 5px;
+}
+.aboutbutton{
+  position: absolute;
+  top: 5px;
+  right: 1%;
+  height: 40px;
+}
 .logo {
     padding-left: 30px;
     width: 200px;
@@ -72,70 +87,6 @@ body {
 .forgot a {
     color: gold;
     text-decoration: none;
-}
-
-
-/* Image Grid Styles */
-/* Grid Styles */
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 30px 45px;
-    padding: 3%;
-    padding-bottom: 0%;
-    
-}
-
-/* Image Item Styles */
-.image-item {
-    text-align: center;
-    font-weight: 600;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: large;
-    position: relative; /* Positioning for hover effects */
-    overflow: hidden; /* To contain the scaled image */
-}
-
-/* Image Styles */
-.image-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-    margin-bottom: 10px;
-}
-
-/* Text Styles */
-.image-item p {
-    font-size: 20px;
-    color: white;
-    margin-top: 10px;
-    transition: text-shadow 0.3s ease; /* Transition for the glowing effect */
-    /* background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(30, 30, 30, 0.7)); */
-}
-
-/* Glow effect on hover */
-.image-item:hover p {
-    text-shadow: 0 0 5px gold, 0 0 10px gold; /* Glow effect on text */
-}
-
-/* Button Styles */
-.image-item button {
-    border: 0;
-    outline: 0;
-    background: transparent;
-    border: 1px solid #fff;
-    cursor: pointer;
-    color: #fff;
-    font-size: 15px;
-    padding: 4px 10px;
-    margin-top: 10px;
-    border-radius: 4px;
-}
-
-/* Button Hover Effect */
-.image-item button:hover {
-    background: rgba(255, 255, 255, 0.2); /* Change background on hover */
-    transform: scale(1.05); /* Scale effect */
 }
 
 /* Video Player Styles */
@@ -1616,8 +1567,8 @@ ul {
     color: red; /* Change color for visibility */
     text-align: center; /* Center the text */
 }
-
-/* otp page */
+/* otp block */
+/* From Uiverse.io by Yaya12085 */ 
 .otpbox{
     justify-content: center;
     display: flex;
@@ -1717,3 +1668,288 @@ ul {
   .validate:hover {
     background-color: #a72109;
   }
+  /* selection bar */
+  /* From Uiverse.io by WhiteNervosa */ 
+.customCheckBoxHolder {
+    margin: 5px;
+    display: flex;
+  }
+  
+  .customCheckBox {
+    width: fit-content;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    padding: 2px 8px;
+    background-color: rgba(0, 0, 0, 0.16);
+    border-radius: 0px;
+    color: rgba(255, 255, 255, 0.7);
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 300ms;
+    transition-property: color, background-color, box-shadow;
+    display: flex;
+    height: 32px;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 1px 0px inset, rgba(255, 255, 255, 0.17) 0px 1px 1px 0px;
+    outline: none;
+    justify-content: center;
+    min-width: 55px;
+  }
+  
+  .customCheckBox:hover {
+    background-color: #2c2c2c;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.23) 0px -4px 1px 0px inset, rgba(255, 255, 255, 0.17) 0px -1px 1px 0px, rgba(0, 0, 0, 0.17) 0px 2px 4px 1px;
+  }
+  
+  .customCheckBox .inner {
+    font-size: 18px;
+    font-weight: 900;
+    pointer-events: none;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 300ms;
+    transition-property: transform;
+    transform: translateY(0px);
+  }
+  
+  .customCheckBox:hover .inner {
+    transform: translateY(-2px);
+  }
+  
+  .customCheckBoxWrapper:first-of-type .customCheckBox {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border-right: 0px;
+  }
+  
+  .customCheckBoxWrapper:last-of-type .customCheckBox {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border-left: 0px;
+  }
+  
+  .customCheckBoxInput {
+    display: none;
+  }
+  
+  .customCheckBoxInput:checked + .customCheckBoxWrapper .customCheckBox {
+    background-color: #2d6737;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.23) 0px -4px 1px 0px inset, rgba(255, 255, 255, 0.17) 0px -1px 1px 0px, rgba(0, 0, 0, 0.17) 0px 2px 4px 1px;
+  }
+  
+  .customCheckBoxInput:checked + .customCheckBoxWrapper .customCheckBox .inner {
+    transform: translateY(-2px);
+  }
+  
+  .customCheckBoxInput:checked + .customCheckBoxWrapper .customCheckBox:hover {
+    background-color: #34723f;
+    box-shadow: rgba(0, 0, 0, 0.26) 0px -4px 1px 0px inset, rgba(255, 255, 255, 0.17) 0px -1px 1px 0px, rgba(0, 0, 0, 0.15) 0px 3px 6px 2px;
+  }
+  
+  .customCheckBoxWrapper .customCheckBox:hover .inner {
+    transform: translateY(-2px);
+  }
+.selectbar {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* profile */
+.profile-picture {
+  position: absolute;
+  right: 20px;
+  top: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Ensure circular profile picture */
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-picture:hover {
+  cursor: pointer;
+  transform: scale(1.1); /* Slight zoom effect on hover */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Add glow effect */
+}
+
+.profile-menu {
+  display: none;
+  position: absolute;
+  z-index: 14;
+  list-style: none;
+  top: 60px; /* Adjusted for better alignment */
+  right: 20px;
+  padding: 15px;
+  background-color: rgb(37, 46, 57);
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.profile-picture:hover + .profile-menu{
+  display:block; /* Show menu on hover */
+}
+
+.profile-picture:hover + .profile-menu,
+.profile-menu:hover {
+  display: block; /* Show menu when hovering over profile picture or menu */
+}
+
+.profile-menu li {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: rgb(196, 202, 207);
+  padding: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.profile-menu li:hover {
+  cursor:zoom-out;
+  background-color: rgba(255, 255, 255, 0.1); 
+  color: white;
+}
+
+b {
+  color: rgb(251, 251, 251);
+  font-size: 30px;
+  font-style:normal;
+  font-family:  Noto Sans bold;
+  cursor: pointer;
+  justify-content: center; 
+  display: flex;
+}
+/* slideshow */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.slideshow-container {
+  top: 20px;
+  border: #fff;
+  border-radius: 30px;
+  width: 100%;
+  height: 50vh; /* 30% of the screen height */
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* movies */
+body {
+    margin: 0%;
+    font-family: Arial, sans-serif;
+    background-color: #141414;
+    color: #fff;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000;
+}
+.navbar h1 {
+    margin: 0;
+    font-size: 24px;
+}
+.movie-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+.movie-card {
+    background-color: #565454;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.movie-card:hover {
+    transform: scale(1.05);
+}
+.movie-card img {
+    width: 100%;
+    height: auto;
+}
+.movie-card .movie-info {
+    padding: 10px;
+}
+.movie-card .movie-info h3 {
+    margin: 0;
+    font-size: 18px;
+}
+.movie-card .movie-info p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #aaa;
+}
+.movies{
+    margin-top: 30px;
+}
+/* language card and container*/
+.language-container{
+    margin-top: 100px;
+    margin-left: 20px;
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 110px;
+    justify-content: center;
+    align-items: center;
+}
+.language-card {
+    height: 200px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #948c8c;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.language-card:hover {
+    transform: scale(1.05);
+}
+.language-card img {
+    width: 100%;
+    height: auto;
+}
+.language-card .language-info {
+    padding: 10px;
+}
+.language-card .language-info h3 {
+    margin: 0;
+    font-size: 18px;
+}
+.language-card .language-info p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #aaa;
+}
