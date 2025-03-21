@@ -2,8 +2,7 @@
 //otp veriifcation function
 document.getElementById('validate').addEventListener('submit', async function (e) {
     e.preventDefault();
-    const button = e.target;
-    const otp = document.getElementById('otpInput').value.trim();
+    e.target.preventDefault(); const otp = document.getElementById('otpInput').value.trim();
 
     const storedEmail = localStorage.getItem("userEmail");
 
@@ -21,6 +20,7 @@ document.getElementById('validate').addEventListener('submit', async function (e
         });
 
         const data = await response.json();
+        console.log(data);
 
         if (response.ok) {
             localStorage.setItem("resetToken", data.token); // Store JWT token

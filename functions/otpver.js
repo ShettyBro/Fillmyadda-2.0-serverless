@@ -19,6 +19,7 @@ exports.verifyOTP = async (event) => {
   const { email, otp } = JSON.parse(event.body);
   if (!email || !otp) {
     return { statusCode: 400, headers, body: JSON.stringify({ message: 'Email and OTP are required' }) };
+    console.log("Email and OTP are required");
   }
 
   try {
