@@ -377,12 +377,12 @@ input[type="range"]::-moz-range-thumb {
 /* Add glow effect for the text only while typing */
 .inputbox input:focus {
     border-bottom: 2px solid rgb(168, 0, 0); /* Keep the border color change */
-    text-shadow: 0 0 5px gold, 0 0 10px gold; /* Gold glow effect for the text */
+    text-shadow: 0 0 5px rgb(246, 246, 246), 0 0 10px rgb(242, 242, 242); /* Gold glow effect for the text */
 }
 
 /* When valid, keep glowing text effect */
 .inputbox input:valid {
-    text-shadow: 0 0 5px gold, 0 0 10px gold; /* Gold glow effect for the text */
+    text-shadow: 0 0 5px rgb(1, 1, 1), 0 0 10px rgb(209, 209, 206); /* Gold glow effect for the text */
 }
 
 /* Label Focus Styles */
@@ -491,12 +491,12 @@ input:-webkit-autofill::first-line {
 /* Add glow effect for the text only while typing */
 .inputbox2 input:focus {
     border-bottom: 2px solid rgb(168, 0, 0); /* Keep the border color change */
-    text-shadow: 0 0 5px gold, 0 0 10px gold; /* Gold glow effect for the text */
+    text-shadow: 0 0 5px rgb(0, 0, 0), 0 0 10px rgb(0, 0, 0); /* Gold glow effect for the text */
 }
 
 /* When valid, keep glowing text effect */
 .inputbox2 input:valid {
-    text-shadow: 0 0 5px gold, 0 0 10px gold; /* Gold glow effect for the text */
+    text-shadow: 0 0 5px rgb(0, 0, 0), 0 0 10px rgb(2, 2, 2); /* Gold glow effect for the text */
 }
 
 /* Label Focus Styles */
@@ -649,6 +649,7 @@ input:-webkit-autofill::first-line {
 
 /* About Section Styles */
 .about {
+
     width: 80%;
     margin: 20px auto;
     padding: 30px;
@@ -684,7 +685,7 @@ input:-webkit-autofill::first-line {
 
 .about h2:hover {
     transform: translateY(-10px);
-    color: #ffcc00;
+    color: #ff0000;
 }
 
 .about h2::before {
