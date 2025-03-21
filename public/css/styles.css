@@ -1762,11 +1762,12 @@ ul {
   position: absolute;
   right: 20px;
   top: 40px;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%; /* Ensure circular profile picture */
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-right: 20px;
 }
 
 .profile-picture:hover {
@@ -1786,6 +1787,7 @@ ul {
   background-color: rgb(37, 46, 57);
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  margin-right: 30px;
 }
 
 .profile-picture:hover + .profile-menu{

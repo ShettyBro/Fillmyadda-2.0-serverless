@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Prevent back navigation to protected pages after logout
 window.addEventListener('popstate', function(event) {
-    const protectedPaths = ['/home.html', '/player.html', '/about.html',];
+    const protectedPaths = ['/home.html', '/player.html', '/about.html','/kannada.html','/telugu.html','/tamil.html','/hindi.html','/english.html'];
     const currentPath = window.location.pathname;
 
     // Check if trying to access protected page without valid token
