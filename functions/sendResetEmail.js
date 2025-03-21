@@ -11,6 +11,7 @@ const headers = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS'
 };
 
+
 // send otp
 exports.forgotPassword = async (event) => {
   if (event.httpMethod === 'OPTIONS') {

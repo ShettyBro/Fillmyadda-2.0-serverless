@@ -28,7 +28,7 @@ exports.verifyOTP = async (event) => {
       .input('otp', sql.NVarChar, otp)
       .query(`
         SELECT * FROM PasswordResetOTPs 
-        WHERE email = @email AND otp = @otp AND expires_at > GETDATE()
+        WHERE email = '@email' AND otp = @otp 
       `);
 
     if (result.recordset.length === 0) {
@@ -48,6 +48,7 @@ exports.verifyOTP = async (event) => {
     console.error('Database error:', error);
     return { statusCode: 500, headers, body: JSON.stringify({ message: 'Internal Server Error' }) };
   }
+
 };
 
 //reset password
