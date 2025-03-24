@@ -4,7 +4,7 @@ document.getElementById('otpForm').addEventListener('submit', async function (e)
     e.preventDefault();
     e.target.preventDefault(); const otp = document.getElementById('otpInput').value.trim();
     const button = e.target.querySelector('button');
-
+    console.log("OTP Verification Triggered"); // Check if this prints in the console
     const storedEmail = localStorage.getItem("userEmail");
 
     // Disable button and show loading text
