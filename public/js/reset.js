@@ -1,8 +1,9 @@
 
 //otp veriifcation function
-document.getElementById('validate').addEventListener('submit', async function (e) {
+document.getElementById('otpForm').addEventListener('submit', async function (e) {
     e.preventDefault();
     e.target.preventDefault(); const otp = document.getElementById('otpInput').value.trim();
+    const button = e.target.querySelector('button');
 
     const storedEmail = localStorage.getItem("userEmail");
 
