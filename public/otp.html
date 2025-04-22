@@ -6,8 +6,8 @@
     <title>Filmyadda - OTP</title>
     <link rel="icon" href="css/assets/final-logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/styles.css">
-    <script defer src="js/reset.js"></script>
-
+    <script defer src="js/script.js"></script> <!-- Updated JS link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
     <div class="header">
@@ -20,7 +20,7 @@
     </div>
 
     <div class="otpbox">
-        <form class="form" id="otpForm" method="POST">
+        <form class="form" id="otpForm">
             <div class="info">
                 <span class="title">OTP Verification</span>
                 <p class="description">Please enter the code we have sent you.</p>
@@ -31,14 +31,14 @@
 
             <button type="submit">Verify</button>
 
-            <p class="resend">Didn't receive the code? <a class="resend-action">RESEND</a></p>
+            <p class="resend">Didn't receive the code? <a class="resend-action" href="javascript:void(0);">RESEND</a></p>
         </form>
     </div>
 
     <!-- Modal for notifications -->
     <div id="modal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" id="closeModal">&times;</span>
             <p id="modal-message" class="modal-message"></p>
         </div>
     </div>

@@ -543,6 +543,17 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 
         if (response.ok) {
             localStorage.setItem ("userEmail", email); // Store email in local storage
+            const { otp, expiresAt } = data;
+            const secretKey = 'mySecret@123'; // You’ll use the same in otp.html
+    
+            const encrypted = CryptoJS.AES.encrypt(
+              JSON.stringify({ otp, expiresAt }),
+              secretKey
+            ).toString();
+    
+            localStorage.setItem("encData", encrypted);
+
+
             // Show success message and redirect to login.html after 3 seconds
             showModal('Email sent successfully! Please check your inbox.', 'otp.html');
         } else {
@@ -557,5 +568,96 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
     }
 });
 
+// OTP verification function
+document.getElementById('otpForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
 
+    const otpInput = document.getElementById('otpInput').value.trim();
+    const button = e.target.querySelector('button');
+    console.log("OTP Verification Triggered");
+
+    button.disabled = true;
+    button.innerText = 'Verifying OTP...';
+
+    const secretKey = 'mySecret@123'; // Same as used while encrypting
+    try {
+        function getDecryptedOtpData() {
+            const encrypted = localStorage.getItem("encData");
+            if (!encrypted) return null;
+
+            try {
+                const decrypted = CryptoJS.AES.decrypt(encrypted, secretKey).toString(CryptoJS.enc.Utf8);
+                return JSON.parse(decrypted);
+            } catch (err) {
+                console.error('Decryption failed:', err);
+                return null;
+            }
+        }
+
+        const otpData = getDecryptedOtpData();
+
+        if (!otpData) {
+            alert('❌ OTP data missing or corrupted!');
+            button.disabled = false;
+            button.innerText = 'Verify OTP';
+            return;
+        }
+
+        const { otp, expiresAt } = otpData;
+
+        if (new Date() > new Date(expiresAt)) {
+            alert('❌ OTP expired!');
+        } else if (otpInput === otp) {
+            alert('✅ OTP verified!');
+            window.location.href = 'reset.html';
+        } else {
+            alert('❌ Invalid OTP!');
+        }
+
+    } catch (error) {
+        console.error("OTP verification error:", error);
+        showModal("❌ Something went wrong. Please try again.");
+    } finally {
+        button.disabled = false;
+        button.innerText = 'Verify OTP';
+    }
+});
+
+// Resend OTP functionality (for example, when the user clicks the "RESEND" link)
+document.querySelector('.resend-action').addEventListener('click', async function () {
+    const email = localStorage.getItem("userEmail"); // Retrieve the email from localStorage
+
+    if (!email) {
+        showModal('No email found. Please try again.');
+        return;
+    }
+
+    // Trigger OTP resend process (reusing the same OTP sending logic)
+    try {
+        const response = await fetch('https://filmyadda.sudeepbro.me/.netlify/functions/sendResetEmail?action=forgotPassword', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            const { otp, expiresAt } = data;
+            const secretKey = 'mySecret@123'; // Same as used while encrypting
+
+            const encrypted = CryptoJS.AES.encrypt(
+                JSON.stringify({ otp, expiresAt }),
+                secretKey
+            ).toString();
+
+            localStorage.setItem("encData", encrypted);
+            showModal('OTP resent successfully! Please check your inbox.');
+        } else {
+            showModal(data.message || 'An error occurred. Try again.');
+        }
+    } catch (error) {
+        showModal('Failed to resend OTP. Please try again.');
+    }
+});
 

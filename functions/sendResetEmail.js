@@ -25,7 +25,7 @@ exports.forgotPassword = async (event) => {
 
   // Generate a 6-digit OTP
   const otp = crypto.randomInt(100000, 999999).toString();
-  const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes expiration
+  const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes expiration 
 
   try {
       // Store OTP in the database
@@ -51,8 +51,15 @@ exports.forgotPassword = async (event) => {
     })
   });
  
-  return { statusCode: 200, headers, body: JSON.stringify({ message: 'OTP sent!' }) };
-
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: 'OTP sent successfully!',
+      otp,
+      expiresAt
+    })
+  };
+  
 } catch (error) {
   console.error('Database error:', error);
   return { statusCode: 500, headers, body: JSON.stringify({ message: 'Internal Server Error' }) };
