@@ -543,13 +543,12 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 
         if (response.ok) {
         
-                const { otp, expiresAt,token } = data;  // Extract from response
-                localStorage.setItem('authToken', data.token); // Store the token
+                const { otp, expiresAt } = data;  // Extract from response
+                
                 localStorage.setItem("userEmail", email);
                 localStorage.setItem("pto", otp);
                 localStorage.setItem("exp", expiresAt);
-                const expirationTime = Date.now() + (15 * 60 * 1000); // 10 minutes
-                localStorage.setItem('tokenExpiration', expirationTime);
+                
 
                 showModal('Email sent successfully! Please check your inbox.', 'otp.html');
         } else {
@@ -608,6 +607,8 @@ if (otpin) {
 
         if (userotp === storedOtp) {
             showModal('OTP verified successfully! Proceeding...', 'reset.html');
+            const expirationTime = Date.now() + (15 * 60 * 1000); // 10 minutes
+                localStorage.setItem('tokenExpiration', expirationTime);
             // Clear OTP after successful verification
             localStorage.removeItem('pto');
             localStorage.removeItem('exp');
