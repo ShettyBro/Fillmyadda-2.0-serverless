@@ -29,6 +29,13 @@ exports.forgotPassword = async (event) => {
   const otp = crypto.randomInt(100000, 999999).toString();
   const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes expiration 
 
+// Generate JWT token (for next page verification)
+const token = jwt.sign(
+  { email: email }, // only email stored in token
+  JWT_SECRET,
+  { expiresIn: '10m' }
+);
+
   try {
     // Store OTP in the database
     let pool = await sql.connect(dbConfig);
@@ -53,12 +60,7 @@ exports.forgotPassword = async (event) => {
       })
     });
 
-    // Generate JWT token (for next page verification)
-    const token = jwt.sign(
-      { email: email }, // only email stored in token
-      JWT_SECRET,
-      { expiresIn: '10m' }
-    );
+    
 
     return {
       statusCode: 200,
