@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filmyadda - OTP</title>
-    <link rel="icon" href="css/assets/final-logo.ico" type="image/x-icon">
+    <title>Filmyadda - Login</title>
+    <link rel="icon" href="css/assets/final-logo.ico" type="image/x-icon" >
     <link rel="stylesheet" href="css/styles.css">
-    <script defer src="js/script.js"></script> <!-- Updated JS link -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script defer src="js/script.js"></script>
+   
 </head>
 <body>
     <div class="header">
@@ -17,32 +17,30 @@
                 <button onclick="location.href='about-index.html'" target="_blank">About</button>
             </div>
         </nav>
-        
-    </div>
-
-    <div class="otpbox">
-        <form class="form" id="otpForm">
-            <div class="info">
-                <span class="title">OTP Verification</span>
-                <p class="description">Please enter the code we have sent you.</p>
-            </div>
-            <div class="inputbox">
-                <input id="otpInput" type="text" maxlength="6" placeholder="Enter 6-digit OTP" required>
-            </div>
-
-            <button type="submit">Verify</button>
-
-            <p class="resend">Didn't receive the code? <a class="resend-action" href="javascript:void(0);">RESEND</a></p>
-        </form>
+        <div class="box">
+            <form id="otpin" method="POST">
+                <div class="inputbox">
+                    <input type="number" name="otp" id="otp" required>
+                    <label class="label" for="otp">Enter 6 Digit OTP</label>
+                </div>
+                <div class="resend-otp">
+                    <label>
+                        <a href="reset.html">Forgot Password ?</a>
+                    </label>
+                </div>
+                <button id="verify" type="submit">Verify</button>
+            </form>
+        </div>
     </div>
 
     <!-- Modal for notifications -->
     <div id="modal" class="modal">
         <div class="modal-content">
-            <span class="close" id="closeModal">&times;</span>
+            <span class="close">&times;</span>
             <p id="modal-message" class="modal-message"></p>
         </div>
     </div>
+    
 
     <footer class="footer">
         <p>&copy; 2024 Filmyadda. All rights reserved.</p>

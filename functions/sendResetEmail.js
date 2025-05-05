@@ -51,12 +51,20 @@ exports.forgotPassword = async (event) => {
     })
   });
  
+  const token = jwt.sign(
+    { id: user.id, username: user.username },
+    JWT_SECRET,
+    { expiresIn: '15m' }   // ⬅️ Set expiry to 10 minutes
+  );
+  
+
   return {
     statusCode: 200,
     body: JSON.stringify({
       message: 'OTP sent successfully!',
       otp,
-      expiresAt
+      expiresAt,
+      token // Include the JWT token in the response
     })
   };
   
