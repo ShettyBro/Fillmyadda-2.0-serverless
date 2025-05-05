@@ -564,32 +564,29 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 });
 
 
-// otp verify
-const otpin = document.getElementById('otpin');
-if (otpin) {
-    otpin.addEventListener('submit', async (event) => {
+// OTP verification
+const otpForm = document.getElementById('otpForm');
+if (otpForm) {
+    otpForm.addEventListener('submit', async (event) => {
         event.preventDefault(); // Prevent form submission
 
-        // Get the verify button element and disable it
         const verifyButton = document.getElementById('verify');
-        verifyButton.disabled = true;
-        verifyButton.textContent = 'Verifying...';
-
-        const userotp = document.getElementById('otp').value.trim();
+        const userotp = document.getElementById('otpInput').value.trim();
         const storedOtp = localStorage.getItem('pto');
         const expiryTime = localStorage.getItem('exp');
 
+        verifyButton.disabled = true;
+        verifyButton.textContent = 'Verifying...';
+
         if (!userotp) {
             showModal('Please enter the OTP.');
-            verifyButton.disabled = false;
-            verifyButton.textContent = 'Verify';
+            resetButton();
             return;
         }
 
         if (!storedOtp || !expiryTime) {
             showModal('OTP not found. Please request a new one.');
-            verifyButton.disabled = false;
-            verifyButton.textContent = 'Verify';
+            resetButton();
             return;
         }
 
@@ -600,22 +597,49 @@ if (otpin) {
             // Clear expired OTP
             localStorage.removeItem('pto');
             localStorage.removeItem('exp');
-            verifyButton.disabled = false;
-            verifyButton.textContent = 'Verify';
+            resetButton();
             return;
         }
 
         if (userotp === storedOtp) {
-            showModal('OTP verified successfully! Proceeding...', 'reset.html');
-            const expirationTime = Date.now() + (15 * 60 * 1000); // 10 minutes
-                localStorage.setItem('tokenExpiration', expirationTime);
+            showModal('OTP verified successfully! Redirecting...', 'reset.html');
             // Clear OTP after successful verification
             localStorage.removeItem('pto');
             localStorage.removeItem('exp');
         } else {
             showModal('Invalid OTP. Please try again.');
+            resetButton();
+        }
+
+        function resetButton() {
             verifyButton.disabled = false;
             verifyButton.textContent = 'Verify';
         }
     });
+}
+
+// Modal functions (Assuming you already have these in script.js)
+function showModal(message, redirectUrl = null) {
+    const modal = document.getElementById('modal');
+    const modalMessage = document.getElementById('modal-message');
+    const closeModal = document.getElementById('closeModal');
+
+    modalMessage.textContent = message;
+    modal.style.display = 'block';
+
+    closeModal.onclick = () => {
+        modal.style.display = 'none';
+        if (redirectUrl) {
+            window.location.href = redirectUrl;
+        }
+    };
+
+    window.onclick = (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            }
+        }
+    };
 }
