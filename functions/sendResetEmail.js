@@ -6,7 +6,7 @@ const dbConfig = require('../dbConfig');
 require('dotenv').config();
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const JWT_SECRET = process.env.JWT_SECRET; // Make sure this is set in .env
+const JWT_SECRET = process.env.JWT_SECRET; // ✅ Make sure this is in your .env file
 
 const headers = {
   'Access-Control-Allow-Origin': '*',
@@ -53,11 +53,11 @@ exports.forgotPassword = async (event) => {
       })
     });
 
-    // Optional: Generate a token (if you want to track session safely — no user info, just email)
+    // Generate JWT token (for next page verification)
     const token = jwt.sign(
-      { email: email },
+      { email: email }, // only email stored in token
       JWT_SECRET,
-      { expiresIn: '10m' }   // ⬅️ Set expiry to 10 minutes exactly
+      { expiresIn: '10m' }
     );
 
     return {
@@ -65,8 +65,9 @@ exports.forgotPassword = async (event) => {
       headers,
       body: JSON.stringify({
         message: 'OTP sent successfully!',
+        otp,         // ✅ Included OTP in response (as you wanted)
         expiresAt,
-        token // Include the JWT token in the response (safe now — no OTP exposed)
+        token        // ✅ Included token in response
       })
     };
 
