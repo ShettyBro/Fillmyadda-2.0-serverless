@@ -9,7 +9,6 @@ console.log('Database Configuration:', {
   database: process.env.DB_NAME,
 });
 
-
 exports.handler = async (event) => {
   const headers = {
     "Access-Control-Allow-Origin": "*",
@@ -47,10 +46,17 @@ exports.handler = async (event) => {
       .query('SELECT * FROM Users WHERE username = @username OR fullname = @fullname OR email = @email');
 
     if (existingUser.recordset.length > 0) {
+      const conflictFields = existingUser.recordset.map(user => {
+        if (user.username === username) return 'Username';
+        if (user.fullname === fullname) return 'Fullname';
+        if (user.email === email) return 'Email';
+        return null;
+      }).filter(Boolean).join(', ');
+
       return {
         statusCode: 409,
         headers,
-        body: JSON.stringify({ message: 'Username, fullname, or email already exists.' })
+        body: JSON.stringify({ message: `${conflictFields} already exists.` })
       };
     }
 
@@ -68,16 +74,12 @@ exports.handler = async (event) => {
       headers,
       body: JSON.stringify({ message: 'User registered successfully' })
     };
+  } catch (err) {
+    console.error("Database connection error:", err);
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ message: 'Database error', error: err.message })
+    };
   }
-    catch (err) {
-      console.error("Database connection error:", err); // Log to Netlify
-  return {
-    statusCode: 500,
-    headers,
-    body: JSON.stringify({ message: 'Database error', error: err.message })
-      };
-    }
-  }
-;
-
-
+};
