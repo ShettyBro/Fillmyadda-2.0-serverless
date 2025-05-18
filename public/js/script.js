@@ -141,9 +141,7 @@ if (loginForm) {
         } else {
             showModal('Invalid username or password.');
         }
-    } catch (error) {
-        console.log('Login Error:', error);
-        showModal('Server Down Contact Develpoer or Try Again Later');
+   
     } finally {
         loginButton.disabled = false; // Re-enable the login button
         loginButton.textContent = 'Login'; // Reset button text
@@ -195,9 +193,7 @@ if (registerForm) {
                 const errorMessage = errorData.message || 'Registration failed: Username, fullname, or email already exists';
                 showModal(errorMessage);
             }
-        } catch (error) {
-            console.error('Registration Error:', error);
-            showModal('Server Down. Contact Developer or Try Again Later');
+     
         } finally {
             // Re-enable the button after the request is complete
             registerButton.disabled = false;
