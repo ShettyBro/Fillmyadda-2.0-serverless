@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="icon" href="css/assets/final-logo.ico" type="image/x-icon" >
+    <title>Filmyadda - WEB-SERIES</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve the token and its expiration time from local storage
+            const token = localStorage.getItem('authToken');
+            const expirationTime = localStorage.getItem('tokenExpiration');
+            
+            // Check if the token is missing or expired
+            if (!token || (expirationTime && Date.now() > expirationTime)) {
+                // Clear the token and expiration time from local storage
+                localStorage.removeItem('token');
+                localStorage.removeItem('tokenExpiration');
+                // Redirect to the login page
+                window.location.href = 'index.html'; // Change this to 'index.html' as you requested
+            }
+        });
+    </script>
+</head>
+
+
+
+    <div class="header">
+        <nav class="nav">
+            <img class="logo" src="css/assets/bg.png" alt="" onclick="location.href='home.html'">
+           
+            <div class="navbt">
+                
+                <div class="header-right">
+                    <img class="profile-picture" src="css/assets/profile (2).png">
+                        <ul class="profile-menu">
+                            <li onclick="location.href='home.html'">HOME</li>
+                            <li onclick="location.href='profile1.html'">MY PROFILE</li> 
+                            <li  onclick="location.href='about.html'" target="_blank">ABOUT</li>
+                            <li onclick="location.href='feedback.html'" target="_blank">GIVE FEEDBACK</li>
+                            <li id="logoutButton">LOGOUT</li>
+                        </ul>
+                    </div>
+                    <div id="transparent-overlay"></div>
+                </div>
+        </nav>
+    </div>
+<style>
+
+        :root {
+            --primary-color: #e50914;
+            --secondary-color: #221f1f;
+            --text-color: #fff;
+            --dark-bg: #141414;
+            --light-bg: #181818;
+            --hover-bg: #333;
+            --gradient-overlay: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 100%);
+            --card-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: rgba(0,0,0,0.8);
+            padding: 16px 40px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            color: var(--primary-color);
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 24px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-icon, .notification-icon, .user-icon {
+            margin-left: 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* Hero section */
+        .hero {
+            height: 80vh;
+            width: 100%;
+            position: relative;
+            margin-top: 60px;
+            background: url("/api/placeholder/1920/800") center/cover no-repeat;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-overlay);
+        }
+
+        .hero-content {
+            padding: 60px;
+            width: 50%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-label {
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 14px;
+            padding: 4px 12px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .hero-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .hero-info span {
+            margin-right: 15px;
+        }
+
+        .match {
+            color: #46d369;
+            font-weight: bold;
+        }
+
+        .hero-description {
+            margin-bottom: 25px;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #ddd;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 22px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .btn-icon {
+            margin-right: 8px;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+            transform: scale(1.02);
+        }
+
+        /* Main content */
+        main {
+            padding: 40px 50px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* Series Rows */
+        .series-row {
+            margin-bottom: 50px;
+        }
+
+        .series-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .series-card {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            background-color: var(--light-bg);
+            box-shadow: var(--card-shadow);
+        }
+
+        .series-card:hover {
+            transform: scale(1.05);
+            z-index: 10;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.7);
+        }
+
+        .series-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .series-info {
+            padding: 12px;
+        }
+
+        .series-title {
+            font-size: 16px;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .series-meta {
+            display: flex;
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+
+        .series-year, .series-seasons {
+            margin-right: 10px;
+        }
+
+        .series-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 8px;
+        }
+
+        .tag {
+            background-color: rgba(255,255,255,0.1);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            color: #ddd;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            color: #ffc107;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .star {
+            margin-right: 5px;
+        }
+
+        /* Featured section */
+        .featured-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .featured-card {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 280px;
+            cursor: pointer;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.2) 100%);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .featured-title {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--primary-color);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .play-btn {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .featured-card:hover .play-btn,
+        .series-card:hover .play-btn {
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            padding: 40px;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary-color);
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                width: 70%;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 20px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+            }
+            
+            .hero-content {
+                width: 100%;
+                padding: 30px;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            main {
+                padding: 20px;
+            }
+            
+            .featured-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 60vh;
+            }
+            
+            .hero-content {
+                padding: 20px;
+            }
+            
+            .hero-title {
+                font-size: 28px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="hero-overlay">
+            <img src="data:image/jpeg;base64,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" alt="Hero Background" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.5;">
+        </div></div>
+        <div class="hero-content">
+            <div class="hero-label">NEW SEASON</div>
+            <h1 class="hero-title">The Last Kingdom: Season 5</h1>
+            <div class="hero-info">
+                <span class="match">97% Match</span>
+                <span>2022</span>
+                <span>5 Seasons</span>
+                <span>HD</span>
+            </div>
+            <p class="hero-description">
+                As Alfred the Great defends his kingdom from Norse invaders, Uhtred -- born a Saxon but raised by Vikings -- seeks to claim his ancestral birthright in the final season of this epic historical drama.
+            </p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary"><span class="btn-icon">▶</span> Play</button>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section class="featured-section">
+            <div class="featured-card">
+                <span class="badge">TRENDING</span>
+                <img src="/api/placeholder/600/330" alt="Squid Game" class="featured-image">
+                <div class="featured-overlay">
+                    <h3 class="featured-title">Squid Game</h3>
+                    <div class="series-meta">
+                        <span class="series-year">2021</span>
+                        <span class="series-seasons">1 Season</span>
+                    </div>
+                    <div class="series-tags">
+                        <span class="tag">Thriller</span>
+                        <span class="tag">Drama</span>
+                        <span class="tag">Survival</span>
+                    </div>
+                </div>
+                <div class="play-btn">▶</div>
+            </div>
+            <div class="featured-card">
+                <span class="badge">NEW</span>
+                <img src="/api/placeholder/600/330" alt="Wednesday" class="featured-image">
+                <div class="featured-overlay">
+                    <h3 class="featured-title">Wednesday</h3>
+                    <div class="series-meta">
+                        <span class="series-year">2022</span>
+                        <span class="series-seasons">1 Season</span>
+                    </div>
+                    <div class="series-tags">
+                        <span class="tag">Mystery</span>
+                        <span class="tag">Supernatural</span>
+                        <span class="tag">Comedy</span>
+                    </div>
+                </div>
+                <div class="play-btn">▶</div>
+            </div>
+        </section>
+
+        <section class="series-row">
+            <h2 class="section-title">Kannada</h2>
+            <div class="series-grid">
+                <div class="series-card">
+                    <img src="/api/placeholder/220/124" alt="Stranger Things" class="series-image">
+                    <div class="play-btn">▶</div>
+                    <div class="series-info">
+                        <h3 class="series-title">Stranger Things</h3>
+                        <div class="series-meta">
+                            <span class="series-year">2016</span>
+                            <span class="series-seasons">4 Seasons</span>
+                        </div>
+                        <div class="rating">
+                            <span class="star">★</span> 8.7
+                        </div>
+                        <div class="series-tags">
+                            <span class="tag">Sci-Fi</span>
+                            <span class="tag">Horror</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="series-card">
+                    <img src="/api/placeholder/220/124" alt="Money Heist" class="series-image">
+                    <div class="play-btn">▶</div>
+                    <div class="series-info">
+                        <h3 class="series-title">Money Heist</h3>
+                        <div class="series-meta">
+                            <span class="series-year">2017</span>
+                            <span class="series-seasons">5 Seasons</span>
+                        </div>
+                        <div class="rating">
+                            <span class="star">★</span> 8.3
+                        </div>
+                        <div class="series-tags">
+                            <span class="tag">Crime</span>
+                            <span class="tag">Thriller</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="series-card">
+                    <img src="/api/placeholder/220/124" alt="The Witcher" class="series-image">
+                    <div class="play-btn">▶</div>
+                    <div class="series-info">
+                        <h3 class="series-title">The Witcher</h3>
+                        <div class="series-meta">
+                            <span class="series-year">2019</span>
+                            <span class="series-seasons">2 Seasons</span>
+                        </div>
+                        <div class="rating">
+                            <span class="star">★</span> 8.2
+                        </div>
+                        <div class="series-tags">
+                            <span class="tag">Fantasy</span>
+                            <span class="tag">Adventure</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="series-card">
+                    <img src="/api/placeholder/220/124" alt="Dark" class="series-image">
+                    <div class="play-btn">▶</div>
+                    <div class="series-info">
+                        <h3 class="series-title">Dark</h3>
+                        <div class="series-meta">
+                            <span class="series-year">2017</span>
+                            <span class="series-seasons">3 Seasons</span>
+                        </div>
+                        <div class="rating">
+                            <span class="star">★</span> 8.7
+                        </div>
+                        <div class="series-tags">
+                            <span class="tag">Sci-Fi</span>
+                            <span class="tag">Thriller</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="series-card">
+                    <img src="/api/placeholder/220/124" alt="Peaky Blinders" class="series-image">
+                    <div class="play-btn">▶</div>
+                    <div class="series-info">
+                        <h3 class="series-title">Peaky Blinders</h3>
+                        <div class="series-meta">
+                            <span class="series-year">2013</span>
+                            <span class="series-seasons">6 Seasons</span>
+                        </div>
+                        <div class="rating">
+                            <span class="star">★</span> 8.8
+                        </div>
+                        <div class="series-tags">
+                            <span class="tag">Crime</span>
+                            <span class="tag">Drama</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="series-row">
+            <h2 class="section-title">Hindi</h2>
+            <div class="series-grid">
+                <div class="series-card">
+                    <img src="/api/placeholder/220/124" alt="1899" class="series-image">
+                    <div class="play-btn">▶</div>
+                    <div class="series-info">
+                        <h3 class="series-title">1899</h3>
+                        <div class="series-meta">
+                            <span class="series-year">2022</span>
+                            <span class="series-seasons">1 Season</span>
+                        </div>
+                        <div class="rating">
+                            <span class="star">★</span> 7.8
+                        </div>
+                        <div class="series-tags">
+                            <span class="tag">Mystery</span>
+                            <span class="tag">Horror</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="series-card">
+                    <img src="/api/placeholder/220/124" alt="The Midnight Club" class="series-image">
+                    <div class="play-btn">▶</div>
+                    <div class="series-info">
+                        <h3 class="series-title">The Midnight Club</h3>
+                        <div class="series-meta">
+                            <span class="series-year">2022</span>
+                            <span class="series-seasons">1 Season</span>
+                        </div>
+                        <div class="rating">
+                            <span class="star">★</span> 6.9
+                        </div>
+                        <div class="series-tags">
+                            <span class="tag">Horror</span>
+                            <span class="tag">Mystery</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="series-card">
+                    <img src="/api/placeholder/220/124" alt="The Watcher" class="series-image">
+                    <div class="play-btn">▶</div>
+                    <div class="series-info">
+                        <h3 class="series-title">The Watcher</h3>
+                        <div class="series-meta">
+                            <span class="series-year">2022</span>
+                            <span class="series-seasons">1 Season</span>
+                        </div>
+                        <div class="rating">
+                            <span class="star">★</span> 7.2
+                        </div>
+                        <div class="series-tags">
+                            <span class="tag">Mystery</span>
+                            <span class="tag">Thriller</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="series-card">
+                    <img src="/api/placeholder/220/124" alt="Manifest" class="series-image">
+                    <div class="play-btn">▶</div>
+                    <div class="series-info">
+                        <h3 class="series-title">Manifest</h3>
+                        <div class="series-meta">
+                            <span class="series-year">2018</span>
+                            <span class="series-seasons">4 Seasons</span>
+                        </div>
+                        <div class="rating">
+                            <span class="star">★</span> 7.1
+                        </div>
+                        <div class="series-tags">
+                            <span class="tag">Drama</span>
+                            <span class="tag">Mystery</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="series-card">
+                    <img src="/api/placeholder/220/124" alt="Dahmer" class="series-image">
+                    <div class="play-btn">▶</div>
+                    <div class="series-info">
+                        <h3 class="series-title">Dahmer</h3>
+                        <div class="series-meta">
+                            <span class="series-year">2022</span>
+                            <span class="series-seasons">1 Season</span>
+                        </div>
+                        <div class="rating">
+                            <span class="star">★</span> 8.1
+                        </div>
+                        <div class="series-tags">
+                            <span class="tag">Crime</span>
+                            <span class="tag">Biography</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="series-row">
+            <h2 class="section-title">English</h2>
+            <div class="series-grid">
+                <div class="series-card">
+                    <img src="/api/placeholder/220/124" alt="Breaking Bad" class="series-image">
+                    <div class="play-btn">▶</div>
+                    <div class="series-info">
+                        <h3 class="series-title">Breaking Bad</h3>
+                        <div class="series-meta">
+                            <span class="series-year">2008</span>
+                            <span class="series-seasons">5 Seasons</span>
+                        </div>
+                        <div class="rating">
+                            <span class="star">★</span> 9.5
+                        </div>
+                        <div class="series-tags">
+                            <span class="tag">Crime</span>
+                            <span class="tag">Drama</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="series-card">
+                    <img src="/api/placeholder/220/124" alt="Better Call Saul" class="series-image">
+                    <div class="play-btn">▶</div>
+                    <div class="series-info">
+                        <h3 class="series-title">Better Call Saul</h3>
+                        <div class="series-meta">
+                            <span class="series-year">2015</span>
+                            <span class="series-seasons">6 Seasons</span>
+                        </div>
+                        <div class="rating">
+                            <span class="star">★</span> 8.9
+                        </div>
+                        <div class="series-tags">
+                            <span class="tag">Crime</span>
+                            <span class="tag">Drama</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="series-card">
+                    <img src="/api/placeholder/220/124" alt="Chernobyl" class="series-image">
+                    <div class="play-btn">▶</div>
+                    <div class="series-info">
+                        <h3 class="series-title">Chernobyl</h3>
+                        <div class="series-meta">
+                            <span class="series-year">2019</span>
+                            <span class="series-seasons">1 Season</span>
+                        </div>
+                        <div class="rating">
+                            <span class="star">★</span> 9.4
+                        </div>
+                        <div class="series-tags">
+                            <span class="tag">Drama</span>
+                            <span class="tag">History</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="series-card">
+                    <img src="/api/placeholder/220/124" alt="The Crown" class="series-image">
+                    <div class="play-btn">▶</div>
+                    <div class="series-info">
+                        <h3 class="series-title">The Crown</h3>
+                        <div class="series-meta">
+                            <span class="series-year">2016</span>
+                            <span class="series-seasons">5 Seasons</span>
+                        </div>
+                        <div class="rating">
+                            <span class="star">★</span> 8.7
+                        </div>
+                        <div class="series-tags">
+                            <span class="tag">Drama</span>
+                            <span class="tag">History</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="series-card">
+                    <img src="/api/placeholder/220/124" alt="Succession" class="series-image">
+                    <div class="play-btn">▶</div>
+                    <div class="series-info">
+                        <h3 class="series-title">Succession</h3>
+                        <div class="series-meta">
+                            <span class="series-year">2018</span>
+                            <span class="series-seasons">4 Seasons</span>
+                        </div>
+                        <div class="rating">
+                            <span class="star">★</span> 8.8
+                        </div>
+                        <div class="series-tags">
+                            <span class="tag">Drama</span>
+                            <span class="tag">Comedy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Filmyadda. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+             

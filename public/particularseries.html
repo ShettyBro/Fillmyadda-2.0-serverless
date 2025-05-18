@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="icon" href="css/assets/final-logo.ico" type="image/x-icon" >
+    <title>Filmyadda - WEB-SERIES</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve the token and its expiration time from local storage
+            const token = localStorage.getItem('authToken');
+            const expirationTime = localStorage.getItem('tokenExpiration');
+            
+            // Check if the token is missing or expired
+            if (!token || (expirationTime && Date.now() > expirationTime)) {
+                // Clear the token and expiration time from local storage
+                localStorage.removeItem('token');
+                localStorage.removeItem('tokenExpiration');
+                // Redirect to the login page
+                window.location.href = 'index.html'; // Change this to 'index.html' as you requested
+            }
+        });
+    </script>
+</head>
+
+
+
+    <div class="header">
+        <nav class="nav">
+            <img class="logo" src="css/assets/bg.png" alt="" onclick="location.href='home.html'">
+           
+            <div class="navbt">
+                
+                <div class="header-right">
+                    <img class="profile-picture" src="css/assets/profile (2).png">
+                        <ul class="profile-menu">
+                            <li onclick="location.href='home.html'">HOME</li>
+                            <li onclick="location.href='profile1.html'">MY PROFILE</li> 
+                            <li  onclick="location.href='about.html'" target="_blank">ABOUT</li>
+                            <li onclick="location.href='feedback.html'" target="_blank">GIVE FEEDBACK</li>
+                            <li id="logoutButton">LOGOUT</li>
+                        </ul>
+                    </div>
+                    <div id="transparent-overlay"></div>
+                </div>
+        </nav>
+    </div>
+<style>
+        :root {
+            --primary-color: #e50914;
+            --dark-bg: #141414;
+            --light-text: #e5e5e5;
+            --secondary-bg: #232323;
+            --hover-color: #292929;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+        }
+        
+        header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            color: var(--primary-color);
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .hero {
+            top: 20px;
+            position: relative;
+            height: 60vh;
+            display: flex;
+            align-items: flex-end;
+            background: linear-gradient(to top, var(--dark-bg), transparent), 
+                        url('/api/placeholder/1200/675') center/cover no-repeat;
+        }
+        
+        .hero-content {
+            padding: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            max-width: 600px;
+        }
+        
+        .play-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 10px;
+        }
+        
+        .info-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        .season-selector {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+            margin-bottom: 20px;
+        }
+        
+        .season-btn {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 8px 15px;
+            white-space: nowrap;
+            transition: color 0.3s;
+        }
+        
+        .season-btn.active {
+            color: var(--light-text);
+            font-weight: bold;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .episode-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .episode-card {
+            display: flex;
+            background-color: var(--secondary-bg);
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .episode-card:hover {
+            background-color: var(--hover-color);
+            transform: scale(1.02);
+        }
+        
+        .episode-thumbnail {
+            width: 240px;
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        .episode-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .episode-card:hover .play-overlay {
+            opacity: 1;
+        }
+        
+        .play-circle {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(229, 9, 20, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .episode-info {
+            padding: 15px;
+            flex-grow: 1;
+        }
+        
+        .episode-info h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .episode-number {
+            color: #888;
+            font-weight: normal;
+        }
+        
+        .episode-details {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #888;
+        }
+        
+        .episode-description {
+            color: #aaa;
+            line-height: 1.5;
+        }
+        
+        .progress-container {
+            height: 4px;
+            background-color: #333;
+            margin-top: 15px;
+            border-radius: 2px;
+            position: relative;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .video-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .video-player {
+            width: 80%;
+            max-width: 1000px;
+            aspect-ratio: 16/9;
+            background-color: #000;
+        }
+        
+        .close-video {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .video-info {
+            width: 80%;
+            max-width: 1000px;
+            padding: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                height: 40vh;
+                align-items: flex-end;
+            }
+            
+            .hero-content {
+                padding: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 30px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .episode-card {
+                flex-direction: column;
+            }
+            
+            .episode-thumbnail {
+                width: 100%;
+                height: 180px;
+            }
+            
+            .play-btn, .info-btn {
+                padding: 10px 15px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Stranger Things</h1>
+            <p>When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.</p>
+            <button class="play-btn" onclick="playEpisode(1, 1)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <polygon points="5,3 19,12 5,21"/>
+                </svg>
+                Play
+            </button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="season-selector" id="seasonSelector">
+            <button class="season-btn active" onclick="selectSeason(1)">Season 1</button>
+            <button class="season-btn" onclick="selectSeason(2)">Season 2</button>
+            <button class="season-btn" onclick="selectSeason(3)">Season 3</button>
+            <button class="season-btn" onclick="selectSeason(4)">Season 4</button>
+        </div>
+        
+        <div class="episode-list" id="episodeList">
+            <!-- Episodes will be loaded here -->
+        </div>
+    </div>
+    
+    <div class="video-container" id="videoContainer">
+        <button class="close-video" onclick="closeVideo()">✕</button>
+        <div class="video-player" id="videoPlayer">
+            <img src="/api/placeholder/1000/562" alt="Video Player" style="width: 100%; height: 100%;">
+        </div>
+        <div class="video-info">
+            <h2 id="playingTitle">Episode Title</h2>
+            <p id="playingDescription">Episode description will appear here.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Sample data - in a real application, this would come from your backend
+        const seasons = {
+            1: [
+                {
+                    number: 1,
+                    title: "Chapter One: The Vanishing of Will Byers",
+                    duration: "49m",
+                    description: "On his way home from a friend's house, young Will sees something terrifying. Nearby, a sinister secret lurks in the depths of a government lab.",
+                    thumbnail: "/api/placeholder/480/270",
+                    progress: 100
+                },
+                {
+                    number: 2,
+                    title: "Chapter Two: The Weirdo on Maple Street",
+                    duration: "56m",
+                    description: "Lucas, Mike and Dustin try to talk to the girl they found in the woods. Hopper questions an anxious Joyce about an unsettling phone call.",
+                    thumbnail: "/api/placeholder/481/270",
+                    progress: 85
+                },
+                {
+                    number: 3,
+                    title: "Chapter Three: Holly, Jolly",
+                    duration: "52m",
+                    description: "An increasingly concerned Nancy looks for Barb and finds out what Jonathan's been up to. Joyce is convinced Will is trying to talk to her.",
+                    thumbnail: "/api/placeholder/482/270",
+                    progress: 45
+                },
+                {
+                    number: 4,
+                    title: "Chapter Four: The Body",
+                    duration: "51m",
+                    description: "Refusing to believe Will is dead, Joyce tries to connect with her son. The boys give Eleven a makeover. Nancy and Jonathan form an unlikely alliance.",
+                    thumbnail: "/api/placeholder/483/270",
+                    progress: 0
+                },
+                {
+                    number: 5,
+                    title: "Chapter Five: The Flea and the Acrobat",
+                    duration: "53m",
+                    description: "Hopper breaks into the lab while Nancy and Jonathan confront the force that took Will. The boys ask Mr. Clarke how to travel to another dimension.",
+                    thumbnail: "/api/placeholder/484/270",
+                    progress: 0
+                },
+                {
+                    number: 6,
+                    title: "Chapter Six: The Monster",
+                    duration: "47m",
+                    description: "A frantic Jonathan looks for Nancy in the darkness, but Steve's looking for her too. Hopper and Joyce uncover the truth about the lab's experiments.",
+                    thumbnail: "/api/placeholder/485/270",
+                    progress: 0
+                },
+                {
+                    number: 7,
+                    title: "Chapter Seven: The Bathtub",
+                    duration: "42m",
+                    description: "Eleven struggles to reach Will, while Lucas warns that 'the bad men are coming.' Nancy and Jonathan show the police what Jonathan caught on camera.",
+                    thumbnail: "/api/placeholder/486/270",
+                    progress: 0
+                },
+                {
+                    number: 8,
+                    title: "Chapter Eight: The Upside Down",
+                    duration: "55m",
+                    description: "Dr. Brenner holds Hopper and Joyce for questioning while the boys wait with Eleven in the gym. Back at Will's, Nancy and Jonathan prepare for battle.",
+                    thumbnail: "/api/placeholder/487/270",
+                    progress: 0
+                }
+            ],
+            2: [
+                {
+                    number: 1,
+                    title: "Chapter One: MADMAX",
+                    duration: "48m",
+                    description: "As the town preps for Halloween, a high-scoring rival shakes things up at the arcade, and a skeptical Hopper inspects a field of rotting pumpkins.",
+                    thumbnail: "/api/placeholder/490/270",
+                    progress: 0
+                },
+                {
+                    number: 2,
+                    title: "Chapter Two: Trick or Treat, Freak",
+                    duration: "56m",
+                    description: "After Will sees something terrible on trick-or-treat night, Mike wonders whether Eleven's still out there. Nancy wrestles with the truth about Barb.",
+                    thumbnail: "/api/placeholder/491/270",
+                    progress: 0
+                },
+                {
+                    number: 3,
+                    title: "Chapter Three: The Pollywog",
+                    duration: "51m",
+                    description: "Dustin adopts a strange new pet, and Eleven grows increasingly impatient. A well-meaning Bob urges Will to stand up to his fears.",
+                    thumbnail: "/api/placeholder/492/270",
+                    progress: 0
+                }
+            ],
+            3: [
+                {
+                    number: 1,
+                    title: "Chapter One: Suzie, Do You Copy?",
+                    duration: "51m",
+                    description: "Summer brings new jobs and budding romance. But the mood shifts when Dustin's radio picks up a Russian broadcast, and Will senses something is wrong.",
+                    thumbnail: "/api/placeholder/500/270",
+                    progress: 0
+                },
+                {
+                    number: 2,
+                    title: "Chapter Two: The Mall Rats",
+                    duration: "50m",
+                    description: "Nancy and Jonathan follow a lead, Steve and Robin sign on to a secret mission, and Max and Eleven go shopping. A rattled Billy has troubling visions.",
+                    thumbnail: "/api/placeholder/501/270",
+                    progress: 0
+                }
+            ],
+            4: [
+                {
+                    number: 1,
+                    title: "Chapter One: The Hellfire Club",
+                    duration: "76m",
+                    description: "Darkness returns to Hawkins just in time for spring break, triggering fresh terror, disturbing memories — and the threat of war.",
+                    thumbnail: "/api/placeholder/510/270",
+                    progress: 0
+                },
+                {
+                    number: 2,
+                    title: "Chapter Two: Vecna's Curse",
+                    duration: "77m",
+                    description: "A plane brings Mike to California — and a dead body brings Hawkins to a halt. Nancy goes looking for leads. A shaken Eddie tells the gang what he saw.",
+                    thumbnail: "/api/placeholder/511/270",
+                    progress: 0
+                }
+            ]
+        };
+        
+        let currentSeason = 1;
+        
+        function selectSeason(seasonNumber) {
+            currentSeason = seasonNumber;
+            
+            // Update active season button
+            const seasonButtons = document.querySelectorAll('.season-btn');
+            seasonButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.season-btn')[seasonNumber - 1].classList.add('active');
+            
+            // Update episode list
+            renderEpisodes(seasonNumber);
+        }
+        
+        function renderEpisodes(seasonNumber) {
+            const episodeList = document.getElementById('episodeList');
+            episodeList.innerHTML = '';
+            
+            seasons[seasonNumber].forEach(episode => {
+                const episodeCard = document.createElement('div');
+                episodeCard.className = 'episode-card';
+                episodeCard.onclick = () => playEpisode(seasonNumber, episode.number);
+                
+                episodeCard.innerHTML = `
+                    <div class="episode-thumbnail">
+                        <img src="${episode.thumbnail}" alt="Episode ${episode.number}">
+                        <div class="play-overlay">
+                            <div class="play-circle">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                    <polygon points="8,5 19,12 8,19"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="episode-info">
+                        <h3>
+                            <span>${episode.title}</span>
+                            <span class="episode-number">${episode.number}</span>
+                        </h3>
+                        <div class="episode-details">
+                            <span>${episode.duration}</span>
+                        </div>
+                        <div class="episode-description">
+                            ${episode.description}
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: ${episode.progress}%"></div>
+                        </div>
+                    </div>
+                `;
+                
+                episodeList.appendChild(episodeCard);
+            });
+        }
+        
+        function playEpisode(season, episodeNumber) {
+            const episode = seasons[season].find(ep => ep.number === episodeNumber);
+            document.getElementById('playingTitle').textContent = episode.title;
+            document.getElementById('playingDescription').textContent = episode.description;
+            document.getElementById('videoContainer').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeVideo() {
+            document.getElementById('videoContainer').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Initialize with Season 1
+        renderEpisodes(1);
+    </script>
+    <footer class="footer">
+        <p>&copy; 2024 Filmyadda. All rights reserved.</p>
+    </footer>
+</body>
+</html>

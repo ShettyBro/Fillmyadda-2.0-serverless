@@ -309,7 +309,7 @@ input[type="range"]::-moz-range-thumb {
     text-align: center;
     width: 100%;
     position: absolute;
-    bottom: 0;
+    bottom: -70px;
     left: 0;
     margin: 0;
     margin-top: 10%;
@@ -377,12 +377,12 @@ input[type="range"]::-moz-range-thumb {
 /* Add glow effect for the text only while typing */
 .inputbox input:focus {
     border-bottom: 2px solid rgb(168, 0, 0); /* Keep the border color change */
-    text-shadow: 0 0 5px gold, 0 0 10px gold; /* Gold glow effect for the text */
+    text-shadow: 0 0 5px rgb(246, 246, 246), 0 0 10px rgb(242, 242, 242); /* Gold glow effect for the text */
 }
 
 /* When valid, keep glowing text effect */
 .inputbox input:valid {
-    text-shadow: 0 0 5px gold, 0 0 10px gold; /* Gold glow effect for the text */
+    text-shadow: 0 0 5px rgb(1, 1, 1), 0 0 10px rgb(209, 209, 206); /* Gold glow effect for the text */
 }
 
 /* Label Focus Styles */
@@ -491,12 +491,12 @@ input:-webkit-autofill::first-line {
 /* Add glow effect for the text only while typing */
 .inputbox2 input:focus {
     border-bottom: 2px solid rgb(168, 0, 0); /* Keep the border color change */
-    text-shadow: 0 0 5px gold, 0 0 10px gold; /* Gold glow effect for the text */
+    text-shadow: 0 0 5px rgb(0, 0, 0), 0 0 10px rgb(0, 0, 0); /* Gold glow effect for the text */
 }
 
 /* When valid, keep glowing text effect */
 .inputbox2 input:valid {
-    text-shadow: 0 0 5px gold, 0 0 10px gold; /* Gold glow effect for the text */
+    text-shadow: 0 0 5px rgb(0, 0, 0), 0 0 10px rgb(2, 2, 2); /* Gold glow effect for the text */
 }
 
 /* Label Focus Styles */
@@ -649,6 +649,7 @@ input:-webkit-autofill::first-line {
 
 /* About Section Styles */
 .about {
+
     width: 80%;
     margin: 20px auto;
     padding: 30px;
@@ -684,7 +685,7 @@ input:-webkit-autofill::first-line {
 
 .about h2:hover {
     transform: translateY(-10px);
-    color: #ffcc00;
+    color: #ff0000;
 }
 
 .about h2::before {
@@ -1178,8 +1179,9 @@ ul {
     }
 
     .footer {
-        margin-top: auto; /* Push footer to the bottom */
-        position: relative; /* Ensure it is positioned correctly */
+      margin-top: auto; /* Push footer to the bottom */
+      position: relative; /* Ensure it is positioned correctly */
+      bottom: -60px; /* Move footer down by 60px */
     }
 
     /* Make form inputs more touch-friendly */
@@ -1194,7 +1196,7 @@ ul {
 
     /* Footer positioning for portrait */
     .footer {
-        margin-top: auto;
+      margin-top: 60px;
         padding: 5px 0;
     }
 
@@ -1771,7 +1773,7 @@ ul {
 }
 
 .profile-picture:hover {
-  cursor: pointer;
+  cursor: grab; /* Change cursor to pointer on hover */
   transform: scale(1.1); /* Slight zoom effect on hover */
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Add glow effect */
 }
@@ -1809,7 +1811,7 @@ ul {
 }
 
 .profile-menu li:hover {
-  cursor:zoom-out;
+  cursor:grab;
   background-color: rgba(255, 255, 255, 0.1); 
   color: white;
 }
@@ -1818,10 +1820,11 @@ b {
   color: rgb(251, 251, 251);
   font-size: 30px;
   font-style:normal;
-  font-family:  Noto Sans bold;
+  font-family:  cursive;
   cursor: pointer;
-  justify-content: center; 
+  justify-content:flex-start; 
   display: flex;
+  margin-left: 20px;
 }
 /* slideshow */
 * {
@@ -1919,8 +1922,8 @@ body {
     margin-top: 100px;
     margin-left: 20px;
     display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 110px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 80px;
     justify-content: center;
     align-items: center;
 }
@@ -1954,4 +1957,196 @@ body {
     margin: 5px 0 0;
     font-size: 14px;
     color: #aaa;
+}
+/* language dropdown */
+.menu {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #ffffff;
+  width: fit-content;
+  display: flex;
+  list-style: none;
+}
+
+.menu a {
+  text-decoration: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.menu .link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 36px;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.menu .link::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #c70a04;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.menu .link svg {
+  width: 14px;
+  height: 14px;
+  fill: #ffffff;
+  transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.menu .item {
+  position: relative;
+}
+
+.menu .item .submenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 100%;
+  border-radius: 0 0 16px 16px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #cccccc;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-12px);
+  transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 1;
+  pointer-events: none;
+  list-style: none;
+}
+
+.menu .item:hover .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+  border-top: transparent;
+  border-color: #f30000;
+}
+
+.menu .item:hover .link {
+  color: #ffffff;
+  border-radius: 16px 16px 0 0;
+}
+
+.menu .item:hover .link::after {
+  transform: scaleX(1);
+  transform-origin: right;
+}
+
+.menu .item:hover .link svg {
+  fill: #ffffff;
+  transform: rotate(-180deg);
+}
+
+.submenu .submenu-item {
+  width: 100%;
+  transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.submenu .submenu-link {
+  display: block;
+  padding: 12px 24px;
+  width: 100%;
+  position: relative;
+  text-align: center;
+  transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.submenu .submenu-item:last-child .submenu-link {
+  border-bottom: none;
+}
+
+.submenu .submenu-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scaleX(0);
+  width: 100%;
+  height: 100%;
+  background-color: #c90000;
+  z-index: -1;
+  transform-origin: left;
+  transition: transform 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.submenu .submenu-link:hover:before {
+  transform: scaleX(1);
+  transform-origin: right;
+}
+
+.submenu .submenu-link:hover {
+  color: #ffffff;
+}
+
+/* button */
+        /* From Uiverse.io by cssbuttons-io */ 
+.btn {
+  position: relative;
+  top: 10px;
+  left: 40px;
+  font-size: 17px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1em 2.5em;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 6em;
+  transition: all 0.2s;
+  border: none;
+  font-family: inherit;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  background-color: rgb(245, 4, 4);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btn::after {
+  background-color: #fff;
+}
+
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
 }

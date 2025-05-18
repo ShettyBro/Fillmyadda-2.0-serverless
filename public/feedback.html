@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="icon" href="css/assets/final-logo.ico" type="image/x-icon" >
+    <title>Filmyadda - HOME</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve the token and its expiration time from local storage
+            const token = localStorage.getItem('authToken');
+            const expirationTime = localStorage.getItem('tokenExpiration');
+            
+            // Check if the token is missing or expired
+            if (!token || (expirationTime && Date.now() > expirationTime)) {
+                // Clear the token and expiration time from local storage
+                localStorage.removeItem('token');
+                localStorage.removeItem('tokenExpiration');
+                // Redirect to the login page
+                window.location.href = 'index.html'; // Change this to 'index.html' as you requested
+            }
+        });
+    </script>
+</head>
+<style>
+/* feedback page */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.feedback-container {
+  background: #ffcbcb;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+.feedback-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.feedback-container p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+.feedback-container a {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #007BFF;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+.feedback-container a:hover {
+  background-color: #0056b3;
+}
+.logo{
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    cursor: grabbing;
+}
+</style>
+<body>
+    <div class="header">
+        <nav class="nav">
+            <img class="logo" src="css/assets/bg.png" alt="" onclick="location.href='home.html'">
+            <div class="navbt">
+                <div class="header-right">
+                    <img class="profile-picture" src="css/assets/profile (2).png">
+                        <ul class="profile-menu">
+                            <li  onclick="location.href='home.html'" target="_blank">HOME</li>
+                            <li onclick="location.href='profile1.html'">MY PROFILE</li> 
+                            <li  onclick="location.href='about.html'" target="_blank">ABOUT</li>
+                            <li id="logoutButton">LOGOUT</li>
+                        </ul>
+                    </div>
+                    <div id="transparent-overlay"></div>
+                </div>
+        </nav>
+    </div>
+
+    <div class="feedback-container">
+        <h1>We Value Your Feedback!</h1>
+        <p>Your opinion helps us improve your experience on our FilmyAdda OTT platform.</p>
+        <a href="https://forms.google.com" target="_blank">Give Feedback</a>
+    </div>
+</body>
+</html>
