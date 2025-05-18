@@ -70,7 +70,7 @@ exports.handler = async (event) => {
       .query('INSERT INTO Users (username, password, fullname, email) VALUES (@username, @password, @fullname, @email)');
 
     return {
-      statusCode: 201,
+      statusCode: 200,
       headers,
       body: JSON.stringify({ message: 'User registered successfully' })
     };
