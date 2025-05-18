@@ -542,9 +542,15 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
         const data = await response.json();
 
         if (response.ok) {
-            localStorage.setItem ("userEmail", email); // Store email in local storage
-            // Show success message and redirect to login.html after 3 seconds
-            showModal('Email sent successfully! Please check your inbox.', 'otp.html');
+        
+                const { otp, expiresAt } = data;  // Extract from response
+                
+                localStorage.setItem("userEmail", email);
+                localStorage.setItem("pto", otp);
+                localStorage.setItem("exp", expiresAt);
+                
+
+                showModal('Email sent successfully! Please check your inbox.', 'otp.html');
         } else {
             showModal(data.message || 'An error occurred. Try again.');
         }
@@ -558,95 +564,82 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
 });
 
 
+// OTP verification
+const otpForm = document.getElementById('otpForm');
+if (otpForm) {
+    otpForm.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevent form submission
 
-//otp veriifcation function
-document.getElementById('validate').addEventListener('submit', async function (e) {
-    e.preventDefault();
-    const button = e.target;
-    const otp = document.getElementById('otpInput').value.trim();
+        const verifyButton = document.getElementById('verify');
+        const userotp = document.getElementById('otpInput').value.trim();
+        const storedOtp = localStorage.getItem('pto');
+        const expiryTime = localStorage.getItem('exp');
 
-    const storedEmail = localStorage.getItem("userEmail");
+        verifyButton.disabled = true;
+        verifyButton.textContent = 'Verifying...';
 
-    // Disable button and show loading text
-    button.disabled = true;
-    button.innerText = 'Verifying OTP...';
-
-    
-
-    try {
-        const response = await fetch("https://filmyadda.sudeepbro.me/.netlify/functions/otpver?action=verifyOTP", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ storedEmail, otp })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            localStorage.setItem("resetToken", data.token); // Store JWT token
-            showModal("✅ OTP verified successfully! Redirecting...");
-
-            setTimeout(() => {
-                window.location.href = "reset.html"; // Redirect to reset password page
-            }, 2000);
-        } else {
-            showModal(`❌ ${data.message}`);
+        if (!userotp) {
+            showModal('Please enter the OTP.');
+            resetButton();
+            return;
         }
-    } catch (error) {
-        console.error("OTP verification error:", error);
-            showModal("❌ Something went wrong. Please try again.");
-    } finally {
-        // Re-enable button
-        button.disabled = false;
-        button.innerText = 'Send Link';
-    }
-});
 
-
-
-
-//reset password function
-document.getElementById("resetForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const resetButton = document.getElementById("resetbutton");
-    resetButton.disabled = true;
-    resetButton.innerText = "Resetting Password...";
-
-    const token = localStorage.getItem("resetToken"); // Get JWT token
-    const email = document.getElementById("Email").value;
-    const newPassword = document.getElementById("NewPassword").value;
-    const confirmPassword = document.getElementById("ConfirmPassword").value;
-
-    if (!email || !newPassword || !confirmPassword) {
-        showModal("All fields are required.");
-        return;
-    }
-
-    if (newPassword !== confirmPassword) {
-        showModal("Passwords do not match.");
-        return;
-    }
-
-    try {
-        const response = await fetch("https://filmyadda.sudeepbro.me/.netlify/functions/otpver?action=resetPassword", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ token, email, newPassword })
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-            showModal("✅ Password reset successful! Redirecting to login...");
-            setTimeout(() => window.location.href = "login.html", 3000);
-        } else {
-            showModal(`❌ ${data.message}`);
+        if (!storedOtp || !expiryTime) {
+            showModal('OTP not found. Please request a new one.');
+            resetButton();
+            return;
         }
-    } catch (error) {
-        console.error("Reset Password Error:", error);
-        showModal("Something went wrong. Please try again.");
-    } finally {
-        resetButton.disabled = false;
-        resetButton.innerText = "SUBMIT";
-    }
-});
+
+        const currentTime = Date.now();
+
+        if (currentTime > parseInt(expiryTime)) {
+            showModal('OTP has expired. Please request a new one.');
+            // Clear expired OTP
+            localStorage.removeItem('pto');
+            localStorage.removeItem('exp');
+            resetButton();
+            return;
+        }
+
+        if (userotp === storedOtp) {
+            showModal('OTP verified successfully! Redirecting...', 'reset.html');
+            // Clear OTP after successful verification
+            localStorage.removeItem('pto');
+            localStorage.removeItem('exp');
+        } else {
+            showModal('Invalid OTP. Please try again.');
+            resetButton();
+        }
+
+        function resetButton() {
+            verifyButton.disabled = false;
+            verifyButton.textContent = 'Verify';
+        }
+    });
+}
+
+// Modal functions (Assuming you already have these in script.js)
+function showModal(message, redirectUrl = null) {
+    const modal = document.getElementById('modal');
+    const modalMessage = document.getElementById('modal-message');
+    const closeModal = document.getElementById('closeModal');
+
+    modalMessage.textContent = message;
+    modal.style.display = 'block';
+
+    closeModal.onclick = () => {
+        modal.style.display = 'none';
+        if (redirectUrl) {
+            window.location.href = redirectUrl;
+        }
+    };
+
+    window.onclick = (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            }
+        }
+    };
+}
