@@ -150,61 +150,62 @@ if (loginForm) {
     }
 });
 }
-
 // Register function
 const registerForm = document.getElementById('registerForm');
 if (registerForm) {
     registerForm.addEventListener('submit', async (event) => {
         event.preventDefault(); // Prevent form from submitting the traditional way
-       
+
         // Get the button element and disable it
         const registerButton = document.getElementById('registerButton');
         registerButton.disabled = true; // Disable the button
         registerButton.textContent = 'Registering...'; // Change button text for feedback
-       
-        const fullname = document.getElementById('fullname').value; // Ensure you have this input in your HTML
-        const email = document.getElementById('email').value; // Ensure you have this input in your HTML
-        const username = document.getElementById('username').value; // Ensure you have this input in your HTML
-        const password = document.getElementById('password').value; // Ensure you have this input in your HTML
 
-          // Password validation rule: Minimum 8 characters and at least 1 special symbol
-          const passwordRegex = /^(?=.*[!@#$%^&*])(?=.{8,})/;
+        const fullname = document.getElementById('fullname').value;
+        const email = document.getElementById('email').value;
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Get the password error element
+        const passwordError = document.getElementById('passwordError');
+
+        // Password validation rule: Minimum 8 characters and at least 1 special symbol
+        const passwordRegex = /^(?=.*[!@#$%^&*]).{8,}$/;
 
         if (!passwordRegex.test(password)) {
-            passwordError.innerHTML = "<span style='color: red;'>Invalid Password <br>  * Mim 8 characters <br> * One special symbol (!@#$%^&*).</span>";
-            hasError = true;`1`
+            passwordError.innerHTML = "<span style='color: red;'>Invalid Password<br>* Min 8 characters<br>* One special symbol (!@#$%^&*).</span>";
             registerButton.disabled = false; // Re-enable the button if validation fails
             registerButton.textContent = 'Register'; // Reset button text
             return;
-        }else {
+        } else {
             passwordError.innerHTML = ""; // Clear password error if valid
         }
-        
 
-    try {
-        const response = await fetch('https://filmyadda.sudeepbro.me/.netlify/functions/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password, fullname, email })
-        });
+        try {
+            const response = await fetch('https://filmyadda.sudeepbro.me/.netlify/functions/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password, fullname, email })
+            });
 
-        if (response.ok) {
-            showModal('Registration successful! Redirecting to login...', 'login.html');
-        } else {
-            const error = await response.text();
-            showModal(`Registration failed:
-                Username, fullname, or email already exists`);
+            if (response.ok) {
+                showModal('Registration successful! Redirecting to login...', 'login.html');
+            } else {
+                const errorData = await response.json();
+                const errorMessage = errorData.message || 'Registration failed: Username, fullname, or email already exists';
+                showModal(errorMessage);
+            }
+        } catch (error) {
+            console.error('Registration Error:', error);
+            showModal('Server Down. Contact Developer or Try Again Later');
+        } finally {
+            // Re-enable the button after the request is complete
+            registerButton.disabled = false;
+            registerButton.textContent = 'Register'; // Reset button text
         }
-    } catch (error) {
-        console.error('Registration Error:', error);
-        showModal('Server Down Contact Develpoer or Try Again Later');
-    }finally {
-        // Re-enable the button after the request is complete
-        registerButton.disabled = false; // Re-enable the button
-        registerButton.textContent = 'Register'; // Reset button text
-    }
-});
+    });
 }
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('modal');
