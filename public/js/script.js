@@ -141,67 +141,70 @@ if (loginForm) {
         } else {
             showModal('Invalid username or password.');
         }
-   
+    } catch (error) {
+        console.log('Login Error:', error);
+        showModal('Server Down Contact Develpoer or Try Again Later');
     } finally {
         loginButton.disabled = false; // Re-enable the login button
         loginButton.textContent = 'Login'; // Reset button text
     }
 });
 }
+
 // Register function
 const registerForm = document.getElementById('registerForm');
 if (registerForm) {
     registerForm.addEventListener('submit', async (event) => {
         event.preventDefault(); // Prevent form from submitting the traditional way
-
+       
         // Get the button element and disable it
         const registerButton = document.getElementById('registerButton');
         registerButton.disabled = true; // Disable the button
         registerButton.textContent = 'Registering...'; // Change button text for feedback
+       
+        const fullname = document.getElementById('fullname').value; // Ensure you have this input in your HTML
+        const email = document.getElementById('email').value; // Ensure you have this input in your HTML
+        const username = document.getElementById('username').value; // Ensure you have this input in your HTML
+        const password = document.getElementById('password').value; // Ensure you have this input in your HTML
 
-        const fullname = document.getElementById('fullname').value;
-        const email = document.getElementById('email').value;
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-
-        // Get the password error element
-        const passwordError = document.getElementById('passwordError');
-
-        // Password validation rule: Minimum 8 characters and at least 1 special symbol
-        const passwordRegex = /^(?=.*[!@#$%^&*]).{8,}$/;
+          // Password validation rule: Minimum 8 characters and at least 1 special symbol
+          const passwordRegex = /^(?=.*[!@#$%^&*])(?=.{8,})/;
 
         if (!passwordRegex.test(password)) {
-            passwordError.innerHTML = "<span style='color: red;'>Invalid Password<br>* Min 8 characters<br>* One special symbol (!@#$%^&*).</span>";
+            passwordError.innerHTML = "<span style='color: red;'>Invalid Password <br>  * Mim 8 characters <br> * One special symbol (!@#$%^&*).</span>";
+            hasError = true;`1`
             registerButton.disabled = false; // Re-enable the button if validation fails
             registerButton.textContent = 'Register'; // Reset button text
             return;
-        } else {
+        }else {
             passwordError.innerHTML = ""; // Clear password error if valid
         }
+        
 
-        try {
-            const response = await fetch('https://filmyadda.sudeepbro.me/.netlify/functions/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password, fullname, email })
-            });
+    try {
+        const response = await fetch('https://filmyadda.sudeepbro.me/.netlify/functions/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password, fullname, email })
+        });
 
-            if (response.ok) {
-                showModal('Registration successful! Redirecting to login...', 'login.html');
-            } else {
-                const errorData = await response.json();
-                const errorMessage = errorData.message || 'Registration failed: Username, fullname, or email already exists';
-                showModal(errorMessage);
-            }
-     
-        } finally {
-            // Re-enable the button after the request is complete
-            registerButton.disabled = false;
-            registerButton.textContent = 'Register'; // Reset button text
+        if (response.ok) {
+            showModal('Registration successful! Redirecting to login...', 'login.html');
+        } else {
+            const error = await response.text();
+            showModal(`Registration failed:
+                Username, fullname, or email already exists`);
         }
-    });
+    } catch (error) {
+        console.error('Registration Error:', error);
+        showModal('Server Down Contact Develpoer or Try Again Later');
+    }finally {
+        // Re-enable the button after the request is complete
+        registerButton.disabled = false; // Re-enable the button
+        registerButton.textContent = 'Register'; // Reset button text
+    }
+});
 }
-
 
 document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('modal');
@@ -539,6 +542,48 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
         const data = await response.json();
 
         if (response.ok) {
+            localStorage.setItem ("userEmail", email); // Store email in local storage
+            // Show success message and redirect to login.html after 3 seconds
+            showModal('Email sent successfully! Please check your inbox.', 'otp.html');
+        } else {
+            showModal(data.message || 'An error occurred. Try again.');
+        }
+    } catch (error) {
+        showModal('Failed to send reset link. Please try again.');
+    } finally {
+        // Re-enable button
+        button.disabled = false;
+        button.innerText = 'Send Link';
+    }
+});
+
+
+
+// send OTP
+document.getElementById('SendLink').addEventListener('click', async function (e) {
+    e.preventDefault();
+    const button = e.target;
+    const email = document.getElementById('Email').value.trim();
+
+    if (!email) {
+        showModal('Please enter a valid email.');
+        return;
+    }
+
+    // Disable button and show loading text
+    button.disabled = true;
+    button.innerText = 'Sending OTP...';
+
+    try {
+        const response = await fetch('https://filmyadda.sudeepbro.me/.netlify/functions/sendResetEmail?action=forgotPassword',{
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
         
                 const { otp, expiresAt } = data;  // Extract from response
                 
@@ -615,28 +660,4 @@ if (otpForm) {
     });
 }
 
-// Modal functions (Assuming you already have these in script.js)
-function showModal(message, redirectUrl = null) {
-    const modal = document.getElementById('modal');
-    const modalMessage = document.getElementById('modal-message');
-    const closeModal = document.getElementById('closeModal');
 
-    modalMessage.textContent = message;
-    modal.style.display = 'block';
-
-    closeModal.onclick = () => {
-        modal.style.display = 'none';
-        if (redirectUrl) {
-            window.location.href = redirectUrl;
-        }
-    };
-
-    window.onclick = (event) => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-            if (redirectUrl) {
-                window.location.href = redirectUrl;
-            }
-        }
-    };
-}
