@@ -144,31 +144,49 @@
         }
     </style>
     <div class="text">ENGLISH</div>
-    <section>
-        </head>
+    <section class="poster-slider">
             <body>
-                <div class="slideshow-container">
-                    <div class="slide active">
-                        <img src="css/assets/slider1.png" alt="Slide 1">
-                    </div>
-                    <div class="slide">
-                        <img src="css/assets/slider2.png" alt="Slide 2">
-                    </div>
-                    <div class="slide">
-                        <img src="css/assets/slider1.png" alt="Slide 3">
-                    </div>
-                </div>
-            <script>
-                   
-                let currentIndex = 0;
-                const slides = document.querySelectorAll('.slide');
-                    function showNextSlide() {
-                    slides[currentIndex].classList.remove('active');
-                    currentIndex = (currentIndex + 1) % slides.length;
-                    slides[currentIndex].classList.add('active');
-                    }
-                setInterval(showNextSlide, 3000); // Change slide every 3 seconds
-                </script>
+
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="css/assets/KRAVEN THE HUNTER.jpg" alt="Bagheera" onclick="selectMovie(9)"></div>
+      <div class="swiper-slide"><img src="css/assets/monkey man.jpeg" alt="Slider 2" onclick="selectMovie(10)"></div>
+      <div class="swiper-slide"><img src="css/assets/if.jpg" alt="Slider 1" onclick="selectMovie(11)"></div>
+      <div class="swiper-slide"><img src="css/assets/Wicked Little Letters.jpg" alt="Slider 1" onclick="selectMovie(12)"></div>
+      <div class="swiper-slide"><img src="css/assets/Mufasa The Lion King.jpeg" alt="Slider 1" onclick="selectMovie(13)"></div>
+      <div class="swiper-slide"><img src="css/assets/Fifty Shades Darker.jpg" alt="Slider 1" onclick="selectMovie(14)"></div>
+      <div class="swiper-slide"><img src="css/assets/Rebel Moon Part Two.jpg" alt="Slider 1" onclick="selectMovie(15)"></div>
+      <div class="swiper-slide"><img src="css/assets/Dune Part Two.jpg" alt="Slider 1" onclick="selectMovie(16)"></div>
+      
+
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+  effect: 'coverflow',
+  
+  grabCursor: true,
+  centeredSlides: true,
+  loop: true,
+slidesPerView: 'auto',
+  spaceBetween: 50,
+  coverflowEffect: {
+    rotate: 0,
+    stretch: 0,
+    depth: 100,
+    modifier: 1,
+    slideShadows: false,
+    
+  },
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
+});
+
+  </script>
     </section>
        
 
@@ -176,20 +194,20 @@
     <div class="movies">
 <section><b>ACTION</b>
     <div class="movie-container">
-        <div class="movie-card">
-            <img src="css/assets/" alt="Movie Poster">
+        <div class="movie-card" onclick="selectMovie(9)">
+            <img src="css/assets/KRAVEN THE HUNTER.jpg" alt="Movie Poster">
             <div class="movie-info">
-                <h3>Movie Title 1</h3>
+                <h3>KRAVEN THE HUNTER (2024)</h3>
                 <p>Genre: Action</p>
-                <p>Rating: IMDB ★6.9</p>
+                <p>Rating: IMDB ★5.5</p>
             </div>
         </div>
-        <div class="movie-card">
-            <img src="css/assets/" alt="Movie Poster">
+        <div class="movie-card" onclick="selectMovie(10)">
+            <img src="css/assets/monkey man.jpeg" alt="Movie Poster">
             <div class="movie-info">
-                <h3>Movie Title 1</h3>
+                <h3>Monkey Man (2024)</h3>
                 <p>Genre: Action</p>
-                <p>Rating: IMDB ★6.9</p>
+                <p>Rating: IMDB ★6.8</p>
             </div>
         </div>
         
@@ -197,20 +215,20 @@
     </section>
 <section><b>COMEDY</b>
     <div class="movie-container">
-        <div class="movie-card">
-            <img src="https://via.placeholder.com/200x300" alt="Movie Poster">
+        <div class="movie-card" onclick="selectMovie(11)">
+            <img src="css/assets/if.jpg" alt="Movie Poster">
             <div class="movie-info">
-                <h3>Movie Title 2</h3>
+                <h3>IF (2024)</h3>
                 <p>Genre: Comedy</p>
-                <p>Rating: IMDB ★6.9</p>
+                <p>Rating: IMDB ★6.4</p>
             </div>
         </div>
-        <div class="movie-card">
-            <img src="https://via.placeholder.com/200x300" alt="Movie Poster">
+        <div class="movie-card" onclick="selectMovie(12)">
+            <img src="css/assets/Wicked Little Letters.jpg" alt="Movie Poster">
             <div class="movie-info">
-                <h3>Movie Title 2</h3>
+                <h3>Wicked Little Letters (2024) </h3>
                 <p>Genre: Comedy</p>
-                <p>Rating: IMDB ★6.9</p>
+                <p>Rating: IMDB ★7.0</p>
             </div>
         </div>
         
@@ -218,20 +236,20 @@
 </section>
 <section><b>DRAMA</b>
     <div class="movie-container">
-        <div class="movie-card">
-            <img src="https://via.placeholder.com/200x300" alt="Movie Poster">
+        <div class="movie-card" onclick="selectMovie(13)">
+            <img src="css/assets/Mufasa The Lion King.jpeg" alt="Movie Poster">
             <div class="movie-info">
-                <h3>Movie Title 3</h3>
+                <h3>Mufasa The Lion King</h3>
                 <p>Genre: Drama</p>
-                <p>Rating: IMDB ★6.9</p>
+                <p>Rating: IMDB ★6.6</p>
             </div>
         </div>
-        <div class="movie-card">
-            <img src="https://via.placeholder.com/200x300" alt="Movie Poster">
+        <div class="movie-card" onclick="selectMovie(14)">
+            <img src="css/assets/Fifty Shades Darker.jpg" alt="Movie Poster">
             <div class="movie-info">
-                <h3>Movie Title 3</h3>
+                <h3>Fifty Shades Darker (2017)</h3>
                 <p>Genre: Drama</p>
-                <p>Rating: IMDB ★6.9</p>
+                <p>Rating: IMDB ★4.6</p>
             </div>
         </div>
         
@@ -239,20 +257,20 @@
 </section>
 <section><b>SCI-FI</b>
     <div class="movie-container">
-        <div class="movie-card">
-            <img src="https://via.placeholder.com/200x300" alt="Movie Poster">
+        <div class="movie-card" onclick="selectMovie(15)">
+            <img src="css/assets/Rebel Moon Part Two.jpg" alt="Movie Poster">
             <div class="movie-info">
-                <h3>Movie Title 4</h3>
+                <h3>Rebel Moon: Part Two – The Scargiver</h3>
                 <p>Genre: Sci-Fi</p>
-                <p>Rating: IMDB ★6.9</p>
+                <p>Rating: IMDB ★5.3</p>
             </div>
         </div>
-        <div class="movie-card">
-            <img src="https://via.placeholder.com/200x300" alt="Movie Poster">
+        <div class="movie-card" onclick="selectMovie(16)">
+            <img src="css/assets/Dune Part Two.jpg" alt="Movie Poster">
             <div class="movie-info">
-                <h3>Movie Title 4</h3>
+                <h3>Dune: Part Two (2024)</h3>
                 <p>Genre: Sci-Fi</p>
-                <p>Rating: IMDB ★6.9</p>
+                <p>Rating: IMDB ★8.5</p>
             </div>
         </div>
        
