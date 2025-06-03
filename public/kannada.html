@@ -144,30 +144,47 @@
         }
     </style>
     <div class="text">KANNADA</div>
-    <section>
+    <section class="poster-slider">
             <body>
-                <div class="slideshow-container">
-                    <div class="slide active">
-                        <img src="css/assets/slider1.png" alt="Slide 1">
-                    </div>
-                    <div class="slide">
-                        <img src="css/assets/slider2.png" alt="Slide 2">
-                    </div>
-                    <div class="slide">
-                        <img src="css/assets/slider1.png" alt="Slide 3">
-                    </div>
-                </div>
-            <script>
-                   
-                let currentIndex = 0;
-                const slides = document.querySelectorAll('.slide');
-                    function showNextSlide() {
-                    slides[currentIndex].classList.remove('active');
-                    currentIndex = (currentIndex + 1) % slides.length;
-                    slides[currentIndex].classList.add('active');
-                    }
-                setInterval(showNextSlide, 3000); // Change slide every 3 seconds
-                </script>
+
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="css/assets/bagheera.jpg" alt="Bagheera" onclick="selectMovie(2)"></div>
+      <div class="swiper-slide"><img src="css/assets/Bhairathi Ranagal.jpg" alt="Slider 2" onclick="selectMovie(3)"></div>
+      <div class="swiper-slide"><img src="css/assets/Ondu Motteya Kathe.webp" alt="Slider 1" onclick="selectMovie(4)"></div>
+      <div class="swiper-slide"><img src="css/assets/Bhootayyana Mommaga Ayyu.jpg" alt="Slider 1" onclick="selectMovie(5)"></div>
+      <div class="swiper-slide"><img src="css/assets/U turn.jpg" alt="Slider 1" onclick="selectMovie(8)"></div>
+      <div class="swiper-slide"><img src="css/assets/tenant.jpeg" alt="Slider 1" onclick="selectMovie(6)"></div>
+      <div class="swiper-slide"><img src="css/assets/pepe.jpeg" alt="Slider 1" onclick="selectMovie(7)"></div>
+      
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+  effect: 'coverflow',
+  
+  grabCursor: true,
+  centeredSlides: true,
+  loop: true,
+slidesPerView: 'auto',
+  spaceBetween: 50,
+  coverflowEffect: {
+    rotate: 0,
+    stretch: 0,
+    depth: 100,
+    modifier: 1,
+    slideShadows: false,
+    
+  },
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
+});
+
+  </script>
     </section>
        
 
@@ -175,18 +192,18 @@
     <div class="movies">
 <section><b>ACTION</b>
     <div class="movie-container">
-        <div class="movie-card">
-            <img src="css/assets/" alt="Movie Poster">
+        <div class="movie-card" onclick="selectMovie(2)">
+            <img src="css/assets/bagheera.jpg" alt="Movie Poster">
             <div class="movie-info">
-                <h3>Movie Title 1</h3>
+                <h3>Bagheera (2024)</h3>
                 <p>Genre: Action</p>
-                <p>Rating: IMDB ★6.9</p>
+                <p>Rating: IMDB ★6.7</p>
             </div>
         </div>
-        <div class="movie-card">
-            <img src="css/assets/" alt="Movie Poster">
+        <div class="movie-card" onclick="selectMovie(3)">
+            <img src="css/assets/Bhairathi Ranagal.jpg" alt="Movie Poster">
             <div class="movie-info">
-                <h3>Movie Title 1</h3>
+                <h3>Bhairathi Ranagal (2024)</h3>
                 <p>Genre: Action</p>
                 <p>Rating: IMDB ★6.9</p>
             </div>
@@ -196,21 +213,21 @@
     </div>
     </section>
 <section><b>COMEDY</b>
-    <div class="movie-container">
-        <div class="movie-card">
-            <img src="https://via.placeholder.com/200x300" alt="Movie Poster">
+    <div class="movie-container"   >
+        <div class="movie-card" onclick="selectMovie(4)">
+            <img src="css/assets/Ondu Motteya Kathe.webp" alt="Movie Poster">
             <div class="movie-info">
-                <h3>Movie Title 2</h3>
+                <h3>Ondu Motteya Kathe (2017) </h3>
                 <p>Genre: Comedy</p>
-                <p>Rating: IMDB ★6.9</p>
+                <p>Rating: IMDB ★7.9</p>
             </div>
         </div>
-        <div class="movie-card">
-            <img src="https://via.placeholder.com/200x300" alt="Movie Poster">
+        <div class="movie-card" onclick="selectMovie(5)" >
+            <img src="css/assets/Bhootayyana Mommaga Ayyu.jpg" alt="Movie Poster">
             <div class="movie-info">
-                <h3>Movie Title 2</h3>
+                <h3>Bhootayyana Mommaga Ayyu (2018)</h3>
                 <p>Genre: Comedy</p>
-                <p>Rating: IMDB ★6.9</p>
+                <p>Rating: IMDB★6.7</p>
             </div>
         </div>
        
@@ -218,18 +235,18 @@
 </section>
 <section><b>DRAMA</b>
     <div class="movie-container">
-        <div class="movie-card">
-            <img src="https://via.placeholder.com/200x300" alt="Movie Poster">
+        <div class="movie-card" onclick="selectMovie(6)">
+            <img src="css/assets/tenant.jpeg" alt="Movie Poster">
             <div class="movie-info">
-                <h3>Movie Title 3</h3>
+                <h3>Tenant (2024)</h3>
                 <p>Genre: Drama</p>
-                <p>Rating: IMDB ★6.9</p>
+                <p>Rating: IMDB ★4.1</p>
             </div>
         </div>
-        <div class="movie-card">
-            <img src="https://via.placeholder.com/200x300" alt="Movie Poster">
+        <div class="movie-card" onclick="selectMovie(7)">
+            <img src="css/assets/pepe.jpeg" alt="Movie Poster">
             <div class="movie-info">
-                <h3>Movie Title 3</h3>
+                <h3>Pepe (2024)</h3>
                 <p>Genre: Drama</p>
                 <p>Rating: IMDB ★6.9</p>
             </div>
@@ -239,23 +256,15 @@
 </section>
 <section><b>SCI-FI</b>
     <div class="movie-container">
-        <div class="movie-card">
-            <img src="https://via.placeholder.com/200x300" alt="Movie Poster">
+        <div class="movie-card" onclick="selectMovie(8)">
+            <img src="css/assets/U turn.jpg" alt="Movie Poster">
             <div class="movie-info">
-                <h3>Movie Title 4</h3>
+                <h3>U Turn (2016)</h3>
                 <p>Genre: Sci-Fi</p>
                 <p>Rating: IMDB ★6.9</p>
             </div>
         </div>
-        <div class="movie-card">
-            <img src="https://via.placeholder.com/200x300" alt="Movie Poster">
-            <div class="movie-info">
-                <h3>Movie Title 4</h3>
-                <p>Genre: Sci-Fi</p>
-                <p>Rating: IMDB ★6.9</p>
-            </div>
-        </div>
-    
+        
     </div>
 </section>
 <section><b>Web-Series</b>

@@ -1837,19 +1837,26 @@ body {
   font-family: Arial, sans-serif;
 }
 
+
+
 .slideshow-container {
   top: 20px;
   border: #fff;
+  margin: 0 auto;
   border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 50vh; /* 30% of the screen height */
   position: relative;
   overflow: hidden;
+ 
 }
 
 .slide {
-  width: 100%;
-  height: 100%;
+  width: 400px;
+  height:600px; /* Adjusted height for better visibility */
   position: absolute;
   opacity: 0;
   transition: opacity 1s ease-in-out;
@@ -2149,4 +2156,53 @@ body {
 .btn:hover::after {
   transform: scaleX(1.4) scaleY(1.6);
   opacity: 0;
+}
+
+
+
+  .swiper {
+    width: 100% ;
+    height: 100%;
+    margin: auto;
+    padding: 30px;
+    display: flex;
+    position: relative;
+    max-width: 1000px;
+    overflow:visible;
+    box-sizing: border-box; 
+   }
+
+  .swiper-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 10%;
+    transform: translateX(-50%);
+  }
+
+   .swiper-slide {
+  width: 200px; /* or 220px based on your design */
+  height: 320px;
+  border-radius: 12px;
+  overflow: visible;
+  transition: transform 0.4s;
+  box-shadow: 0 4px 15px rgba(247, 210, 2, 0.3);
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.swiper-slide-active {
+  transform: scale(1.1);
+}
+
+.poster-slider {
+  width: 100%;
+  padding: 40px 0;
+  
 }

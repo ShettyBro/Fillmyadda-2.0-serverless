@@ -1,0 +1,595 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Movie Player</title>
+    <link rel="icon" href="css/assets/final-logo.ico" type="image/x-icon" >
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve the token and its expiration time from local storage
+            const token = localStorage.getItem('authToken');
+            const expirationTime = localStorage.getItem('tokenExpiration');
+            
+            // Check if the token is missing or expired
+            if (!token || (expirationTime && Date.now() > expirationTime)) {
+                // Clear the token and expiration time from local storage
+                localStorage.removeItem('token');
+                localStorage.removeItem('tokenExpiration');
+                // Redirect to the login page
+                window.location.href = 'index.html'; // Change this to 'index.html' as you requested
+            }
+        });
+    </script>
+
+</head>
+  <div class="header">
+        <nav class="nav">
+            <img class="logo" src="css/assets/bg.png" alt="" onclick="location.href='home.html'">
+           
+            <div class="navbt">
+                
+                <div class="header-right">
+                    <img class="profile-picture" src="css/assets/profile (2).png">
+                        <ul class="profile-menu">
+                            <li onclick="location.href='home.html'">HOME</li>
+                            <li onclick="location.href='profile1.html'">MY PROFILE</li> 
+                            <li  onclick="location.href='about.html'" target="_blank">ABOUT</li>
+                            <li onclick="location.href='feedback.html'" target="_blank">GIVE FEEDBACK</li>
+                            <li id="logoutButton">LOGOUT</li>
+                        </ul>
+                    </div>
+                    <div id="transparent-overlay"></div>
+                </div>
+        </nav>
+    </div>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0d1117;
+            color: #e6e6e6;
+            overflow-x: hidden;
+        }
+        
+        .player-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .video-container {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .video-frame {
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/1920/1080') center/cover no-repeat;
+            position: relative;
+        }
+        
+        .controls-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.8) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .player-container:hover .controls-overlay {
+            opacity: 1;
+        }
+        
+        .top-controls {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem;
+        }
+        
+        .movie-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .movie-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .episode-info {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .right-controls {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .control-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        
+        .control-button:hover {
+            opacity: 1;
+        }
+        
+        .center-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(229, 9, 20, 0.7);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .center-play:hover {
+            background-color: rgba(229, 9, 20, 0.9);
+        }
+        
+        .play-icon {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .bottom-controls {
+            padding: 1rem 2rem 2rem;
+        }
+        
+        .timeline-container {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline {
+            width: 100%;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+            position: relative;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        
+        .timeline-progress {
+            position: absolute;
+            height: 100%;
+            background-color: #e50914;
+            width: 35%;
+            border-radius: 2px;
+        }
+        
+        .timeline-buffer {
+            position: absolute;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            width: 65%;
+            border-radius: 2px;
+        }
+        
+        .timeline-handle {
+            position: absolute;
+            height: 16px;
+            width: 16px;
+            background-color: #e50914;
+            border-radius: 50%;
+            top: 50%;
+            left: 35%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+        
+        .timeline:hover {
+            height: 6px;
+        }
+        
+        .timeline:hover .timeline-handle {
+            height: 18px;
+            width: 18px;
+        }
+        
+        .timeline-tooltip {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            bottom: 20px;
+            transform: translateX(-50%);
+            display: none;
+        }
+        
+        .timeline:hover .timeline-tooltip {
+            display: block;
+        }
+        
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .left-controls, .right-controls {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .time-display {
+            font-size: 0.9rem;
+            color: #ddd;
+            min-width: 100px;
+        }
+        
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .volume-slider {
+            width: 80px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+            position: relative;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        
+        .volume-level {
+            position: absolute;
+            height: 100%;
+            background-color: white;
+            width: 75%;
+            border-radius: 2px;
+        }
+        
+        .volume-handle {
+            position: absolute;
+            height: 12px;
+            width: 12px;
+            background-color: white;
+            border-radius: 50%;
+            top: 50%;
+            left: 75%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .buttons-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .fullscreen-button {
+            margin-left: 1rem;
+        }
+        
+        .quality-selector {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.3rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        
+        /* Recommendation drawer */
+        .recommendation-drawer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(13, 17, 23, 0.95);
+            padding: 2rem;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+            z-index: 10;
+        }
+        
+        .show-recommendations .recommendation-drawer {
+            transform: translateY(0);
+        }
+        
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .drawer-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .close-drawer {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .recommendation-card {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .recommendation-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .recommendation-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .recommendation-title {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .recommendation-meta {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+        
+        
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .controls-overlay {
+                opacity: 1;
+            }
+            
+            .timeline-container {
+                margin-bottom: 0.5rem;
+            }
+            
+            .time-display {
+                min-width: auto;
+            }
+            
+            .volume-container {
+                display: none;
+            }
+            
+            .quality-selector {
+                display: none;
+            }
+            
+            .next-episode-preview {
+                width: 250px;
+                bottom: 80px;
+                right: 20px;
+            }
+            
+            .skip-intro-button {
+                bottom: 80px;
+                right: 20px;
+                padding: 0.6rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Player Container -->
+    <div class="player-container">
+        <!-- Video Frame -->
+        <div class="video-container">
+            <div class="video-frame"></div>
+            
+            <!-- Controls Overlay -->
+            <div class="controls-overlay">
+                <!-- Top Controls Bar -->
+                <div class="top-controls">
+                    <div class="movie-info">
+                        <div class="movie-title">Interstellar</div>
+                        <div class="episode-info">2h 49m remaining</div>
+                    </div>
+                    <div class="right-controls">
+                        <button class="control-button">📑</button>
+                        <button class="control-button">✖</button>
+                    </div>
+                </div>
+                
+                <!-- Center Play Button -->
+                <button class="center-play">
+                    <div class="play-icon">▶</div>
+                </button>
+                
+                <!-- Bottom Controls Bar -->
+                <div class="bottom-controls">
+                    <!-- Timeline -->
+                    <div class="timeline-container">
+                        <div class="timeline">
+                            <div class="timeline-buffer"></div>
+                            <div class="timeline-progress"></div>
+                            <div class="timeline-handle"></div>
+                            <div class="timeline-tooltip" style="left: 35%;">1:00:05</div>
+                        </div>
+                    </div>
+                    
+                    <div class="controls-row">
+                        <div class="left-controls">
+                            <button class="control-button">▶</button>
+                            <button class="control-button">⏭</button>
+                            <div class="volume-container">
+                                <button class="control-button">🔊</button>
+                                <div class="volume-slider">
+                                    <div class="volume-level"></div>
+                                    <div class="volume-handle"></div>
+                                </div>
+                            </div>
+                            <div class="time-display">1:00:05 / 2:49:00</div>
+                        </div>
+                        
+                        <div class="right-controls">
+                            <div class="buttons-group">
+                                <select class="quality-selector">
+                                    <option>Auto (1080p)</option>
+                                    <option>1080p</option>
+                                    <option>720p</option>
+                                    <option>480p</option>
+                                    <option>360p</option>
+                                </select>
+                                <button class="control-button fullscreen-button">⛶</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!-- Recommendation Drawer (initially hidden) -->
+            <div class="recommendation-drawer">
+                <div class="drawer-header">
+                    <div class="drawer-title">More Like This</div>
+                    <button class="close-drawer">✖</button>
+                </div>
+                <div class="recommendations-grid">
+                    <div class="recommendation-card">
+                        <img src="/api/placeholder/200/120" alt="Inception">
+                        <div class="recommendation-title">Inception</div>
+                        <div class="recommendation-meta">2010 • Christopher Nolan</div>
+                    </div>
+                    <div class="recommendation-card">
+                        <img src="/api/placeholder/200/120" alt="The Martian">
+                        <div class="recommendation-title">The Martian</div>
+                        <div class="recommendation-meta">2015 • Ridley Scott</div>
+                    </div>
+                    <div class="recommendation-card">
+                        <img src="/api/placeholder/200/120" alt="Gravity">
+                        <div class="recommendation-title">Gravity</div>
+                        <div class="recommendation-meta">2013 • Alfonso Cuarón</div>
+                    </div>
+                    <div class="recommendation-card">
+                        <img src="/api/placeholder/200/120" alt="Arrival">
+                        <div class="recommendation-title">Arrival</div>
+                        <div class="recommendation-meta">2016 • Denis Villeneuve</div>
+                    </div>
+                    <div class="recommendation-card">
+                        <img src="/api/placeholder/200/120" alt="Dune">
+                        <div class="recommendation-title">Dune</div>
+                        <div class="recommendation-meta">2021 • Denis Villeneuve</div>
+                    </div>
+                    <div class="recommendation-card">
+                        <img src="/api/placeholder/200/120" alt="Tenet">
+                        <div class="recommendation-title">Tenet</div>
+                        <div class="recommendation-meta">2020 • Christopher Nolan</div>
+                    </div>
+                    <div class="recommendation-card">
+                        <img src="/api/placeholder/200/120" alt="Ad Astra">
+                        <div class="recommendation-title">Ad Astra</div>
+                        <div class="recommendation-meta">2019 • James Gray</div>
+                    </div>
+                    <div class="recommendation-card">
+                        <img src="/api/placeholder/200/120" alt="First Man">
+                        <div class="recommendation-title">First Man</div>
+                        <div class="recommendation-meta">2018 • Damien Chazelle</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Demo Interaction - Not fully functional but shows UI state changes -->
+    <script>
+        // Demo script to show UI states - not a fully functional player
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle play/pause
+            const centerPlayBtn = document.querySelector('.center-play');
+            const playPauseBtn = document.querySelector('.left-controls .control-button');
+            let isPlaying = false;
+            
+            function togglePlayPause() {
+                isPlaying = !isPlaying;
+                centerPlayBtn.style.display = isPlaying ? 'none' : 'flex';
+                playPauseBtn.textContent = isPlaying ? '⏸' : '▶';
+            }
+            
+            centerPlayBtn.addEventListener('click', togglePlayPause);
+            playPauseBtn.addEventListener('click', togglePlayPause);
+            
+            // Show next episode preview after 5 seconds
+            setTimeout(function() {
+                document.querySelector('.player-container').classList.add('show-next-preview');
+            }, 5000);
+            
+            // Toggle recommendations drawer
+            const listButton = document.querySelector('.right-controls .control-button:nth-child(1)');
+            const closeDrawerBtn = document.querySelector('.close-drawer');
+            
+            listButton.addEventListener('click', function() {
+                document.querySelector('.player-container').classList.add('show-recommendations');
+            });
+            
+            closeDrawerBtn.addEventListener('click', function() {
+                document.querySelector('.player-container').classList.remove('show-recommendations');
+            });
+            
+            // Hide skip intro after 5 seconds
+            setTimeout(function() {
+                document.querySelector('.skip-intro-button').style.display = 'none';
+            }, 10000);
+        });
+    </script>
+
+    </div>
+</body>
+</html>
