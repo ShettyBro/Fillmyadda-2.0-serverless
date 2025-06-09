@@ -74,10 +74,11 @@ exports.forgotPassword = async (event) => {
         margin: 0 auto;
         padding: 45px 30px 60px;
         background: #f4f7ff;
-        background-image: url(https://archisketch-resources.s3.ap-northeast-2.amazonaws.com/vrstyler/1661497957196_595865/email-template-background-banner);
+        background-image: url(https://drive.google.com/uc?export=view&id=1ssEyjtDFon1RTlPUnp6gY_KCh2byaB_s);
         background-repeat: no-repeat;
         background-size: 800px 452px;
         background-position: top center;
+        background-size: cover;
         font-size: 14px;
         color: #434343;
       "
@@ -90,14 +91,14 @@ exports.forgotPassword = async (event) => {
                 <img
                   alt=""
                   src="https://drive.google.com/uc?export=view&id=1IGUcJpeEk-yIhxOasiwAXrtFBXhy3m_2"
-                  height="30px"
+                  height="50px" onclick="window.location.href='https://filmyadda.sudeepbro.me/index.html'"
+                  style="cursor: pointer; width: 100%; max-width: 150px;"
                 />
               </td>
               <td style="text-align: right;">
                 <span
                   style="font-size: 16px; line-height: 30px; color: #ffffff;"
-                  >12 Nov, 2021</span
-                >
+                  ></span>
               </td>
             </tr>
           </tbody>
@@ -124,7 +125,7 @@ exports.forgotPassword = async (event) => {
                 color: #1f1f1f;
               "
             >
-              Your OTP
+              Your Password Reset OTP
             </h1>
             <p
               style="
@@ -134,7 +135,7 @@ exports.forgotPassword = async (event) => {
                 font-weight: 500;
               "
             >
-              Hi,
+          
             </p>
             <p
               style="
@@ -144,10 +145,10 @@ exports.forgotPassword = async (event) => {
                 letter-spacing: 0.56px;
               "
             >
-              Use the following OTP
+              Hi,Use the following OTP
               to complete the procedure to change your Password. OTP is
               valid for
-              <span style="font-weight: 600; color: #1f1f1f;">5 minutes</span>.
+              <span style="font-weight: 600; color: #1f1f1f;">10 minutes</span>.
               Do not share this code with others!
             </p>
             <p
@@ -164,18 +165,8 @@ exports.forgotPassword = async (event) => {
             </p>
           </div>
         </div>
-
-        <p
-          style="
-            max-width: 400px;
-            margin: 0 auto;
-            margin-top: 90px;
-            text-align: center;
-            font-weight: 500;
-            color: #8c8c8c;
-          "
-        >
-         
+      </main>
+         <footer>
         <p style="margin: 0; margin-top: 16px; color: #434343;">
           © 2024 Filmyadda. All rights reserved.
         </p>
