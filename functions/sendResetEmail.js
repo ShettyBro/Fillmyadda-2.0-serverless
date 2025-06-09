@@ -74,7 +74,8 @@ exports.forgotPassword = async (event) => {
         margin: 0 auto;
         padding: 45px 30px 60px;
         background: #f4f7ff;
-        background-image: url(https://drive.google.com/uc?export=view&id=1ssEyjtDFon1RTlPUnp6gY_KCh2byaB_s);
+        background-image: url(https://drive.google.com/uc?export=view&id=1KjykWV8X8MSjtP05RshfZkh0Lw6mWTl5
+);
         background-repeat: no-repeat;
         background-size: 800px 452px;
         background-position: top center;
@@ -111,7 +112,7 @@ exports.forgotPassword = async (event) => {
             margin: 0;
             margin-top: 70px;
             padding: 92px 30px 115px;
-            background: #ffffff;
+            background:rgb(189, 182, 182);
             border-radius: 30px;
             text-align: center;
           "
@@ -122,7 +123,7 @@ exports.forgotPassword = async (event) => {
                 margin: 0;
                 font-size: 24px;
                 font-weight: 500;
-                color: #1f1f1f;
+                color:rgb(188, 248, 9);
               "
             >
               Your Password Reset OTP
@@ -165,12 +166,11 @@ exports.forgotPassword = async (event) => {
             </p>
           </div>
         </div>
-      </main>
-         <footer>
-        <p style="margin: 0; margin-top: 16px; color: #434343;">
-          © 2024 Filmyadda. All rights reserved.
+       <p style="margin: 0; margin-top: 16px; color: gold; text-align: center;">
+  © 2024 Filmyadda. All rights reserved.
         </p>
-      </footer>
+        
+        </main>
     </div>
   </body>
 </html>`
