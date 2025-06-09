@@ -47,32 +47,142 @@ exports.forgotPassword = async (event) => {
       from: 'no-reply@sudeepbro.me',
       to: email,
       subject: 'Your Password Reset OTP',
-      html: `<div style="max-width: 600px; margin: auto; font-family: Arial, sans-serif; border: 1px solid #ddd; border-radius: 8px; padding: 20px; background-color: #f9f9f9;">
-  <!-- LOGO PLACEHOLDER -->
-  <div style="text-align: center; margin-bottom: 20px;">
-    <img src="https://drive.google.com/uc?export=view&id=1IGUcJpeEk-yIhxOasiwAXrtFBXhy3m_2" alt="Logo" style="max-width: 150px; height: auto;">
-  </div>
+      html: `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
 
-  <!-- Email Content -->
-  <h2 style="text-align: center; color: #333;">Password Reset Request</h2>
-  <p style="font-size: 16px; color: #555;">Hello,</p>
-  <p style="font-size: 16px; color: #555;">
-    Your OTP for password reset is 
-    <strong style="font-size: 20px; color: #000;">${otp}</strong>.
-  </p>
-  <p style="font-size: 14px; color: #777;">
-    This code is valid for 10 minutes. Please do not share it with anyone.
-  </p>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    style="
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #ffffff;
+      font-size: 14px;
+    "
+  >
+    <div
+      style="
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 45px 30px 60px;
+        background: #f4f7ff;
+        background-image: url(https://archisketch-resources.s3.ap-northeast-2.amazonaws.com/vrstyler/1661497957196_595865/email-template-background-banner);
+        background-repeat: no-repeat;
+        background-size: 800px 452px;
+        background-position: top center;
+        font-size: 14px;
+        color: #434343;
+      "
+    >
+      <header>
+        <table style="width: 100%;">
+          <tbody>
+            <tr style="height: 0;">
+              <td>
+                <img
+                  alt=""
+                  src="https://drive.google.com/uc?export=view&id=1IGUcJpeEk-yIhxOasiwAXrtFBXhy3m_2"
+                  height="30px"
+                />
+              </td>
+              <td style="text-align: right;">
+                <span
+                  style="font-size: 16px; line-height: 30px; color: #ffffff;"
+                  >12 Nov, 2021</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </header>
 
-  <!-- Footer -->
-  <hr style="margin: 30px 0;">
-  <p style="font-size: 12px; color: #aaa; text-align: center;">
-    If you did not request a password reset, please ignore this email.
-  </p>
-  <p style="font-size: 12px; color: #aaa; text-align: center;">
-    &copy; 2025 SudeepBro.me
-  </p>
-</div>`
+      <main>
+        <div
+          style="
+            margin: 0;
+            margin-top: 70px;
+            padding: 92px 30px 115px;
+            background: #ffffff;
+            border-radius: 30px;
+            text-align: center;
+          "
+        >
+          <div style="width: 100%; max-width: 489px; margin: 0 auto;">
+            <h1
+              style="
+                margin: 0;
+                font-size: 24px;
+                font-weight: 500;
+                color: #1f1f1f;
+              "
+            >
+              Your OTP
+            </h1>
+            <p
+              style="
+                margin: 0;
+                margin-top: 17px;
+                font-size: 16px;
+                font-weight: 500;
+              "
+            >
+              Hi,
+            </p>
+            <p
+              style="
+                margin: 0;
+                margin-top: 17px;
+                font-weight: 500;
+                letter-spacing: 0.56px;
+              "
+            >
+              Use the following OTP
+              to complete the procedure to change your Password. OTP is
+              valid for
+              <span style="font-weight: 600; color: #1f1f1f;">5 minutes</span>.
+              Do not share this code with others!
+            </p>
+            <p
+              style="
+                margin: 0;
+                margin-top: 60px;
+                font-size: 40px;
+                font-weight: 600;
+                letter-spacing: 25px;
+                color: #ba3d4f;
+              "
+            >
+              ${otp}
+            </p>
+          </div>
+        </div>
+
+        <p
+          style="
+            max-width: 400px;
+            margin: 0 auto;
+            margin-top: 90px;
+            text-align: center;
+            font-weight: 500;
+            color: #8c8c8c;
+          "
+        >
+         
+        <p style="margin: 0; margin-top: 16px; color: #434343;">
+          © 2024 Filmyadda. All rights reserved.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>`
     })
   });
  
