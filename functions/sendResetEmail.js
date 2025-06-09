@@ -47,7 +47,32 @@ exports.forgotPassword = async (event) => {
       from: 'no-reply@sudeepbro.me',
       to: email,
       subject: 'Your Password Reset OTP',
-      html: `<p>Your OTP for password reset is <strong>${otp}</strong>. It is valid for 10 minutes.</p>`
+      html: `<div style="max-width: 600px; margin: auto; font-family: Arial, sans-serif; border: 1px solid #ddd; border-radius: 8px; padding: 20px; background-color: #f9f9f9;">
+  <!-- LOGO PLACEHOLDER -->
+  <div style="text-align: center; margin-bottom: 20px;">
+    <img src="https://drive.google.com/file/d/1IGUcJpeEk-yIhxOasiwAXrtFBXhy3m_2/view?usp=sharing" alt="Logo" style="max-width: 150px; height: auto;">
+  </div>
+
+  <!-- Email Content -->
+  <h2 style="text-align: center; color: #333;">Password Reset Request</h2>
+  <p style="font-size: 16px; color: #555;">Hello,</p>
+  <p style="font-size: 16px; color: #555;">
+    Your OTP for password reset is 
+    <strong style="font-size: 20px; color: #000;">${otp}</strong>.
+  </p>
+  <p style="font-size: 14px; color: #777;">
+    This code is valid for 10 minutes. Please do not share it with anyone.
+  </p>
+
+  <!-- Footer -->
+  <hr style="margin: 30px 0;">
+  <p style="font-size: 12px; color: #aaa; text-align: center;">
+    If you did not request a password reset, please ignore this email.
+  </p>
+  <p style="font-size: 12px; color: #aaa; text-align: center;">
+    &copy; 2025 SudeepBro.me
+  </p>
+</div>`
     })
   });
  
