@@ -50,7 +50,7 @@ exports.forgotPassword = async (event) => {
       html: `<div style="max-width: 600px; margin: auto; font-family: Arial, sans-serif; border: 1px solid #ddd; border-radius: 8px; padding: 20px; background-color: #f9f9f9;">
   <!-- LOGO PLACEHOLDER -->
   <div style="text-align: center; margin-bottom: 20px;">
-    <img src="https://drive.google.com/file/d/1IGUcJpeEk-yIhxOasiwAXrtFBXhy3m_2/view?usp=sharing" alt="Logo" style="max-width: 150px; height: auto;">
+    <img src="https://drive.google.com/uc?export=view&id=1IGUcJpeEk-yIhxOasiwAXrtFBXhy3m_2" alt="Logo" style="max-width: 150px; height: auto;">
   </div>
 
   <!-- Email Content -->
