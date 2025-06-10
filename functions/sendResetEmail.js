@@ -85,26 +85,17 @@ exports.forgotPassword = async (event) => {
       "
     >
       <header>
-        <table style="width: 100%;">
-          <tbody>
-            <tr style="height: 0;">
-              <td>
-                <img
-                  alt=""
-                  src="https://drive.google.com/uc?export=view&id=1IGUcJpeEk-yIhxOasiwAXrtFBXhy3m_2"
-                  height="50px" onclick="window.location.href='https://filmyadda.sudeepbro.me/index.html'"
-                  style="cursor: pointer; width: 100%; max-width: 150px;"
-                />
-              </td>
-              <td style="text-align: right;">
-                <span
-                  style="font-size: 16px; line-height: 30px; color: #ffffff;"
-                  ></span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </header>
+  <div style="text-align: center; padding: 10px 0;">
+    <img
+      src="https://drive.google.com/uc?export=view&id=1IGUcJpeEk-yIhxOasiwAXrtFBXhy3m_2"
+      alt="Filmyadda Logo"
+      height="50px"
+      style="cursor: pointer; max-width: 150px; width: 100%;"
+      onclick="window.location.href='https://filmyadda.sudeepbro.me/index.html'"
+    />
+  </div>
+</header>
+
 
       <main>
         <div
@@ -112,7 +103,7 @@ exports.forgotPassword = async (event) => {
             margin: 0;
             margin-top: 70px;
             padding: 92px 30px 115px;
-            background:rgb(189, 182, 182);
+            background:rgb(246, 240, 240);
             border-radius: 30px;
             text-align: center;
           "
@@ -144,6 +135,7 @@ exports.forgotPassword = async (event) => {
                 margin-top: 17px;
                 font-weight: 500;
                 letter-spacing: 0.56px;
+                color: #1f1f1f;
               "
             >
               Hi,Use the following OTP
@@ -159,7 +151,7 @@ exports.forgotPassword = async (event) => {
                 font-size: 40px;
                 font-weight: 600;
                 letter-spacing: 25px;
-                color: #ba3d4f;
+                color:rgb(0, 0, 0);
               "
             >
               ${otp}
