@@ -430,7 +430,10 @@ input:-webkit-autofill {
 
 input:-webkit-autofill::first-line {
     color: #fff !important;
+
 }
+/* Modal text styles */
+
 
 
 /* Register Box Styles */
