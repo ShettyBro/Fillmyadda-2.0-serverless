@@ -2,6 +2,7 @@ const sql = require('mssql');
 const bcrypt = require('bcryptjs');
 const dbConfig = require('../dbConfig');
 require('dotenv').config();
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
 console.log('Database Configuration:', {
   user: process.env.DB_USER,
@@ -68,6 +69,29 @@ exports.handler = async (event) => {
       .input('fullname', sql.VarChar, fullname)
       .input('email', sql.VarChar, email)
       .query('INSERT INTO Users (username, password, fullname, email) VALUES (@username, @password, @fullname, @email)');
+
+    // Send welcome email
+     await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${RESEND_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: 'Filmyadda <support@sudeepbro.me>',
+        to: email,
+        subject: 'Welcome to Filmyadda 🎬',
+        html: `
+          <div style="font-family: Arial, sans-serif; color: #333;">
+            <h2>Welcome, ${fullname}!</h2>
+            <p>Thanks for joining <strong>Filmyadda</strong>.</p>
+            <p>You're all set to explore the latest entertainment. 🎥🍿</p>
+            <br>
+            <p style="font-size: 12px; color: #888;">– Team Filmyadda</p>
+          </div>
+        `
+      })
+    });
 
     return {
       statusCode: 200,
