@@ -32,9 +32,11 @@
     // Function to load and display user info from localStorage
     function loadProfileInfo() {
         const name = localStorage.getItem('pname') || 'Not Available';
+        
         const email = localStorage.getItem('pemail') || 'Not Available';
 
         document.getElementById('pname').textContent = name;
+        document.getElementById('name').textContent = name;
         document.getElementById('pemail').textContent = email;
     }
 
@@ -954,12 +956,11 @@
             <div class="settings-section">
                 <div class="section-title">
                     Account Information
-                    <button class="edit-button">Edit</button>
                 </div>
                 
                 <div class="info-row">
                     <div class="info-label">Name</div>
-                    <div class="info-value" id="pname"></div>
+                    <div class="info-value" id="name"> </div>
                 </div>
                 
                 <div class="info-row">
