@@ -88,13 +88,18 @@ exports.forgotPassword = async (event) => {
         <table style="width: 100%;">
           <tbody>
             <tr style="height: 0;">
-              <td style="text-align: center;">
+              <td>
                 <img
                   alt=""
                   src="https://drive.google.com/uc?export=view&id=1IGUcJpeEk-yIhxOasiwAXrtFBXhy3m_2"
                   height="50px" onclick="window.location.href='https://filmyadda.sudeepbro.me/index.html'"
-                  style="cursor: pointer; width: 100%; max-width: 150px; display: inline-block;"
+                  style="cursor: pointer; width: 100%; max-width: 150px;"
                 />
+              </td>
+              <td style="text-align: right;">
+                <span
+                  style="font-size: 16px; line-height: 30px; color: #ffffff;"
+                  ></span>
               </td>
             </tr>
           </tbody>
@@ -142,11 +147,6 @@ exports.forgotPassword = async (event) => {
                 color: #1f1f1f;
               "
             >
-              Hi,Use the following OTP
-              to complete the procedure to change your Password. OTP is
-              valid for
-              <span style="font-weight: 600; color: #1f1f1f;">10 minutes</span>.
-              Do not
               Hi,Use the following OTP
               to complete the procedure to change your Password. OTP is
               valid for
