@@ -88,7 +88,7 @@ exports.forgotPassword = async (event) => {
         <table style="width: 100%;">
           <tbody>
             <tr style="height: 0;">
-              <td>
+              <td style="text-align: center;">
                 <img
                   alt=""
                   src="https://drive.google.com/uc?export=view&id=1IGUcJpeEk-yIhxOasiwAXrtFBXhy3m_2"
