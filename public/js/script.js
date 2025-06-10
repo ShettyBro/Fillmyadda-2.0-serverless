@@ -133,7 +133,7 @@ if (loginForm) {
 
         if (response.ok) {
             const data = await response.json();
-            localStorage.setItem('pname', data.fullname); // Store the user's name
+            localStorage.setItem('pname', data.name); // Store the user's name
             localStorage.setItem('pemail', data.email); // Store the user's email
 
             localStorage.setItem('authToken', data.token); // Store the token
