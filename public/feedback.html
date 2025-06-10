@@ -1,106 +1,534 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <link rel="icon" href="css/assets/final-logo.ico" type="image/x-icon" >
-    <title>Filmyadda - HOME</title>
-    <link rel="stylesheet" href="css/styles.css">
+      <link rel="stylesheet" href="css/styles.css">
     <script src="js/script.js" defer></script>
+    <link rel="icon" href="css/assets/final-logo.ico" type="image/x-icon">
+    <title>Filmyadda - Feedback</title>
+   
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Retrieve the token and its expiration time from local storage
             const token = localStorage.getItem('authToken');
             const expirationTime = localStorage.getItem('tokenExpiration');
-            
+                        
             // Check if the token is missing or expired
             if (!token || (expirationTime && Date.now() > expirationTime)) {
                 // Clear the token and expiration time from local storage
                 localStorage.removeItem('token');
                 localStorage.removeItem('tokenExpiration');
                 // Redirect to the login page
-                window.location.href = 'index.html'; // Change this to 'index.html' as you requested
+                window.location.href = 'index.html';
             }
         });
     </script>
+    
+    <!-- Feedback Form Styles -->
+    <style>
+        /* Feedback form specific styles */
+        .feedback-main {
+            
+            min-height: calc(100vh - 80px); /* Adjust for header height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin-top: 80px; /* Space for fixed header */
+        }
+
+        .feedback-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 1em;
+            
+        }
+        .rating-item label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 600;
+            font-size: 1em;
+            text-align: center;
+           
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .rating-group {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .rating-item {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+            margin-left: 25px;;
+        }
+
+        .star {
+            font-size: 24px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .star:hover,
+        .star.active {
+            color: #ffd700;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            transform: scale(1.2);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: #667eea;
+        }
+
+        .success-message {
+            display: none;
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .error-message {
+            display: none;
+            background: #f44336;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .feedback-container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .form-header h1 {
+                font-size: 2em;
+            }
+            
+            .rating-group {
+                flex-direction: column;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-<style>
-/* feedback page */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-  color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-.feedback-container {
-  background: #ffcbcb;
-  padding: 20px 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  max-width: 400px;
-  width: 100%;
-}
-.feedback-container h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-.feedback-container p {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-.feedback-container a {
-  display: inline-block;
-  text-decoration: none;
-  background-color: #007BFF;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-.feedback-container a:hover {
-  background-color: #0056b3;
-}
-.logo{
-    position: absolute;
-    top: 20px;
-    left: 10px;
-    cursor: grabbing;
-}
-</style>
+
 <body>
     <div class="header">
         <nav class="nav">
             <img class="logo" src="css/assets/bg.png" alt="" onclick="location.href='home.html'">
-            <div class="navbt">
-                <div class="header-right">
-                    <img class="profile-picture" src="css/assets/profile (2).png">
-                        <ul class="profile-menu">
-                            <li  onclick="location.href='home.html'" target="_blank">HOME</li>
-                            <li onclick="location.href='profile1.html'">MY PROFILE</li> 
-                            <li  onclick="location.href='about.html'" target="_blank">ABOUT</li>
-                            <li id="logoutButton">LOGOUT</li>
-                        </ul>
-                    </div>
-                    <div id="transparent-overlay"></div>
-                </div>
+            <div class="header-right">
+                <img class="profile-picture" src="css/assets/profile (2).png">
+                <ul class="profile-menu">
+                    <li onclick="location.href='profile1.html'">MY PROFILE</li>
+                    <li onclick="location.href='about.html'" target="_blank">ABOUT</li>
+                    <li onclick="location.href='feedback.html'" target="_blank">GIVE FEEDBACK</li>
+                    <li id="logoutButton">LOGOUT</li>
+                </ul>
+            </div>
+            <div id="transparent-overlay"></div>
         </nav>
     </div>
 
-    <div class="feedback-container">
-        <h1>We Value Your Feedback!</h1>
-        <p>Your opinion helps us improve your experience on our FilmyAdda OTT platform.</p>
-        <a href="https://forms.gle/VQwa2Azef9u94n5b6" target="_blank">Give Feedback</a>
-    </div>
+    <main class="feedback-main">
+        <div class="feedback-container">
+            <div class="form-header">
+                <h1>🎬 Feedback Form</h1>
+                <p>Help us improve your streaming experience</p>
+            </div>
+
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                </div>
+
+                <div class="form-group">
+                    <label for="userType">User Type *</label>
+                    <select id="userType" name="userType" required>
+                        <option value="">Select user type</option>
+                        <option value="free">Free User</option>
+                        <option value="premium">Premium Subscriber</option>
+                        <option value="trial">Trial User</option>
+                    </select>
+                </div>
+
+                <div class="form-group"></div>
+
+                <div class="form-group">
+                    <label>Rate Your Experience *</label>
+                    <div class="rating-group">
+                        <div class="rating-item">
+                            <label>Overall Experience</label>
+                            <div class="star-rating" data-rating="overallRating">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                        </div>
+                        <div class="rating-item">
+                            <label>Video Quality</label>
+                            <div class="star-rating" data-rating="videoQuality">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                        </div>
+                        <div class="rating-item">
+                            <label>Content Library</label>
+                            <div class="star-rating" data-rating="contentLibrary">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                        </div>
+                        <div class="rating-item">
+                            <label>App Performance</label>
+                            <div class="star-rating" data-rating="appPerformance">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Which features do you use most? (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="watchlist" name="features" value="watchlist">
+                            <label for="watchlist">Watchlist</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="search" name="features" value="search">
+                            <label for="search">Search</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="recommendations" name="features" value="recommendations">
+                            <label for="recommendations">Recommendations</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="download" name="features" value="download">
+                            <label for="download">Download for Offline</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtitles" name="features" value="subtitles">
+                            <label for="subtitles">Subtitles</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="profiles" name="features" value="profiles">
+                            <label for="profiles">Multiple Profiles</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="device">Primary Device Used</label>
+                    <select id="device" name="device">
+                        <option value="">Select your primary device</option>
+                        <option value="mobile">Mobile Phone</option>
+                        <option value="tablet">Tablet</option>
+                        <option value="laptop">Laptop/Computer</option>
+                        <option value="smart-tv">Smart TV</option>
+                        <option value="streaming-device">Streaming Device (Roku, Fire Stick, etc.)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="issues">Issues Faced (if any)</label>
+                    <textarea id="issues" name="issues" placeholder="Describe any technical issues, bugs, or problems you've encountered..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="suggestions">Suggestions for Improvement</label>
+                    <textarea id="suggestions" name="suggestions" placeholder="What features would you like to see? How can we improve your experience?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="recommend">Would you recommend our app to others?</label>
+                    <select id="recommend" name="recommend">
+                        <option value="">Select an option</option>
+                        <option value="definitely">Definitely Yes</option>
+                        <option value="probably">Probably Yes</option>
+                        <option value="maybe">Maybe</option>
+                        <option value="probably-not">Probably Not</option>
+                        <option value="definitely-not">Definitely Not</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Submit Feedback
+                </button>
+
+                <div class="loading" id="loading">
+                    <p>Submitting your feedback...</p>
+                </div>
+
+                <div class="success-message" id="successMessage">
+                    <p>Thank you for your feedback! We appreciate your input and will use it to improve our service.</p>
+                </div>
+
+                <div class="error-message" id="errorMessage">
+                    <p>There was an error submitting your feedback. Please try again.</p>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        // Star rating functionality
+        const starRatings = document.querySelectorAll('.star-rating');
+        const ratings = {};
+
+        starRatings.forEach(rating => {
+            const stars = rating.querySelectorAll('.star');
+            const ratingName = rating.dataset.rating;
+            
+            stars.forEach((star, index) => {
+                star.addEventListener('click', () => {
+                    const value = parseInt(star.dataset.value);
+                    ratings[ratingName] = value;
+                    
+                    // Update visual state
+                    stars.forEach((s, i) => {
+                        if (i < value) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+                
+                star.addEventListener('mouseover', () => {
+                    const value = parseInt(star.dataset.value);
+                    stars.forEach((s, i) => {
+                        if (i < value) {
+                            s.style.color = '#ffd700';
+                        } else {
+                            s.style.color = '#ddd';
+                        }
+                    });
+                });
+            });
+            
+            rating.addEventListener('mouseleave', () => {
+                const currentRating = ratings[ratingName] || 0;
+                stars.forEach((s, i) => {
+                    if (i < currentRating) {
+                        s.style.color = '#ffd700';
+                    } else {
+                        s.style.color = '#ddd';
+                    }
+                });
+            });
+        });
+
+       document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Show loading
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('submitBtn').disabled = true;
+    document.getElementById('successMessage').style.display = 'none';
+    document.getElementById('errorMessage').style.display = 'none';
+
+    const formData = new FormData(this);
+
+    Object.keys(ratings).forEach(key => {
+        formData.append(key, ratings[key] || 0);
+    });
+
+    const selectedFeatures = [];
+    document.querySelectorAll('input[name="features"]:checked').forEach(checkbox => {
+        selectedFeatures.push(checkbox.value);
+    });
+    formData.append('selectedFeatures', selectedFeatures.join(', '));
+
+    formData.append('timestamp', new Date().toISOString());
+
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzZzRJBt9UGvF6tJrlistUrgILpv2sXdU3S7kUmlIKJg9HQrrQZIU7YptPw5yLqnOjGPw/exec';
+
+    fetch(scriptURL, {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('loading').style.display = 'none';
+        if (data.status === 'success') {
+            document.getElementById('successMessage').style.display = 'block';
+        } else {
+            document.getElementById('errorMessage').innerText = data.message || 'Unknown error';
+            document.getElementById('errorMessage').style.display = 'block';
+        }
+        document.getElementById('submitBtn').disabled = false;
+
+        setTimeout(() => {
+            this.reset();
+            document.querySelectorAll('.star').forEach(star => {
+                star.classList.remove('active');
+                star.style.color = '#ddd';
+            });
+            Object.keys(ratings).forEach(key => delete ratings[key]);
+            document.getElementById('successMessage').style.display = 'none';
+        }, 3000);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('errorMessage').style.display = 'block';
+        document.getElementById('submitBtn').disabled = false;
+    });
+});
+
+    </script>
 </body>
-</html>
