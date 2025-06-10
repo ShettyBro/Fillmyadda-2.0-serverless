@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
             localStorage.removeItem('pto'); // Clear OTP
             localStorage.removeItem('exp'); // Clear OTP expiration time
             
-            showModal('Successfully logged out. Thank you!');
+            // showModal('Successfully logged out. Thank you!');
             
             // Replace the current history state
             window.history.replaceState(null, '', 'index.html');
