@@ -44,7 +44,7 @@ exports.forgotPassword = async (event) => {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      ffrom: 'Filmyadda <support@sudeepbro.me>',
+      from: 'Filmyadda <support@sudeepbro.me>',
       to: email,
       subject: 'Your Password Reset OTP',
       html: `<!DOCTYPE html>
