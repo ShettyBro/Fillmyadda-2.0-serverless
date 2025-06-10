@@ -2210,3 +2210,31 @@ body {
   padding: 40px 0;
   
 }
+
+.back-button {
+    display: inline-block;
+    margin: 0px 20px 0px 10px;
+    padding: 0px 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #efe8e9;
+    background-color: transparent;
+    /* border: 1px solid #e50914; */
+    border-radius: 0px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+   
+}
+
+.back-button img {
+    width: 150px;
+    height: 100px;
+    vertical-align: middle; /* Aligns the image with the text */
+    margin-right: 8px; /* Space between image and text */
+}
+
+   
+/* .back-button:hover {
+    background-color:gold;
+    color: rgb(11, 0, 0);
+} */

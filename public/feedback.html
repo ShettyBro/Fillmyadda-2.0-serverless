@@ -38,7 +38,7 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            margin-top: 80px; /* Space for fixed header */
+            margin-top: 0px; /* Space for fixed header */
         }
 
         .feedback-container {
@@ -262,14 +262,16 @@
             <div class="header-right">
                 <img class="profile-picture" src="css/assets/profile (2).png">
                 <ul class="profile-menu">
+                    <li onclick="location.href='home.html'" target="_blank">Home</li>
                     <li onclick="location.href='profile1.html'">MY PROFILE</li>
                     <li onclick="location.href='about.html'" target="_blank">ABOUT</li>
-                    <li onclick="location.href='feedback.html'" target="_blank">GIVE FEEDBACK</li>
                     <li id="logoutButton">LOGOUT</li>
                 </ul>
             </div>
             <div id="transparent-overlay"></div>
         </nav>
+        <br>
+    <button id="backButton" onclick="history.back()" class="back-button"><img src="css/assets/back button.png" alt=""> </button>
     </div>
 
     <main class="feedback-main">
@@ -538,4 +540,9 @@
 });
 
     </script>
+    <div>
+    <footer class="footer">
+      <p> &copy; 2024 Filmyadda. All rights reserved.</p>
+    </footer>
+  </div>
 </body>
