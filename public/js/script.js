@@ -133,8 +133,8 @@ if (loginForm) {
 
         if (response.ok) {
             const data = await response.json();
-            localStorage.setItem('name', data.fullname); // Store the user's name
-            localStorage.setItem('email', data.email); // Store the user's email
+            localStorage.setItem('pname', data.fullname); // Store the user's name
+            localStorage.setItem('pemail', data.email); // Store the user's email
 
             localStorage.setItem('authToken', data.token); // Store the token
              // Set expiration time for the token (5 hours in milliseconds)
