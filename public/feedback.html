@@ -515,11 +515,12 @@
         setTimeout(() => {
             this.reset();
             document.querySelectorAll('.star').forEach(star => {
-                star.classList.remove('active');
-                star.style.color = '#ddd';
+            star.classList.remove('active');
+            star.style.color = '#ddd';
             });
             Object.keys(ratings).forEach(key => delete ratings[key]);
             document.getElementById('successMessage').style.display = 'none';
+            window.history.back();
         }, 3000);
     })
     .catch(error => {
