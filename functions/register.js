@@ -81,15 +81,121 @@ exports.handler = async (event) => {
         from: 'Filmyadda <support@sudeepbro.me>',
         to: email,
         subject: 'Welcome to Filmyadda 🎬',
-        html: `
-          <div style="font-family: Arial, sans-serif; color: #333;">
-            <h2>Welcome, ${fullname}!</h2>
-            <p>Thanks for joining <strong>Filmyadda</strong>.</p>
-            <p>You're all set to explore the latest entertainment. 🎥🍿</p>
-            <br>
-            <p style="font-size: 12px; color: #888;">– Team Filmyadda</p>
+        html:`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    style="
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #ffffff;
+      font-size: 14px;
+    "
+  >
+    <div
+      style="
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 45px 30px 60px;
+        background: #f4f7ff;
+        background-image: url(https://drive.google.com/uc?export=view&id=1KjykWV8X8MSjtP05RshfZkh0Lw6mWTl5
+);
+        background-repeat: no-repeat;
+        background-size: 800px 452px;
+        background-position: top center;
+        background-size: cover;
+        font-size: 14px;
+        color: #434343;
+      "
+    >
+      <header>
+        <table style="width: 100%;">
+          <tbody>
+            <tr style="height: 0;">
+              <td style="text-align: center;">
+                <img
+                  alt=""
+                  src="https://drive.google.com/uc?export=view&id=1IGUcJpeEk-yIhxOasiwAXrtFBXhy3m_2"
+                  height="50px" onclick="window.location.href='https://filmyadda.sudeepbro.me/index.html'"
+                  style="cursor: pointer; width: 100%; max-width: 150px;"
+                />
+              </td>
+              <td style="text-align: right;">
+                <span
+                  style="font-size: 16px; line-height: 30px; color: #ffffff;"
+                  ></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </header>
+
+      <main>
+        <div
+          style="
+            margin: 0;
+            margin-top: 70px;
+            padding: 92px 30px 115px;
+            background:rgb(246, 240, 240);
+            border-radius: 30px;
+            text-align: center;
+          "
+        >
+          <div style="width: 100%; max-width: 489px; margin: 0 auto;">
+            <h1
+              style="
+                margin: 0;
+                font-size: 24px;
+                font-weight: 500;
+                color:rgb(188, 248, 9);
+              "
+            >
+              Your Password Reset OTP
+            </h1>
+            <p
+              style="
+                margin: 0;
+                margin-top: 17px;
+                font-size: 16px;
+                font-weight: 500;
+              "
+            >
+          
+            </p>
+            <p
+              style="
+                margin: 0;
+                margin-top: 17px;
+                font-weight: 500;
+                letter-spacing: 0.56px;
+                color: #1f1f1f;
+              "
+            >
+              Wlwcome to Filmyadda, ${fullname}!<br />
+              Your account has been successfully created. You can now explore the latest movies, TV shows, and more.
+            
+            </p>
+            
           </div>
-        `
+        </div>
+       <p style="margin: 0; margin-top: 16px; color: gold; text-align: center;">
+  © 2024 Filmyadda. All rights reserved.
+        </p>
+        
+        </main>
+    </div>
+  </body>
+</html>`
       })
     });
 
