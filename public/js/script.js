@@ -48,7 +48,13 @@ document.addEventListener('DOMContentLoaded', function () {
             // Clear all auth-related data
             localStorage.removeItem('authToken');
             localStorage.removeItem('tokenExpiration');
-            localStorage.removeItem('selectedMovieId'); // Clear any selected movie
+            localStorage.removeItem('selectedMovieId');
+            localStorage.removeItem('pname'); // Clear user's name
+            localStorage.removeItem('pemail'); // Clear user's email
+            localStorage.removeItem('userEmail'); // Clear user email for password reset
+            localStorage.removeItem('pto'); // Clear OTP
+            localStorage.removeItem('exp'); // Clear OTP expiration time
+            
 
             // Replace the current history state
             window.history.replaceState(null, '', 'index.html');
@@ -62,25 +68,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// Handle Logout
-document.addEventListener('DOMContentLoaded', function () {
-    const logoutButton = document.getElementById('logoutButton');
-    
-    if (logoutButton) {
-        logoutButton.addEventListener('click', () => {
-            // Clear all auth-related data
-            localStorage.removeItem('authToken');
-            localStorage.removeItem('tokenExpiration');
-            localStorage.removeItem('selectedMovieId'); // Clear any selected movie
-
-            // Set page to prevent cache on logout
-            window.location.replace('index.html'); // Redirect to login page
-
-            // Show logout confirmation modal
-            showModal('Successfully logged out. Thank you!');
-        });
-    }
-});
 
 // Prevent back navigation to protected pages after logout
 window.addEventListener('popstate', function(event) {
