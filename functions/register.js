@@ -160,7 +160,7 @@ exports.handler = async (event) => {
                 color:rgb(188, 248, 9);
               "
             >
-              Your Password Reset OTP
+              Welcome to Filmyadda 🎬
             </h1>
             <p
               style="
@@ -181,7 +181,7 @@ exports.handler = async (event) => {
                 color: #1f1f1f;
               "
             >
-              Wlwcome to Filmyadda, ${fullname}!<br />
+              Hi, ${fullname}!<br />
               Your account has been successfully created. You can now explore the latest movies, TV shows, and more.
             
             </p>
