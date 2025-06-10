@@ -27,6 +27,21 @@
             }
         });
     </script>
+    <script>
+
+    // Function to load and display user info from localStorage
+    function loadProfileInfo() {
+        const name = localStorage.getItem('name') || 'Not Available';
+        const email = localStorage.getItem('email') || 'Not Available';
+
+        document.getElementById('pname').textContent = name;
+        document.getElementById('pemail').textContent = email;
+    }
+
+    // Run the function after the DOM is loaded
+    document.addEventListener('DOMContentLoaded', loadProfileInfo);
+</script>
+
 </head>
 
 
@@ -961,12 +976,12 @@
                 
                 <div class="info-row">
                     <div class="info-label">Name</div>
-                    <div class="info-value">Alex Johnson</div>
+                    <div class="info-value" id="pname"></div>
                 </div>
                 
                 <div class="info-row">
                     <div class="info-label">Email</div>
-                    <div class="info-value">alex.johnson@example.com</div>
+                    <div class="info-value" id="pemail"></div>
                 </div>
                 
                 <div class="info-row">
