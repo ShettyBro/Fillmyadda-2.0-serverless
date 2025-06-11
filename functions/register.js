@@ -108,8 +108,7 @@ exports.handler = async (event) => {
         margin: 0 auto;
         padding: 45px 30px 60px;
         background: #f4f7ff;
-        background-image: url(https://drive.google.com/uc?export=view&id=1KjykWV8X8MSjtP05RshfZkh0Lw6mWTl5
-);
+        background-image: url(https://filmyadda.sudeepbro.me/css/assets/eamilBG.jpg);
         background-repeat: no-repeat;
         background-size: 800px 452px;
         background-position: top center;
