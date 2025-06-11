@@ -435,6 +435,13 @@ input:-webkit-autofill::first-line {
 /* Modal text styles */
 
 
+.register a {
+    color: gold;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: gold;
+}
+
 
 /* Register Box Styles */
 /* General Box Styles */
