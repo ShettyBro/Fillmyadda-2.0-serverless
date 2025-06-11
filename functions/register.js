@@ -125,7 +125,7 @@ exports.handler = async (event) => {
               <td style="text-align: center;">
                 <img
                   alt=""
-                  src="https://drive.google.com/uc?export=view&id=1IGUcJpeEk-yIhxOasiwAXrtFBXhy3m_2"
+                  src="https://filmyadda.sudeepbro.me/css/assets/bg.png"
                   height="50px" onclick="window.location.href='https://filmyadda.sudeepbro.me/index.html'"
                   style="cursor: pointer; width: 100%; max-width: 150px;"
                 />
