@@ -1123,10 +1123,7 @@ ul {
         margin: 0 auto;
     }
 
-    /* Adjust video player for landscape */
-    #videoPlayer {
-        max-height: 70vh;
-    }
+    
 
     /* Footer adjustment for landscape */
     .footer {
@@ -2336,17 +2333,7 @@ body {
     padding: 10px;
   }
 
-  /* Video Player */
-  .video-container {
-    width: 100%;
-    padding: 0;
-  }
-
-  .video-container iframe {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-  }
+  
 
   /* Profile Page */
   .profile-container {
