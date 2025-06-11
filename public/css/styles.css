@@ -2245,3 +2245,241 @@ body {
     background-color:gold;
     color: rgb(11, 0, 0);
 } */
+
+
+/* Mobile-specific styles for screens up to 768px */
+@media only screen and (max-width: 768px) {
+  /* General Reset for Mobile */
+  body {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  .container {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  /* Navigation */
+  nav, .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nav-list li {
+    margin: 5px 0;
+    width: 100%;
+  }
+
+  .nav-list li a {
+    display: block;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .menu-icon {
+    display: block !important; /* Show hamburger menu if implemented */
+  }
+
+  /* Forms */
+  .form-container, .login-form, .register-form, .forgot-form, .otp-form, .reset-form, .feedback-form {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+
+  button, input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  /* Cards and Grids */
+  .row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card1, .card2, .card3, .card4 {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+  }
+
+  .card1 img, .card2 img, .card3 img, .card4 img {
+    width: 100%;
+    height: auto;
+  }
+
+  .card-content {
+    padding: 10px;
+  }
+
+  /* Video Player */
+  .video-container {
+    width: 100%;
+    padding: 0;
+  }
+
+  .video-container iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  /* Profile Page */
+  .profile-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .profile-pic {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 10px;
+  }
+
+  .profile-details {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Language Pages */
+  .language-container {
+    padding: 10px;
+  }
+
+  .language-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .language-container p {
+    font-size: 1rem;
+  }
+
+  /* Footer */
+  footer {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  /* Specific Page Adjustments */
+  /* Home Page */
+  .hero-section {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .hero-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  /* About Page */
+  .about-content {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .about-content img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Feedback Page */
+  .feedback-container {
+    padding: 15px;
+  }
+
+  /* Particular Series Page */
+  .series-container {
+    padding: 10px;
+  }
+
+  .series-container .card {
+    width: 100%;
+  }
+
+  /* Typography */
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  p, a, li {
+    font-size: 1rem;
+  }
+}
+
+/* Extra Small Devices (below 480px) */
+@media only screen and (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 5px;
+  }
+
+  button, input[type="submit"] {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .nav-list li a {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .card1, .card2, .card3, .card4 {
+    padding: 5px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+}
