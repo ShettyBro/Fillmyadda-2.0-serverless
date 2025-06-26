@@ -30,24 +30,19 @@ FilmyAdda 2.0 is a cutting-edge serverless movie streaming platform that brings 
 ## 🎯 Features
 
 ### 🔐 **Authentication & Security**
-- **Secure Registration**: Email-based account creation with verification
+- **Secure Registration**: Email-based account creation.
 - **Smart Login System**: Fast and secure user authentication
-- **Profile Management**: Comprehensive user profile customization
 - **Password Recovery**: Secure password reset via email confirmation
-- **Session Management**: Advanced security protocols
+- **Session Management**: Advanced security protocol (JWT Tokens)
 
 ### 🎥 **Streaming Experience**
-- **HD Movie Streaming**: High-quality video playback with adaptive bitrate
-- **Smart Search**: Intelligent movie discovery and filtering
+- **HD Movie Streaming**: High-quality video playback
+- **Smart Search**: Intelligent movie discovery
 - **Responsive Player**: Custom video player with advanced controls
-- **Watchlist Management**: Save and organize favorite movies
-- **Viewing History**: Track and resume watching experience
-
+  
 ### 🎨 **User Interface**
 - **Modern Design**: Netflix-inspired clean and intuitive interface
 - **Responsive Layout**: Seamless experience on desktop, tablet, and mobile
-- **Dark/Light Themes**: Customizable viewing preferences
-- **Accessibility**: WCAG compliant for inclusive user experience
 - **Performance Optimized**: Lazy loading and efficient resource management
 
 ## 🛠️ Tech Stack
@@ -61,12 +56,12 @@ FilmyAdda 2.0 is a cutting-edge serverless movie streaming platform that brings 
 
 ### Backend Technologies
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-000000?style=flat-square&logo=express&logoColor=white)
+
 
 ### Database & Cloud
 ![Azure SQL](https://img.shields.io/badge/Azure_SQL-0078D4?style=flat-square&logo=microsoft-azure&logoColor=white)
 ![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=flat-square&logo=netlify&logoColor=white)
-![Azure VM](https://img.shields.io/badge/Azure_VM-0078D4?style=flat-square&logo=microsoft-azure&logoColor=white)
+![Azure Bolb Storage](https://img.shields.io/badge/Azure-Blob%20Storage-0078D4?style=for-the-badge&logo=Microsoft%20Azure&logoColor=white)
 
 </div>
 
