@@ -3,11 +3,10 @@
 <div align="center">
 <p><img align="Center" src="images/1.png" width="2048" border="1" /></p>
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bc7f6b4e-cb01-4d70-a9db-e700adccb86e/deploy-status?style=for-the-badge)](https://app.netlify.com/sites/filmyadda-srverless/deploys)
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_Site-ff6b6b?style=for-the-badge)](https://filmyadda-srverless.netlify.app/)
 [![GitHub Stars](https://img.shields.io/github/stars/ShettyBro/Fillmyadda-2.0-serverless?style=for-the-badge&color=ffd93d)](https://github.com/ShettyBro/Fillmyadda-2.0-serverless/stargazers)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
-[![Made with Love](https://img.shields.io/badge/Made%20with-❤️-red?style=for-the-badge)](https://github.com/ShettyBro)
+
 
 *A Netflix-inspired serverless movie streaming platform delivering premium OTT experience* 🍿
 
@@ -121,7 +120,7 @@ filmyadda/
 
 **⭐ Star this repository if you found it helpful!**
 
-**🚀 [Try FilmyAdda 2.0 Live](https://filmyadda.sudeepbro.me/index.html)**
+**🚀 [Try FilmyAdda 2.0 Live](https://filmyadda-srverless.netlify.app/)**
 
 *Made with ❤️ for movie lovers worldwide*
 
