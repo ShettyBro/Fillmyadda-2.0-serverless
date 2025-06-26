@@ -55,7 +55,8 @@ filmyadda/
 ├── public/             # Frontend files
 │   ├── css/
 │   ├── js/
-│   └── index.html
+│   ├── index.html
+│   └─ other frontend files
 └── package.json
 ```
 
@@ -110,7 +111,7 @@ filmyadda/
 - 💼 LinkedIn: [Connect with me](https://www.linkedin.com/in/sudeepshivashettar/)
 - 📧 Email: [sudeepshivashettar2022@gmail.com](mailto:sudeepshivashettar2022@gmail.com)
 
-**🥷 Pratik Mungawadi** - Font-end Developer & Movie Enthusiast
+**🥷 Pratik Mungawadi** - Fontend Developer & Movie Enthusiast
 
 - 🐙 GitHub: [@pratikm56](https://github.com/pratikm56)
 - 💼 LinkedIn: [Connect with me](https://www.linkedin.com/in/pratik-mungaravadi-2a62a0329/)
