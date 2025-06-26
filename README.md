@@ -93,60 +93,30 @@ filmyadda/
 4. Push to branch: `git push origin feature/new-feature`
 5. Submit a pull request
 
-<br>
-<h2  align="center">Screenshots</h2>
-<div align="center">
-
-<br>
-<h3 align="left"> Index/Home Page <h3></h3>
-
-<img align="Center" src="images/1.png" width="2048" border="1" />
-
-<h3 align="left"> Register Page <h3></h3>
-
-<img align="Center" src="images/2.png" width="2048" border="1" />
-
-<br>
-<h3 align="left"> Login Page <h3></h3>
-
-<img align="Center" src="images/3.png" width="2048" border="1" />
-<br>
-
-<br>
-<h3 align="left"> Forgot Password Page <h3></h3>
-
-<img align="Center" src="images/4.png" width="2048" border="1" />
-
-<br>
-<h3 align="left"> Language Selection Page <h3></h3>
-
-<img align="Center" src="images/5.png" width="2048" border="1" />
-<br>
-<h3 align="left"> Content Page <h3></h3>
-
-<img align="Center" src="images/6.png" width="2048" border="1" />
-<br>
-<h3 align="left"> Profile Page <h3></h3>
-
-<img align="Center" src="images/7.png" width="2048" border="1" />
-<br>
-<h3 align="left"> Movie Player <h3></h3>
-
-<img align="Center" src="images/8.png" width="2048" border="1" />
-
-<br>
-<h3 align="left"> Web-Series <h3></h3>
-
-<img align="Center" src="images/9.png" width="2048" border="1" />
-
-<br>
-<h3 align="left"> About Developers <h3></h3>
-
-<img align="Center" src="images/10.png" width="2048" height="600" border="1" />
-
-<br>
 ---
 
+🙏 Acknowledgments
+
+**Contributors:** Thanks to all amazing contributors who made this possible
+**Open Source Community:** For the incredible tools and libraries
+**Azure & Netlify:** For reliable cloud infrastructure
+**Movie Database APIs:** For comprehensive movie information
+**Design Inspiration:** Netflix, Prime Video, and other OTT platforms
+
+👨‍💻 About the Developer
+🥷 Sudeep J Shivashettar - Full Stack Developer & Movie Enthusiast
+
+🌐 Portfolio: [sudeepbro.me](https://sudeepbro.me)
+🐙 GitHub: [@ShettyBro](https://github.com/ShettyBro)
+💼 LinkedIn: [Connect with me](https://www.linkedin.com/in/sudeepshivashettar/)
+📧 Email: [sudeepshivashettar2022@gmail.com](mailto:sudeepshivashettar2022@gmail.com)
+<div align="center">
+
+🥷 Pratik Mungawadi - Font-end Developer & Movie Enthusiast
+
+🐙 GitHub: [@pratikm56](https://github.com/pratikm56)
+💼 LinkedIn: [Connect with me](https://www.linkedin.com/in/pratik-mungaravadi-2a62a0329/)
+📧 Email: [pratikmungarwadi8296@gmail.com](mailto:pratikmungarwadi8296@gmail.com)
 <div align="center">
 
 **⭐ Star this repository if you found it helpful!**
