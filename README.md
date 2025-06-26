@@ -1,7 +1,7 @@
 # 🎬 FilmyAdda 2.0 Serverless
 
 <div align="center">
-  <p><img align="Center" src="public/css/assets/bg.png" width="2048" border="1" /></p>
+  <p><img align="Center" src="public/css/assets/bg.png" width="600" border="1" /></p>
   
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_Site-ff6b6b?style=for-the-badge)](https://filmyadda.sudeepbro.me/index.html)
 [![GitHub Stars](https://img.shields.io/github/stars/ShettyBro/Fillmyadda-2.0-serverless?style=for-the-badge&color=ffd93d)](https://github.com/ShettyBro/Fillmyadda-2.0-serverless/stargazers)
