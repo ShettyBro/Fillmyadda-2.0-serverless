@@ -22,9 +22,11 @@ FilmyAdda is an online OTT platform built to provide a Netflix-like experience f
 ## Tech Stack
 
 - **Frontend**: HTML, CSS, JavaScript
-- **Backend**: Node.js, Express.js
-- **Database**: Azure SQL
-- **Hosting**: Netlify (Frontend), Azure Virtual Machine (Backend)
+- **Backend**: Node.js (Netlify Serverless Functions)
+- **Database**: Azure SQL, Azure Blob Storage
+- **Hosting**: Netlify  
+- **Authentication**: JWT
+- **Email Service**:Resend.com
 - **Version Control**: GitHub
 
 ## Installation
