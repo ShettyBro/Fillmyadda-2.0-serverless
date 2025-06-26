@@ -1,9 +1,10 @@
 # 🎬 FilmyAdda 2.0 Serverless
 
 <div align="center">
-  <p><img align="Center" src="public/css/assets/bg.png" width="600" border="1" /></p>
-  
-[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_Site-ff6b6b?style=for-the-badge)](https://filmyadda.sudeepbro.me/index.html)
+<p><img align="Center" src="images/0.png" width="2048" border="1" /></p>
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bc7f6b4e-cb01-4d70-a9db-e700adccb86e/deploy-status)](https://app.netlify.com/sites/filmyadda-srverless/deploys)
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_Site-ff6b6b?style=for-the-badge)](https://filmyadda-srverless.netlify.app/)
 [![GitHub Stars](https://img.shields.io/github/stars/ShettyBro/Fillmyadda-2.0-serverless?style=for-the-badge&color=ffd93d)](https://github.com/ShettyBro/Fillmyadda-2.0-serverless/stargazers)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![Made with Love](https://img.shields.io/badge/Made%20with-❤️-red?style=for-the-badge)](https://github.com/ShettyBro)
@@ -92,9 +93,29 @@ filmyadda/
 4. Push to branch: `git push origin feature/new-feature`
 5. Submit a pull request
 
-## 📄 License
+<h2  align="center">Screenshots</h2>
+<p>______________________________________________________________________________________________________________________________________________________________</p>
+<h3 align="left"> Index/Home Page <h3></h3>
+______________________________________________________________________________________________________________________________________________________________
+<p><img align="Center" src="images/1.png" width="2048" border="1" /></p>
+______________________________________________________________________________________________________________________________________________________________
+<h3 align="left"> Login Page <h3></h3>
+______________________________________________________________________________________________________________________________________________________________
+<p><img align="Center" src="images/2.png" width="2048" border="1" /></p>
+______________________________________________________________________________________________________________________________________________________________
+<h3 align="left"> Register Page <h3></h3>
+______________________________________________________________________________________________________________________________________________________________
+<p><img align="Center" src="images/3.png" width="2048" border="1" /></p>
+______________________________________________________________________________________________________________________________________________________________
+<h3 align="left"> Home Page <h3></h3>
+______________________________________________________________________________________________________________________________________________________________
+<p><img align="Center" src="images/4.png" width="2048" border="1" /></p>
+______________________________________________________________________________________________________________________________________________________________
+<h3 align="left"> About page <h3></h3>
+______________________________________________________________________________________________________________________________________________________________
+<p><img align="Center" src="images/5.png" width="2048" border="1" /></p>
+______________________________________________________________________________________________________________________________________________________________
 
-MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 👨‍💻 About the Developer
 
