@@ -93,8 +93,10 @@ filmyadda/
 4. Push to branch: `git push origin feature/new-feature`
 5. Submit a pull request
 
-<div align="center">
+<br>
 <h2  align="center">Screenshots</h2>
+<div align="center">
+
 <br>
 <h3 align="left"> Index/Home Page <h3></h3>
 
@@ -140,7 +142,7 @@ filmyadda/
 <br>
 <h3 align="left"> About Developers <h3></h3>
 
-<img align="Center" src="images/10.png" width="2048" border="1" />
+<img align="Center" src="images/10.png" width="2048" height="600" border="1" />
 
 <br>
 ---
