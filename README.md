@@ -93,7 +93,7 @@ filmyadda/
 4. Push to branch: `git push origin feature/new-feature`
 5. Submit a pull request
 
----
+<br>
 
 ## 🙏 Acknowledgments
 
@@ -117,6 +117,7 @@ filmyadda/
 - 💼 LinkedIn: [Connect with me](https://www.linkedin.com/in/pratik-mungaravadi-2a62a0329/)
 - 📧 Email: [pratikmungarwadi8296@gmail.com](mailto:pratikmungarwadi8296@gmail.com)
 
+<br>
 <div align="center">
 
 **⭐ Star this repository if you found it helpful!**
@@ -124,6 +125,7 @@ filmyadda/
 **🚀 [Try FilmyAdda 2.0 Live](https://filmyadda-srverless.netlify.app/)**
 
 *Made with ❤️ for movie lovers worldwide*
+<br>
 **Last Updated 27 June 2025**
 
 </div>
