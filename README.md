@@ -100,33 +100,49 @@ filmyadda/
 
 <img align="Center" src="images/1.png" width="2048" border="1" />
 
-<h3 align="left"> Login Page <h3></h3>
+<h3 align="left"> Register Page <h3></h3>
 
 <img align="Center" src="images/2.png" width="2048" border="1" />
 
-<h3 align="left"> Register Page <h3></h3>
+<br>
+<h3 align="left"> Login Page <h3></h3>
 
 <img align="Center" src="images/3.png" width="2048" border="1" />
+<br>
 
-<h3 align="left"> Home Page <h3></h3>
+<br>
+<h3 align="left"> Forgot Password Page <h3></h3>
 
 <img align="Center" src="images/4.png" width="2048" border="1" />
 
-<h3 align="left"> About page <h3></h3>
+<br>
+<h3 align="left"> Language Selection Page <h3></h3>
 
 <img align="Center" src="images/5.png" width="2048" border="1" />
+<br>
+<h3 align="left"> Content Page <h3></h3>
 
+<img align="Center" src="images/6.png" width="2048" border="1" />
+<br>
+<h3 align="left"> Profile Page <h3></h3>
 
+<img align="Center" src="images/7.png" width="2048" border="1" />
+<br>
+<h3 align="left"> Movie Player <h3></h3>
 
-## 👨‍💻 About the Developer
+<img align="Center" src="images/8.png" width="2048" border="1" />
 
-**ShettyBro** - Full Stack Developer & Movie Enthusiast
+<br>
+<h3 align="left"> Web-Series <h3></h3>
 
-- 🌐 **Portfolio**: [sudeepbro.me](https://sudeepbro.me)
-- 🐙 **GitHub**: [@ShettyBro](https://github.com/ShettyBro)
-- 💼 **LinkedIn**: [Connect with me](https://linkedin.com/in/shettyBro)
-- 📧 **Email**: hello@sudeepbro.me
+<img align="Center" src="images/9.png" width="2048" border="1" />
 
+<br>
+<h3 align="left"> About Developers <h3></h3>
+
+<img align="Center" src="images/10.png" width="2048" border="1" />
+
+<br>
 ---
 
 <div align="center">
