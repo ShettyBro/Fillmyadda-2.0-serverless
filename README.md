@@ -1,7 +1,7 @@
 # 🎬 FilmyAdda 2.0 Serverless
 
 <div align="center">
-<p><img align="Center" src="images/0.png" width="2048" border="1" /></p>
+<p><img align="Center" src="images/1.png" width="2048" border="1" /></p>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/bc7f6b4e-cb01-4d70-a9db-e700adccb86e/deploy-status?style=for-the-badge)](https://app.netlify.com/sites/filmyadda-srverless/deploys)
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_Site-ff6b6b?style=for-the-badge)](https://filmyadda-srverless.netlify.app/)
@@ -95,28 +95,28 @@ filmyadda/
 
 ---
 
-🙏 Acknowledgments
+## 🙏 Acknowledgments
 
-**Contributors:** Thanks to all amazing contributors who made this possible
-**Open Source Community:** For the incredible tools and libraries
-**Azure & Netlify:** For reliable cloud infrastructure
-**Movie Database APIs:** For comprehensive movie information
-**Design Inspiration:** Netflix, Prime Video, and other OTT platforms
+- **Contributors**: Thanks to all amazing contributors who made this possible
+- **Open Source Community**: For the incredible tools and libraries
+- **Azure & Netlify**: For reliable cloud infrastructure
+- **Movie Database APIs**: For comprehensive movie information
+- **Design Inspiration**: Netflix, Prime Video, and other OTT platforms
 
-👨‍💻 About the Developer
-🥷 Sudeep J Shivashettar - Full Stack Developer & Movie Enthusiast
+## 👨‍💻 About the Developer
+**🥷 Sudeep J Shivashettar** - Full Stack Developer & Movie Enthusiast
 
-🌐 Portfolio: [sudeepbro.me](https://sudeepbro.me)
-🐙 GitHub: [@ShettyBro](https://github.com/ShettyBro)
-💼 LinkedIn: [Connect with me](https://www.linkedin.com/in/sudeepshivashettar/)
-📧 Email: [sudeepshivashettar2022@gmail.com](mailto:sudeepshivashettar2022@gmail.com)
-<div align="center">
+- 🌐 Portfolio: [sudeepbro.me](https://sudeepbro.me)
+- 🐙 GitHub: [@ShettyBro](https://github.com/ShettyBro)
+- 💼 LinkedIn: [Connect with me](https://www.linkedin.com/in/sudeepshivashettar/)
+- 📧 Email: [sudeepshivashettar2022@gmail.com](mailto:sudeepshivashettar2022@gmail.com)
 
-🥷 Pratik Mungawadi - Font-end Developer & Movie Enthusiast
+**🥷 Pratik Mungawadi** - Font-end Developer & Movie Enthusiast
 
-🐙 GitHub: [@pratikm56](https://github.com/pratikm56)
-💼 LinkedIn: [Connect with me](https://www.linkedin.com/in/pratik-mungaravadi-2a62a0329/)
-📧 Email: [pratikmungarwadi8296@gmail.com](mailto:pratikmungarwadi8296@gmail.com)
+- 🐙 GitHub: [@pratikm56](https://github.com/pratikm56)
+- 💼 LinkedIn: [Connect with me](https://www.linkedin.com/in/pratik-mungaravadi-2a62a0329/)
+- 📧 Email: [pratikmungarwadi8296@gmail.com](mailto:pratikmungarwadi8296@gmail.com)
+
 <div align="center">
 
 **⭐ Star this repository if you found it helpful!**
