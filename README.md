@@ -5,7 +5,7 @@
 
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_Site-ff6b6b?style=for-the-badge)](https://filmyadda-srverless.netlify.app/)
 [![GitHub Stars](https://img.shields.io/github/stars/ShettyBro/Fillmyadda-2.0-serverless?style=for-the-badge&color=ffd93d)](https://github.com/ShettyBro/Fillmyadda-2.0-serverless/stargazers)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+
 
 
 *A Netflix-inspired serverless movie streaming platform delivering premium OTT experience* 🍿
@@ -123,5 +123,6 @@ filmyadda/
 **🚀 [Try FilmyAdda 2.0 Live](https://filmyadda-srverless.netlify.app/)**
 
 *Made with ❤️ for movie lovers worldwide*
+**Last Updated 27 June 2025**
 
 </div>
