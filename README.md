@@ -61,7 +61,7 @@ FilmyAdda 2.0 is a cutting-edge serverless movie streaming platform that brings 
 ### Database & Cloud
 ![Azure SQL](https://img.shields.io/badge/Azure_SQL-0078D4?style=flat-square&logo=microsoft-azure&logoColor=white)
 ![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=flat-square&logo=netlify&logoColor=white)
-![Azure Bolb Storage](https://img.shields.io/badge/Azure-Blob%20Storage-0078D4?style=for-the-badge&logo=Microsoft%20Azure&logoColor=white)
+![Azure Bolb Storage](https://img.shields.io/badge/Azure%20Blob%20Storage-0078D4?style=flat-square&logo=microsoft%20azure&logoColor=white)
 
 </div>
 
