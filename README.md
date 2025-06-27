@@ -5,7 +5,7 @@
 
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_Site-ff6b6b?style=for-the-badge)](https://filmyadda-srverless.netlify.app/)
 [![GitHub Stars](https://img.shields.io/github/stars/ShettyBro/Fillmyadda-2.0-serverless?style=for-the-badge&color=ffd93d)](https://github.com/ShettyBro/Fillmyadda-2.0-serverless/stargazers)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+
 
 
 *A Netflix-inspired serverless movie streaming platform delivering premium OTT experience* 🍿
@@ -14,7 +14,8 @@
 
 ## 🌟 About FilmyAdda 2.0
 
-FilmyAdda 2.0 is a cutting-edge serverless movie streaming platform that brings the magic of cinema to your fingertips. Built with modern web technologies and cloud-native architecture for a seamless entertainment experience.
+FilmyAdda 2.0 is a cutting-edge serverless movie streaming platform that brings the magic of cinema to your fingertips. Built with modern web technologies and cloud-native architecture for a seamless entertainment experience.<br>
+**Note:** only 1st Movie of Kannada and English will Play (Reason: reduceing cost of storage)
 
 ## ✨ Features
 
@@ -55,7 +56,8 @@ filmyadda/
 ├── public/             # Frontend files
 │   ├── css/
 │   ├── js/
-│   └── index.html
+│   ├── index.html
+│   └─ other frontend files
 └── package.json
 ```
 
@@ -92,7 +94,7 @@ filmyadda/
 4. Push to branch: `git push origin feature/new-feature`
 5. Submit a pull request
 
----
+<br>
 
 ## 🙏 Acknowledgments
 
@@ -110,12 +112,13 @@ filmyadda/
 - 💼 LinkedIn: [Connect with me](https://www.linkedin.com/in/sudeepshivashettar/)
 - 📧 Email: [sudeepshivashettar2022@gmail.com](mailto:sudeepshivashettar2022@gmail.com)
 
-**🥷 Pratik Mungawadi** - Font-end Developer & Movie Enthusiast
+**🥷 Pratik Mungawadi** - Fontend Developer & Movie Enthusiast
 
 - 🐙 GitHub: [@pratikm56](https://github.com/pratikm56)
 - 💼 LinkedIn: [Connect with me](https://www.linkedin.com/in/pratik-mungaravadi-2a62a0329/)
 - 📧 Email: [pratikmungarwadi8296@gmail.com](mailto:pratikmungarwadi8296@gmail.com)
 
+<br>
 <div align="center">
 
 **⭐ Star this repository if you found it helpful!**
@@ -123,5 +126,7 @@ filmyadda/
 **🚀 [Try FilmyAdda 2.0 Live](https://filmyadda-srverless.netlify.app/)**
 
 *Made with ❤️ for movie lovers worldwide*
+<br>
+**Last Updated 27 June 2025**
 
 </div>
