@@ -15,7 +15,7 @@
 ## 🌟 About FilmyAdda 2.0
 
 FilmyAdda 2.0 is a cutting-edge serverless movie streaming platform that brings the magic of cinema to your fingertips. Built with modern web technologies and cloud-native architecture for a seamless entertainment experience.<br>
-**Note:** only 1st Movie of Kannada and English will Play (Reason: reduceing cost of storage)
+**Note:** only 1st Movie of English will Play (Reason: reduceing cost of storage)
 
 ## ✨ Features
 
