@@ -112,7 +112,7 @@ if (loginForm) {
         const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('https://filmyadda.sudeepbro.me/.netlify/functions/login', {
+        const response = await fetch('https://filmyadda.sudeepbro.works/.netlify/functions/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
@@ -172,7 +172,7 @@ if (registerForm) {
         
 
     try {
-        const response = await fetch('https://filmyadda.sudeepbro.me/.netlify/functions/register', {
+        const response = await fetch('https://filmyadda.sudeepbro.works/.netlify/functions/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password, fullname, email })
@@ -236,7 +236,7 @@ async function fetchMovieDetails() {
     }
 
     try {
-        const response = await fetch('https://filmyadda.sudeepbro.me/.netlify/functions/getVideoDetails', {
+        const response = await fetch('https://filmyadda.sudeepbro.works/.netlify/functions/getVideoDetails', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -523,7 +523,7 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
     button.innerText = 'Sending OTP...';
 
     try {
-        const response = await fetch('https://filmyadda.sudeepbro.me/.netlify/functions/sendResetEmail?action=forgotPassword',{
+        const response = await fetch('https://filmyadda.sudeepbro.works/.netlify/functions/sendResetEmail?action=forgotPassword',{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
@@ -565,7 +565,7 @@ document.getElementById('SendLink').addEventListener('click', async function (e)
     button.innerText = 'Sending OTP...';
 
     try {
-        const response = await fetch('https://filmyadda.sudeepbro.me/.netlify/functions/sendResetEmail?action=forgotPassword',{
+        const response = await fetch('https://filmyadda.sudeepbro.works/.netlify/functions/sendResetEmail?action=forgotPassword',{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
